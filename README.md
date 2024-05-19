@@ -1,4 +1,4 @@
-# [Volt Dashboard Laravel](https://volt-laravel-admin-dashboard.updivision.com/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=Check%20Volt%20Dashboard%20made%20by%20%40Themesberg%20and%20%40UPDIVISION%20%23webdesign%20%23dashboard%20%23laravel%20%23livewire%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.themesberg.com%2Fproduct%2Flaravel%2Fvolt-pro-admin-dashboard-template)
+<!-- # [Volt Dashboard Laravel](https://volt-laravel-admin-dashboard.updivision.com/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=Check%20Volt%20Dashboard%20made%20by%20%40Themesberg%20and%20%40UPDIVISION%20%23webdesign%20%23dashboard%20%23laravel%20%23livewire%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.themesberg.com%2Fproduct%2Flaravel%2Fvolt-pro-admin-dashboard-template)
 ## Free Frontend Web App for Laravel with Livewire & Alpine.js
 
 [![version](https://img.shields.io/npm/v/@themesberg/volt-bootstrap-5-dashboard)](https://www.npmjs.com/package/@themesberg/volt-laravel-admin-dashboard)
@@ -91,7 +91,7 @@ If you don't already have an Apache local environment with PHP and MySQL, use on
  - Windows: https://updivision.com/blog/post/beginner-s-guide-to-setting-up-your-local-development-environment-on-windows
  - Linux & Mac: https://updivision.com/blog/post/guide-what-is-lamp-and-how-to-install-it-on-ubuntu-and-macos
 
-Also, you will need to install Composer: https://getcomposer.org/doc/00-intro.md
+Also, you will need to install Composer: https://getcomposer.org/doc/00-intro.md -->
 
 ## Laravel
 1. Download the project’s zip then copy and paste volt-dashboard-master folder in your projects folder. Rename the folder to your project’s name
@@ -103,7 +103,7 @@ Also, you will need to install Composer: https://getcomposer.org/doc/00-intro.md
 7. Run `php artisan migrate --seed` to create the database tables and seed the roles and users tables
 8. Run `php artisan storage:link` to create the storage symlink (if you are using **Vagrant** with **Homestead** for development, remember to ssh into your virtual machine and run the command from there).
 
-
+<!-- 
 ## Usage
 
 Register a user or login using admin@volt.com and secret and start testing the Laravel app (make sure to run the migrations and seeders for these credentials to be available).
@@ -376,4 +376,4 @@ Updivision Blog: <https://updivision.com/blog/?ref=pdl-readme>
 ## Credits
 
 - [Themesberg](https://themesberg.com/)
-- [UPDIVISION](https://updivision.com)
+- [UPDIVISION](https://updivision.com) -->
