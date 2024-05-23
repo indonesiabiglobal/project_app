@@ -50,19 +50,21 @@
         </a>
       </li>
       <li class="nav-item">
-        <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-          data-bs-target="#order-lpk" aria-expanded="true">
+        <span
+          class="nav-link collapsed d-flex justify-content-between align-items-center"
+          data-bs-toggle="collapse" data-bs-target="#order-lpk">
           <span>
             <span class="sidebar-icon"><i class="fas fa-pen me-2"></i></span>
             <span class="sidebar-text">Order & LPK</span>
           </span>
-          <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20">
+          <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                 clip-rule="evenodd"></path>
             </svg></span>
         </span>
-        <div class="multi-level collapse" role="list" id="order-lpk" aria-expanded="false">
+        <div class="multi-level collapse {{ Request::segment(1) == 'order-entry' || Request::segment(1) == 'lpk-entry' || Request::segment(1) == 'cetak-lpk' || Request::segment(1) == 'order-report' ? 'show' : '' }}" role="list" id="order-lpk" aria-expanded="false">
           <ul class="flex-column nav">
             <li class="nav-item {{ Request::segment(1) == 'order-entry' ? 'active' : '' }}">
               <a href="/order-entry" class="nav-link">
@@ -121,39 +123,23 @@
                 clip-rule="evenodd"></path>
             </svg></span>
         </span>
-        <div class="multi-level collapse" role="list"
-          id="nippo-infure" aria-expanded="false">
+        <div class="multi-level collapse {{ Request::segment(1) == 'nippo-infure' || Request::segment(1) == 'loss-infure' || Request::segment(1) == 'checklist-infure' || Request::segment(1) == 'label-gentan' ? 'show' : '' }}" role="list" id="nippo-infure" aria-expanded="false">
           <ul class="flex-column nav">
             <li class="nav-item {{ Request::segment(1) == 'nippo-infure' ? 'active' : '' }}">
               <a class="nav-link" href="/nippo-infure">
                 <span class="sidebar-text">Nipo Infure</span>
               </a>
             </li>
-          </ul>
-        </div>
-        <div class="multi-level collapse" role="list"
-          id="nippo-infure" aria-expanded="false">
-          <ul class="flex-column nav">
             <li class="nav-item {{ Request::segment(1) == 'loss-infure' ? 'active' : '' }}">
               <a class="nav-link" href="/loss-infure">
                 <span class="sidebar-text">Loss Infure</span>
               </a>
             </li>
-          </ul>
-        </div>
-        <div class="multi-level collapse" role="list"
-          id="nippo-infure" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item {{ Request::segment(1) == '/checklist-infure' ? 'active' : '' }}">
+            <li class="nav-item {{ Request::segment(1) == 'checklist-infure' ? 'active' : '' }}">
               <a class="nav-link" href="/checklist-infure">
                 <span class="sidebar-text">Check List</span>
               </a>
             </li>
-          </ul>
-        </div>
-        <div class="multi-level collapse" role="list"
-          id="nippo-infure" aria-expanded="false">
-          <ul class="flex-column nav">
             <li class="nav-item {{ Request::segment(1) == 'label-gentan' ? 'active' : '' }}">
               <a class="nav-link" href="/label-gentan">
                 <span class="sidebar-text">Label Gentan</span>
@@ -162,6 +148,7 @@
           </ul>
         </div>
       </li>
+
       <li class="nav-item">
         <span
           class="nav-link d-flex justify-content-between align-items-center"
@@ -254,7 +241,7 @@
                 clip-rule="evenodd"></path>
             </svg></span>
         </span>
-        <div class="multi-level collapse {{ Request::segment(1) == 'infure-jam-kerja' ? 'show' : '' }}" role="list"
+        <div class="multi-level collapse {{ Request::segment(1) == 'infure-jam-kerja' || Request::segment(1) == 'seitai-jam-kerja' ? 'show' : '' }}" role="list"
           id="jam-kerja" aria-expanded="false">
           <ul class="flex-column nav">
             <li class="nav-item {{ Request::segment(1) == 'infure-jam-kerja' ? 'active' : '' }}">
@@ -264,7 +251,7 @@
             </li>
           </ul>
         </div>
-        <div class="multi-level collapse {{ Request::segment(1) == 'seitai-jam-kerja' ? 'show' : '' }}" role="list"
+        <div class="multi-level collapse {{ Request::segment(1) == 'infure-jam-kerja' || Request::segment(1) == 'seitai-jam-kerja' ? 'show' : '' }}" role="list"
           id="jam-kerja" aria-expanded="false">
           <ul class="flex-column nav">
             <li class="nav-item {{ Request::segment(1) == 'seitai-jam-kerja' ? 'active' : '' }}">
