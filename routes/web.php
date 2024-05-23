@@ -38,6 +38,7 @@ use App\Http\Livewire\InfureJamKerja;
 use App\Http\Livewire\KenpinInfure;
 use App\Http\Livewire\KenpinSeitai;
 use App\Http\Livewire\LabelMasukGudang;
+use App\Http\Livewire\SumberDayaManusia\MasterPegawai;
 use App\Http\Livewire\MutasiIsiPaletKenpin;
 use App\Http\Livewire\PenarikanPalet;
 use App\Http\Livewire\PengembalianPalet;
@@ -47,6 +48,15 @@ use App\Http\Livewire\Transactions;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ResetPasswordExample;
 use App\Http\Livewire\SeitaiJamKerja;
+use App\Http\Livewire\SumberDayaManusia\AbsensiPegawai;
+use App\Http\Livewire\SumberDayaManusia\DaftarPengajuan;
+use App\Http\Livewire\SumberDayaManusia\DaftarPersetujuan;
+use App\Http\Livewire\SumberDayaManusia\DaftarPersetujuanLembur;
+use App\Http\Livewire\SumberDayaManusia\JadwalKerjaPegawai;
+use App\Http\Livewire\SumberDayaManusia\PengajuanKehadiran;
+use App\Http\Livewire\SumberDayaManusia\PengajuanLembur;
+use App\Http\Livewire\SumberDayaManusia\PerhitunganPayroll;
+use App\Http\Livewire\SumberDayaManusia\SlipGaji;
 use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
 
@@ -92,34 +102,50 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
-    
-    // Route::get('/lpk-entry', [OrderLpk::class, 'lpkentry'])->name('lpk-entry');
+
+    // Fukusuke    
+    Route::get('/order-entry', OrderLpk::class)->name('order-entry');
+    Route::get('/lpk-entry', LpkEntry::class)->name('lpk-entry');
+    Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');
+    Route::get('/order-report', OrderReport::class)->name('order-report');
+    Route::get('/nippo-infure', NippoInfure::class)->name('nippo-infure');
+    Route::get('/loss-infure', LossInfure::class)->name('loss-infure');
+    Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
+    Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');
+    Route::get('/nippo-seitai', NippoSeitai::class)->name('nippo-seitai');
+    Route::get('/loss-seitai', LossSeitai::class)->name('loss-seitai');
+    Route::get('/mutasi-isi-palet', MutasiIsiPalet::class)->name('mutasi-isi-palet');
+    Route::get('/check-list-seitai', CheckListSeitai::class)->name('check-list-seitai');
+    Route::get('/label-masuk-gudang', LabelMasukGudang::class)->name('label-masuk-gudang');
+    Route::get('/infure-jam-kerja', InfureJamKerja::class)->name('infure-jam-kerja');
+    Route::get('/seitai-jam-kerja', SeitaiJamKerja::class)->name('seitai-jam-kerja');
+
+    Route::get('/kenpin-infure-kenpin', KenpinInfure::class)->name('kenpin-infure-kenpin');
+    Route::get('/kenpin-seitai-kenpin', KenpinSeitai::class)->name('kenpin-seitai-kenpin');
+    Route::get('/mutasi-isi-palet-kenpin', MutasiIsiPaletKenpin::class)->name('mutasi-isi-palet-kenpin');
+    Route::get('/print-label-gudang-kenpin', PrintLabelGudangKenpin::class)->name('print-label-gudang-kenpin');
+    Route::get('/report-kenpin', ReportKenpin::class)->name('report-kenpin');
+
+    Route::get('/penarikan-palet', PenarikanPalet::class)->name('penarikan-palet');
+    Route::get('/pengembalian-palet', PengembalianPalet::class)->name('pengembalian-palet');
+
+    Route::get('/general-report', GeneralReport::class)->name('general-report');
+    Route::get('/detail-report', DetailReport::class)->name('detail-report');
+
+    // SDM
+    Route::get('/master-pegawai', MasterPegawai::class)->name('master-pegawai');
+    Route::get('/absensi-pegawai', AbsensiPegawai::class)->name('absensi-pegawai');
+    Route::get('/jadwal-kerja-pegawai', JadwalKerjaPegawai::class)->name('jadwal-kerja-pegawai');
+
+    Route::get('/pengajuan-kehadiran', PengajuanKehadiran::class)->name('pengajuan-kehadiran');
+    Route::get('/daftar-pengajuan', DaftarPengajuan::class)->name('daftar-pengajuan');
+    Route::get('/daftar-persetujuan', DaftarPersetujuan::class)->name('daftar-persetujuan');
+
+    Route::get('/pengajuan-lembur', PengajuanLembur::class)->name('nippo-infure');
+    Route::get('/daftar-persetujuan-lembur', DaftarPersetujuanLembur::class)->name('nippo-infure');
+
+    Route::get('/perhitungan-payroll', PerhitunganPayroll::class)->name('perhitungan-payroll');
+    Route::get('/slip-gaji', SlipGaji::class)->name('slip-gaji');
+
 });
 
-Route::get('/order-entry', OrderLpk::class)->name('order-entry');
-Route::get('/lpk-entry', LpkEntry::class)->name('lpk-entry');
-Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');
-Route::get('/order-report', OrderReport::class)->name('order-report');
-Route::get('/nippo-infure', NippoInfure::class)->name('nippo-infure');
-Route::get('/loss-infure', LossInfure::class)->name('loss-infure');
-Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
-Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');
-Route::get('/nippo-seitai', NippoSeitai::class)->name('nippo-seitai');
-Route::get('/loss-seitai', LossSeitai::class)->name('loss-seitai');
-Route::get('/mutasi-isi-palet', MutasiIsiPalet::class)->name('mutasi-isi-palet');
-Route::get('/check-list-seitai', CheckListSeitai::class)->name('check-list-seitai');
-Route::get('/label-masuk-gudang', LabelMasukGudang::class)->name('label-masuk-gudang');
-Route::get('/infure-jam-kerja', InfureJamKerja::class)->name('infure-jam-kerja');
-Route::get('/seitai-jam-kerja', SeitaiJamKerja::class)->name('seitai-jam-kerja');
-
-Route::get('/kenpin-infure-kenpin', KenpinInfure::class)->name('kenpin-infure-kenpin');
-Route::get('/kenpin-seitai-kenpin', KenpinSeitai::class)->name('kenpin-seitai-kenpin');
-Route::get('/mutasi-isi-palet-kenpin', MutasiIsiPaletKenpin::class)->name('mutasi-isi-palet-kenpin');
-Route::get('/print-label-gudang-kenpin', PrintLabelGudangKenpin::class)->name('print-label-gudang-kenpin');
-Route::get('/report-kenpin', ReportKenpin::class)->name('report-kenpin');
-
-Route::get('/penarikan-palet', PenarikanPalet::class)->name('penarikan-palet');
-Route::get('/pengembalian-palet', PengembalianPalet::class)->name('pengembalian-palet');
-
-Route::get('/general-report', GeneralReport::class)->name('general-report');
-Route::get('/detail-report', DetailReport::class)->name('detail-report');

@@ -23,7 +23,18 @@
         'seitai-jam-kerja',
         'kenpin-infure-kenpin',
         'kenpin-seitai-kenpin',
-        'mutasi-isi-palet-kenpin'
+        'mutasi-isi-palet-kenpin',
+
+        'master-pegawai',
+        'absensi-pegawai',
+        'jadwal-kerja-pegawai',
+        'pengajuan-kehadiran',
+        'daftar-pengajuan',
+        'daftar-persetujuan',
+        'pengajuan-lembur',
+        'daftar-persetujuan-lembur',
+        'perhitungan-payroll',
+        'slip-gaji',
         ]))
 
         {{-- Nav --}}
