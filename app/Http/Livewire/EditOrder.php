@@ -18,6 +18,8 @@ class EditOrder extends Component
     public $process_date;
     public $order_date;
     public $stufingdate;
+    public $etddate;
+    public $etadate;
 
     public function mount($orderId)
     {
@@ -31,6 +33,8 @@ class EditOrder extends Component
         $this->process_date = Carbon::parse($order->process_date)->format('d/m/y');
         $this->order_date = Carbon::parse($order->order_date)->format('d/m/y');
         $this->stufingdate = Carbon::parse($order->stufingdate)->format('d/m/y');
+        $this->etddate = Carbon::parse($order->etddate)->format('d/m/y');
+        $this->etadate = Carbon::parse($order->etadate)->format('d/m/y');
     }
 
     public function save()
@@ -38,10 +42,31 @@ class EditOrder extends Component
         $order = TdOrder::findOrFail($this->orderId);
         $order->po_no = $this->po_no;
         $order->product_id = $this->product_id;
+        $order->order_qty = $this->order_qty;
+        // $order->process_date = Carbon::createFromFormat('d/m/Y', $this->process_date)->format('Y-m-d');
+        // $order->order_date = Carbon::createFromFormat('d/m/Y', $this->order_date)->format('Y-m-d');
+        // $order->stufingdate = Carbon::createFromFormat('d/m/Y', $this->stufingdate)->format('Y-m-d');
+        // $order->etddate = Carbon::createFromFormat('d/m/Y', $this->etddate)->format('Y-m-d');
+        // $order->etadate = Carbon::createFromFormat('d/m/Y', $this->etadate)->format('Y-m-d');
         $order->save();
 
         session()->flash('message', 'Order updated successfully.');
-        return redirect()->route('order-list');
+        return redirect()->route('order-entry');
+    }
+
+    public function delete()
+    {
+        $order = TdOrder::findOrFail($this->orderId);
+        $order->delete();
+
+        session()->flash('message', 'Order deleted successfully.');
+        return redirect()->route('order-entry');
+    }
+
+    public function cancel()
+    {
+        session()->flash('message', 'Order deleted successfully.');
+        return redirect()->route('order-entry');
     }
 
     public function render()

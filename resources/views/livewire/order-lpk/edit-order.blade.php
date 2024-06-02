@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-lg-2"></div>
 	<div class="col-lg-8">
+    <form wire:submit.prevent="save">
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Tanggal Proses</label>
 			<div class="input-group col-md-9 col-xs-12">
@@ -80,7 +81,7 @@
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">ETD</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input data-datepicker="" class="form-control datepicker-input" id="tglMasuk" type="text" placeholder="yyyy/mm/dd" wire:model="tglMasuk">
+				<input data-datepicker="" class="form-control datepicker-input" id="etddate" type="text" placeholder="yyyy/mm/dd" wire:model="etddate">
                 <span class="input-group-text">
                     <svg class="icon icon-xs" fill="currentColor"
                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +95,7 @@
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">ETA</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input data-datepicker="" class="form-control datepicker-input" id="tglMasuk" type="text" placeholder="yyyy/mm/dd" wire:model="tglMasuk">
+				<input data-datepicker="" class="form-control datepicker-input" id="etadate" type="text" placeholder="yyyy/mm/dd" wire:model="etadate">
                 <span class="input-group-text">
                     <svg class="icon icon-xs" fill="currentColor"
                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -118,15 +119,15 @@
 		<hr />
 		<div class="col-lg-12" style="border-top:1px solid #efefef">
             <div class="toolbar">
-                <button id="btnFilter" type="button" class="btn btn-warning">
+                <button id="btnFilter" type="button" class="btn btn-warning" wire:click="cancel">
                     <i class="fa fa-back"></i> Cancel
                 </button>
 
-                <button id="btnFilter" type="button" class="btn btn-danger">
+                <button id="btnFilter" type="button" class="btn btn-danger" wire:click="delete">
                     <i class="fa fa-trash"></i> Delete
                 </button>
 
-                <button id="btnCreate" type="button" class="btn btn-success">
+                <button id="btnCreate" type="submit" class="btn btn-success">
                     <i class="fa fa-plus"></i> Update
                 </button>
 
@@ -134,7 +135,8 @@
                     <i class="fa fa-print"></i> Print
                 </button>
             </div>
-        </div>        
+        </div>
+    </form>        
 	</div>
 	<div class="col-lg-2"></div>
 </div>
