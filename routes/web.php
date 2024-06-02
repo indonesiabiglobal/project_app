@@ -33,6 +33,7 @@ use App\Http\Livewire\LossSeitai;
 use App\Http\Livewire\MutasiIsiPalet;
 use App\Http\Livewire\CheckListSeitai;
 use App\Http\Livewire\DetailReport;
+use App\Http\Livewire\EditOrder;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
 use App\Http\Livewire\KenpinInfure;
@@ -105,6 +106,8 @@ Route::middleware('auth')->group(function () {
 
     // Fukusuke    
     Route::get('/order-entry', OrderLpk::class)->name('order-entry');
+    Route::get('/edit-order/{orderId}', EditOrder::class)->name('edit-order');
+
     Route::get('/lpk-entry', LpkEntry::class)->name('lpk-entry');
     Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');
     Route::get('/order-report', OrderReport::class)->name('order-report');

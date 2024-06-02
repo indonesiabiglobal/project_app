@@ -61,7 +61,8 @@
         'penarikan-palet',
         'pengembalian-palet',
         'general-report',
-        'detail-report'
+        'detail-report',
+        'edit-order'
         ]))
         {{-- Nav --}}
         @include('layouts.nav')

@@ -29,7 +29,7 @@
         </a>
       </div>
     </div>
-    @if(Auth::check() && Auth::user()->first_name === 'Admin')
+    @if(Auth::check() && Auth::user()->status == '9')
       <ul class="nav flex-column pt-3 pt-md-0">
         <li class="nav-item">
           <a href="/dashboard" class="nav-link d-flex align-items-center">
