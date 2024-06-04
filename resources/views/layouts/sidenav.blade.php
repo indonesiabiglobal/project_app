@@ -813,7 +813,7 @@
       </ul>
     @endif
     
-    @if(Auth::check() && Auth::user()->first_name === 'SDM')
+    @if(Auth::check() && Auth::user()->status == '1')
       <ul class="nav flex-column pt-3 pt-md-0">
         <li class="nav-item">
           <a href="/dashboard" class="nav-link d-flex align-items-center">

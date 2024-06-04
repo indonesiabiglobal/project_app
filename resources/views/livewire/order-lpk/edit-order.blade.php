@@ -120,7 +120,7 @@
 		<div class="col-lg-12" style="border-top:1px solid #efefef">
             <div class="toolbar">
                 <button id="btnFilter" type="button" class="btn btn-warning" wire:click="cancel">
-                    <i class="fa fa-back"></i> Cancel
+                    <i class="fa fa-back"></i> Close
                 </button>
 
                 <button id="btnFilter" type="button" class="btn btn-danger" wire:click="delete">
