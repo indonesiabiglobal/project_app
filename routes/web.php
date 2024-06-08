@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AddOrder;
 use App\Http\Livewire\BootstrapTables;
 use App\Http\Livewire\Components\Buttons;
 use App\Http\Livewire\Components\Forms;
@@ -107,6 +108,7 @@ Route::middleware('auth')->group(function () {
     // Fukusuke    
     Route::get('/order-entry', OrderLpk::class)->name('order-entry');
     Route::get('/edit-order/{orderId}', EditOrder::class)->name('edit-order');
+    Route::get('/add-order', AddOrder::class)->name('add-order');
 
     Route::get('/lpk-entry', LpkEntry::class)->name('lpk-entry');
     Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');

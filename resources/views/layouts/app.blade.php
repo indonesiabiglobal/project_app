@@ -62,7 +62,8 @@
         'pengembalian-palet',
         'general-report',
         'detail-report',
-        'edit-order'
+        'edit-order',
+        'add-order'
         ]))
         {{-- Nav --}}
         @include('layouts.nav')

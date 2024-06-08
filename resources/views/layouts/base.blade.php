@@ -53,6 +53,7 @@
     
     <!-- Volt CSS -->
     <link type="text/css" href="/css/volt.css" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
 
     @livewireStyles
 

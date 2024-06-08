@@ -26,6 +26,11 @@ class OrderLpk extends Component
         $this->tglMasuk = Carbon::now()->format('d/m/Y');
     }
 
+    public function add()
+    {
+        return redirect()->route('add-order');
+    }
+
     public function render()
     {
         return view('livewire.order-lpk.order-entry');

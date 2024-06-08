@@ -1,6 +1,11 @@
 <title>Order Entry</title>
 <div class="container mt-5">
     <div class="row">
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4" resources="DatePeriod"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
@@ -90,7 +95,13 @@
         <div class="col-lg-12" style="border-top:1px solid #efefef">
             <div class="toolbar">
                 <button id="btnFilter" type="button" class="btn btn-info" style="width:125px;"><i class="fa fa-search"></i> Filter</button>
-                <button id="btnCreate" type="button" class="btn btn-success" style="width:125px;" asp-app-role="write">
+                <button 
+                    id="btnCreate" 
+                    type="button" 
+                    class="btn btn-success" 
+                    style="width:125px;" 
+                    asp-app-role="write" 
+                    onclick="window.location.href='{{ route('add-order') }}'">
                     <i class="fa fa-plus"></i> Add
                 </button>
             </div>
