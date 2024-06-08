@@ -63,7 +63,9 @@
         'general-report',
         'detail-report',
         'edit-order',
-        'add-order'
+        'add-order',
+        'edit-lpk',
+        'add-lpk',
         ]))
         {{-- Nav --}}
         @include('layouts.nav')

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AddLpkController;
 use App\Http\Livewire\AddOrder;
 use App\Http\Livewire\BootstrapTables;
 use App\Http\Livewire\Components\Buttons;
@@ -34,6 +35,8 @@ use App\Http\Livewire\LossSeitai;
 use App\Http\Livewire\MutasiIsiPalet;
 use App\Http\Livewire\CheckListSeitai;
 use App\Http\Livewire\DetailReport;
+use App\Http\Livewire\EditLpk;
+use App\Http\Livewire\EditLpkController;
 use App\Http\Livewire\EditOrder;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
@@ -111,6 +114,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-order', AddOrder::class)->name('add-order');
 
     Route::get('/lpk-entry', LpkEntry::class)->name('lpk-entry');
+    Route::get('/edit-lpk/{orderId}', EditLpkController::class)->name('edit-lpk');
+    Route::get('/add-lpk', AddLpkController::class)->name('add-lpk');
+
     Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');
     Route::get('/order-report', OrderReport::class)->name('order-report');
     Route::get('/nippo-infure', NippoInfure::class)->name('nippo-infure');

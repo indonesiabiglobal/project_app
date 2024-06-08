@@ -9,7 +9,7 @@ use App\Models\MsProduct;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class AddOrder extends Component
+class AddLpkController extends Component
 {
     public $tdOrder;
     public $product;
@@ -43,17 +43,17 @@ class AddOrder extends Component
 
         session()->flash('message', 'Order saved successfully.');
 
-        return redirect()->route('order-entry');
+        return redirect()->route('lpk-entry');
     }
 
     public function cancel()
     {
-        return redirect()->route('order-entry');
+        return redirect()->route('lpk-entry');
     }
 
     public function render()
     {
-        return view('livewire.order-lpk.add-order');
+        return view('livewire.order-lpk.add-lpk');
     }
 }
 

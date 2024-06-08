@@ -65,7 +65,6 @@ class EditOrder extends Component
 
     public function cancel()
     {
-        session()->flash('message', 'Order deleted successfully.');
         return redirect()->route('order-entry');
     }
 
