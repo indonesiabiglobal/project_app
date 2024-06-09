@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\AddLpkController;
+use App\Http\Livewire\AddNippoController;
 use App\Http\Livewire\AddOrder;
 use App\Http\Livewire\BootstrapTables;
 use App\Http\Livewire\Components\Buttons;
@@ -37,6 +38,7 @@ use App\Http\Livewire\CheckListSeitai;
 use App\Http\Livewire\DetailReport;
 use App\Http\Livewire\EditLpk;
 use App\Http\Livewire\EditLpkController;
+use App\Http\Livewire\EditNippoController;
 use App\Http\Livewire\EditOrder;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
@@ -45,6 +47,7 @@ use App\Http\Livewire\KenpinSeitai;
 use App\Http\Livewire\LabelMasukGudang;
 use App\Http\Livewire\SumberDayaManusia\MasterPegawai;
 use App\Http\Livewire\MutasiIsiPaletKenpin;
+use App\Http\Livewire\NippoInfureController;
 use App\Http\Livewire\PenarikanPalet;
 use App\Http\Livewire\PengembalianPalet;
 use App\Http\Livewire\PrintLabelGudangKenpin;
@@ -116,11 +119,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/lpk-entry', LpkEntry::class)->name('lpk-entry');
     Route::get('/edit-lpk/{orderId}', EditLpkController::class)->name('edit-lpk');
     Route::get('/add-lpk', AddLpkController::class)->name('add-lpk');
-
     Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');
     Route::get('/order-report', OrderReport::class)->name('order-report');
-    Route::get('/nippo-infure', NippoInfure::class)->name('nippo-infure');
+    
+    Route::get('/nippo-infure', NippoInfureController::class)->name('nippo-infure');
+    Route::get('/edit-nippo/{orderId}', EditNippoController::class)->name('edit-nippo');
+    Route::get('/add-nippo', AddNippoController::class)->name('add-nippo');
+
     Route::get('/loss-infure', LossInfure::class)->name('loss-infure');
+    
     Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
     Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');
     Route::get('/nippo-seitai', NippoSeitai::class)->name('nippo-seitai');
@@ -152,8 +159,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/daftar-pengajuan', DaftarPengajuan::class)->name('daftar-pengajuan');
     Route::get('/daftar-persetujuan', DaftarPersetujuan::class)->name('daftar-persetujuan');
 
-    Route::get('/pengajuan-lembur', PengajuanLembur::class)->name('nippo-infure');
-    Route::get('/daftar-persetujuan-lembur', DaftarPersetujuanLembur::class)->name('nippo-infure');
+    Route::get('/pengajuan-lembur', PengajuanLembur::class)->name('daftar-persetujuan-lembur');
+    Route::get('/daftar-persetujuan-lembur', DaftarPersetujuanLembur::class)->name('daftar-persetujuan-lembur');
 
     Route::get('/perhitungan-payroll', PerhitunganPayroll::class)->name('perhitungan-payroll');
     Route::get('/slip-gaji', SlipGaji::class)->name('slip-gaji');

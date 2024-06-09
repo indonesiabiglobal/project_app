@@ -66,6 +66,8 @@
         'add-order',
         'edit-lpk',
         'add-lpk',
+        'edit-nippo',
+        'add-nippo',
         ]))
         {{-- Nav --}}
         @include('layouts.nav')
