@@ -68,6 +68,8 @@
         'add-lpk',
         'edit-nippo',
         'add-nippo',
+        'edit-loss',
+        'add-loss',
         ]))
         {{-- Nav --}}
         @include('layouts.nav')

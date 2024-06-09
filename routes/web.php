@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AddLossController;
 use App\Http\Livewire\AddLpkController;
 use App\Http\Livewire\AddNippoController;
 use App\Http\Livewire\AddOrder;
@@ -36,6 +37,7 @@ use App\Http\Livewire\LossSeitai;
 use App\Http\Livewire\MutasiIsiPalet;
 use App\Http\Livewire\CheckListSeitai;
 use App\Http\Livewire\DetailReport;
+use App\Http\Livewire\EditLossController;
 use App\Http\Livewire\EditLpk;
 use App\Http\Livewire\EditLpkController;
 use App\Http\Livewire\EditNippoController;
@@ -127,7 +129,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-nippo', AddNippoController::class)->name('add-nippo');
 
     Route::get('/loss-infure', LossInfure::class)->name('loss-infure');
-    
+    Route::get('/edit-loss/{orderId}', EditLossController::class)->name('edit-loss');
+    Route::get('/add-loss', AddLossController::class)->name('add-loss');
+
     Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
     Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');
     Route::get('/nippo-seitai', NippoSeitai::class)->name('nippo-seitai');
