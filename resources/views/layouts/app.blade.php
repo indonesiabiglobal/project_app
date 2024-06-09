@@ -21,7 +21,7 @@
         'mutasi-isi-palet',
         'infure-jam-kerja',
         'seitai-jam-kerja',
-        'kenpin-infure-kenpin',
+        'kenpin-infure',
         'kenpin-seitai-kenpin',
         'mutasi-isi-palet-kenpin',
 
@@ -70,6 +70,8 @@
         'add-nippo',
         'edit-loss',
         'add-loss',
+        'edit-kenpin',
+        'add-kenpin',
         ]))
         {{-- Nav --}}
         @include('layouts.nav')

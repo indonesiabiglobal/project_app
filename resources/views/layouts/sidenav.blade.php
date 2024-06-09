@@ -262,8 +262,8 @@
           <div class="multi-level collapse {{ Request::segment(1) == 'kenpin-infure-kenpin' || Request::segment(1) == 'kenpin-seitai-kenpin' || Request::segment(1) == 'mutasi-isi-palet-kenpin' || Request::segment(1) == 'print-label-gudang-kenpin' || Request::segment(1) == 'report-kenpin' ? 'show' : '' }}" role="list"
             id="kenpin" aria-expanded="false">
             <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == 'kenpin-infure-kenpin' ? 'active' : '' }}">
-                <a class="nav-link" href="/kenpin-infure-kenpin">
+              <li class="nav-item {{ Request::segment(1) == 'kenpin-infure' ? 'active' : '' }}">
+                <a class="nav-link" href="/kenpin-infure">
                   <span class="sidebar-text">Kenpin Infure</span>
                 </a>
               </li>
