@@ -21,6 +21,7 @@ class AddLpkController extends Component
     public $order_unit;
     public $buyer_id;
     public $product_id;
+    public $lpk_no;
 
     public function mount()
     {
@@ -32,18 +33,25 @@ class AddLpkController extends Component
 
     public function save()
     {
-        $order = new TdOrder();
-        $order->po_no = $this->po_no;
-        $order->product_code = $this->product_code;
-        $order->product_id = $this->product_id;
-        $order->order_qty = $this->order_qty;
-        $order->order_unit = $this->order_unit;
-        $order->buyer_id = $this->buyer_id;
-        $order->save();
+        $validatedData = $this->validate([
+            'lpk_no' => 'required',
+        ]);
 
-        session()->flash('message', 'Order saved successfully.');
+        try {
+            $order = new TdOrder();
+            $order->po_no = $this->po_no;
+            $order->product_code = $this->product_code;
+            $order->product_id = $this->product_id;
+            $order->order_qty = $this->order_qty;
+            $order->order_unit = $this->order_unit;
+            $order->buyer_id = $this->buyer_id;
+            $order->save();
 
-        return redirect()->route('lpk-entry');
+            session()->flash('message', 'Order saved successfully.');
+            return redirect()->route('lpk-entry');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+        }
     }
 
     public function cancel()

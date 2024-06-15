@@ -1,5 +1,18 @@
 <div class="row">
-	
+	@if (session()->has('message'))
+		<div class="alert alert-success">
+			{{ session('message') }}
+		</div>
+	@endif
+	@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+	@endif
     <form wire:submit.prevent="save">
         <div class="row">
             <div class="col-lg-5 ms-3">
@@ -148,9 +161,9 @@
                     <i class="fa fa-back"></i> Close
                 </button>
 
-                <button id="btnFilter" type="button" class="btn btn-danger" wire:click="delete">
+                {{-- <button id="btnFilter" type="button" class="btn btn-danger" wire:click="delete">
                     <i class="fa fa-trash"></i> Delete
-                </button>
+                </button> --}}
 
                 <button id="btnCreate" type="submit" class="btn btn-success">
                     <i class="fa fa-plus"></i> Update

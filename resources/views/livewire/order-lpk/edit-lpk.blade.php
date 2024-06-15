@@ -1,5 +1,14 @@
 <div class="row">
-	
+	@if (session()->has('message'))
+		<div class="alert alert-success">
+			{{ session('message') }}
+		</div>
+	@endif
+    @if (session()->has('error'))
+		<div class="alert alert-danger">
+			{{ session('error') }}
+		</div>
+	@endif
         <form wire:submit.prevent="save">
             <div class="row">
                 <div class="col-lg-5 ms-3">
@@ -21,6 +30,9 @@
                         <label class="control-label col-md-6 col-xs-12">Nomor LPK</label>
                         <div class="input-group col-md-9 col-xs-12">
                             <input type="text" id="lpk_no" class="form-control"  wire:model="lpk_no" />
+                            @error('lpk_no')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">

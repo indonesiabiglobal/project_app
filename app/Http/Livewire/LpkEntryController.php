@@ -8,7 +8,7 @@ use App\Models\TdOrderLpk;
 use App\Models\MsProduct;
 use App\Models\MsBuyer;
 
-class LpkEntry extends Component
+class LpkEntryController extends Component
 {
     public $tdOrderLpk;
     public $product;

@@ -42,23 +42,39 @@ class EditLpkController extends Component
 
     public function save()
     {
-        $order = TdOrderLpk::findOrFail($this->orderId);
-        $order->po_no = $this->po_no;
-        $order->product_id = $this->product_id;
-        $order->order_qty = $this->order_qty;
-        $order->save();
+        $validatedData = $this->validate([
+            'lpk_no' => 'required',
+        ]);
 
-        session()->flash('message', 'Order updated successfully.');
-        return redirect()->route('lpk-entry');
+        try {
+            $order = TdOrderLpk::findOrFail($this->orderIdss);
+            $order->po_no = $this->po_no;
+            $order->product_id = $this->product_id;
+            $order->order_qty = $this->order_qty;
+            $order->save();
+
+            session()->flash('message', 'Order updated successfully.');
+            return redirect()->route('lpk-entry');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+        }
+
+        
     }
 
     public function delete()
     {
-        $order = TdOrderLpk::findOrFail($this->orderId);
-        $order->delete();
+        try {
+            $order = TdOrderLpk::findOrFail($this->orderId);
+            $order->delete();
 
-        session()->flash('message', 'Order deleted successfully.');
-        return redirect()->route('lpk-entry');
+            session()->flash('message', 'Order deleted successfully.');
+            return redirect()->route('lpk-entry');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+        }
+
+        
     }
 
     public function cancel()
