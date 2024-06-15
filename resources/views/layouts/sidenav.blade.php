@@ -337,7 +337,7 @@
           </div>
         </li>
 
-        {{-- <li class="nav-item">
+        <li class="nav-item">
           <span
             class="nav-link {{ Request::segment(1) !== 'bootstrap-tables' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
             data-bs-toggle="collapse" data-bs-target="#master-tabel">
@@ -428,7 +428,7 @@
               </li>
             </ul>
           </div>
-        </li> --}}
+        </li>
 
         {{-- <li class="nav-item">
           <span

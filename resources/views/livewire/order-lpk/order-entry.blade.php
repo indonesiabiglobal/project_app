@@ -1,5 +1,5 @@
 <title>Order Entry</title>
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="row">
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -29,8 +29,8 @@
                                                 clip-rule="evenodd"></path>
                                         </svg></span>
                                     <input data-datepicker=""
-                                        class="form-control datepicker-input" id="birthday" type="text"
-                                        placeholder="yyyy/mm/dd">
+                                        class="form-control datepicker-input" id="tglMasuk" type="text"
+                                        placeholder="yyyy/mm/dd" wire:model="tglMasuk">
 
                                         <span class="input-group-text">
                                             <svg class="icon icon-xs" fill="currentColor"
@@ -41,8 +41,8 @@
                                             </svg>
                                         </span>
                                     <input data-datepicker=""
-                                        class="form-control datepicker-input" id="tglMasuk" type="text"
-                                        placeholder="yyyy/mm/dd" wire:model="tglMasuk">
+                                        class="form-control datepicker-input" id="tglPulang" type="text"
+                                        placeholder="yyyy/mm/dd" wire:model="tglPulang">
                                     </div>
                                 </div>
                             </td>
@@ -57,6 +57,8 @@
                 </div>
             </div>
         </div>
+
+        
     
         <div class="col-lg-6">
             <div class="form-group">
@@ -108,7 +110,7 @@
             <table class="table table-bordered" data-height="414" id="tableSrc"></table>
         </div>
     </div>
-    <div class="card border-0 shadow mb-4 mt-4">
+    {{-- <div class="card border-0 shadow mb-4 mt-4">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-centered table-nowrap mb-0 rounded">
@@ -128,12 +130,12 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
+                        @php
+                            $no = 1;
+                        @endphp
                         @foreach ($tdOrder as $item)
                         <tr>
-                            <td>        
-                                {{-- <button id="btnCreate" type="button" class="btn btn-info">
-                                    <i class="fa fa-plus"></i> Edit
-                                </button> --}}
+                            <td>
                                 <a href="{{ route('edit-order', ['orderId' => $item->id]) }}" class="btn btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
@@ -142,28 +144,28 @@
                                 {{ $item->po_no }}
                             </td>
                             <td>
-                                {{ $item->product_id }}
+                                {{ $item->produk_name }}
                             </td>
                             <td>
                                 {{ $item->product_code }}
                             </td>
                             <td>
+                                {{ $item->buyer_name }}
+                            </td>
+                            <td>
                                 {{ $item->order_qty }}
                             </td>
                             <td>
-                                {{ $item->order_unit }}
+                                {{ $item->order_date }}
                             </td>
                             <td>
-                                {{ $item->qty_gentan }}
+                                {{ $item->etddate }}
                             </td>
                             <td>
-                                {{ $item->qty_gulung }}
+                                {{ $item->processdate }}
                             </td>
                             <td>
-                                {{ $item->qty_lpk }}
-                            </td>
-                            <td>
-                                {{ $item->panjang_lpk }}
+                                {{ $no++ }}
                             </td>
                         </tr>
                         @endforeach
@@ -171,6 +173,94 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div> --}}
+    <div class="card card-body border-0 shadow table-wrapper table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="border-0 rounded-start">Action</th>
+                    <th class="border-0">PO Number</th>
+                    <th class="border-0">Nama Produk</th>
+                    <th class="border-0">Kode Produk</th>
+                    <th class="border-0">Buyer</th>
+                    <th class="border-0">Quantity</th>
+                    <th class="border-0">Tgl. Order</th>
+                    <th class="border-0">Etd</th>
+                    <th class="border-0">Tgl Proses</th>
+                    <th class="border-0 rounded-end">No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Item -->
+                @php
+                    $no = 1;
+                @endphp
+                @foreach ($tdOrder as $item)
+                    <tr>
+                        <td>
+                            <a href="{{ route('edit-order', ['orderId' => $item->id]) }}" class="btn btn-info">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                        </td>
+                        <td>                                
+                            {{ $item->po_no }}
+                        </td>
+                        <td>
+                            {{ $item->produk_name }}
+                        </td>
+                        <td>
+                            {{ $item->product_code }}
+                        </td>
+                        <td>
+                            {{ $item->buyer_name }}
+                        </td>
+                        <td>
+                            {{ $item->order_qty }}
+                        </td>
+                        <td>
+                            {{ $item->order_date }}
+                        </td>
+                        <td>
+                            {{ $item->etddate }}
+                        </td>
+                        <td>
+                            {{ $item->processdate }}
+                        </td>
+                        <td>
+                            {{ $no++ }}
+                        </td>
+                    </tr>
+                    @endforeach                          
+            </tbody>
+        </table>
+        <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mb-0">
+                    <li class="page-item">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">4</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">5</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="fw-normal small mt-4 mt-lg-0">Showing <b>5</b> out of <b>25</b> entries</div>
         </div>
     </div>
 </div>
