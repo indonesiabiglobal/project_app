@@ -72,6 +72,8 @@
         'add-loss',
         'edit-kenpin',
         'add-kenpin',
+        'edit-seitai',
+        'add-seitai',
         ]))
         {{-- Nav --}}
         @include('layouts.nav')

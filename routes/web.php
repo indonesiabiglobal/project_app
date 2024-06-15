@@ -6,6 +6,7 @@ use App\Http\Livewire\AddLpkController;
 use App\Http\Livewire\AddNippoController;
 use App\Http\Livewire\AddOrder;
 use App\Http\Livewire\AddOrderController;
+use App\Http\Livewire\AddSeitaiController;
 use App\Http\Livewire\BootstrapTables;
 use App\Http\Livewire\Components\Buttons;
 use App\Http\Livewire\Components\Forms;
@@ -42,6 +43,7 @@ use App\Http\Livewire\EditLossController;
 use App\Http\Livewire\EditLpkController;
 use App\Http\Livewire\EditNippoController;
 use App\Http\Livewire\EditOrderController;
+use App\Http\Livewire\EditSeitaiController;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
 use App\Http\Livewire\KenpinInfure;
@@ -51,6 +53,7 @@ use App\Http\Livewire\LpkEntryController;
 use App\Http\Livewire\SumberDayaManusia\MasterPegawai;
 use App\Http\Livewire\MutasiIsiPaletKenpin;
 use App\Http\Livewire\NippoInfureController;
+use App\Http\Livewire\NippoSeitaiController;
 use App\Http\Livewire\PenarikanPalet;
 use App\Http\Livewire\PengembalianPalet;
 use App\Http\Livewire\PrintLabelGudangKenpin;
@@ -133,9 +136,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-loss/{orderId}', EditLossController::class)->name('edit-loss');
     Route::get('/add-loss', AddLossController::class)->name('add-loss');
 
+    // Nippo Seitai
+    Route::get('/nippo-seitai', NippoSeitaiController::class)->name('nippo-seitai');
+    Route::get('/add-seitai', AddSeitaiController::class)->name('add-seitai');
+    Route::get('/edit-seitai/{orderId}', EditSeitaiController::class)->name('edit-seitai');
+
     Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
-    Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');
-    Route::get('/nippo-seitai', NippoSeitai::class)->name('nippo-seitai');
+    Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');    
     Route::get('/loss-seitai', LossSeitai::class)->name('loss-seitai');
     Route::get('/mutasi-isi-palet', MutasiIsiPalet::class)->name('mutasi-isi-palet');
     Route::get('/check-list-seitai', CheckListSeitai::class)->name('check-list-seitai');

@@ -8,7 +8,7 @@ use App\Models\MsBuyer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class EditLpkController extends Component
+class EditSeitaiController extends Component
 {
     public $buyer;
     public $orderId;
@@ -54,7 +54,7 @@ class EditLpkController extends Component
             $order->save();
 
             session()->flash('message', 'Order updated successfully.');
-            return redirect()->route('lpk-entry');
+            return redirect()->route('nippo-seitai');
         } catch (\Exception $e) {
             session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
         }
@@ -69,7 +69,7 @@ class EditLpkController extends Component
             $order->delete();
 
             session()->flash('message', 'Order deleted successfully.');
-            return redirect()->route('lpk-entry');
+            return redirect()->route('nippo-seitai');
         } catch (\Exception $e) {
             session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
         }
@@ -79,12 +79,12 @@ class EditLpkController extends Component
 
     public function cancel()
     {
-        return redirect()->route('lpk-entry');
+        return redirect()->route('nippo-seitai');
     }
 
     public function render()
     {
-        return view('livewire.order-lpk.edit-lpk');
+        return view('livewire.nippo-seitai.edit-seitai');
     }
 }
 
