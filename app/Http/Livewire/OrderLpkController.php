@@ -9,7 +9,7 @@ use App\Models\TdOrder;
 use App\Models\MsProduct;
 use App\Models\MsBuyer;
 
-class OrderLpk extends Component
+class OrderLpkController extends Component
 {
     use WithPagination;
 

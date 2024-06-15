@@ -1,6 +1,11 @@
 <title>Loss Seitai</title>
 <div class="container mt-5">
     <div class="row">
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="col-lg-6 mb-4">
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4" resources="DatePeriod"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>

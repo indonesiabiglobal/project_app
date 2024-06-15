@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class LossSeitai extends Component
+class LossSeitaiController extends Component
 {
     public function render()
     {
