@@ -5,6 +5,7 @@ use App\Http\Livewire\AddLossController;
 use App\Http\Livewire\AddLpkController;
 use App\Http\Livewire\AddNippoController;
 use App\Http\Livewire\AddOrder;
+use App\Http\Livewire\AddOrderController;
 use App\Http\Livewire\BootstrapTables;
 use App\Http\Livewire\Components\Buttons;
 use App\Http\Livewire\Components\Forms;
@@ -43,6 +44,7 @@ use App\Http\Livewire\EditLpk;
 use App\Http\Livewire\EditLpkController;
 use App\Http\Livewire\EditNippoController;
 use App\Http\Livewire\EditOrder;
+use App\Http\Livewire\EditOrderController;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
 use App\Http\Livewire\KenpinInfure;
@@ -116,8 +118,8 @@ Route::middleware('auth')->group(function () {
 
     // Fukusuke    
     Route::get('/order-entry', OrderLpk::class)->name('order-entry');
-    Route::get('/edit-order/{orderId}', EditOrder::class)->name('edit-order');
-    Route::get('/add-order', AddOrder::class)->name('add-order');
+    Route::get('/edit-order/{orderId}', EditOrderController::class)->name('edit-order');
+    Route::get('/add-order', AddOrderController::class)->name('add-order');
 
     Route::get('/lpk-entry', LpkEntry::class)->name('lpk-entry');
     Route::get('/edit-lpk/{orderId}', EditLpkController::class)->name('edit-lpk');

@@ -9,7 +9,7 @@ use App\Models\MsProduct;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class AddOrder extends Component
+class AddOrderController extends Component
 {
     public $tdOrder;
     public $product;
@@ -32,18 +32,28 @@ class AddOrder extends Component
 
     public function save()
     {
-        $order = new TdOrder();
-        $order->po_no = $this->po_no;
-        $order->product_code = $this->product_code;
-        $order->product_id = $this->product_id;
-        $order->order_qty = $this->order_qty;
-        $order->order_unit = $this->order_unit;
-        $order->buyer_id = $this->buyer_id;
-        $order->save();
+        $validatedData = $this->validate([
+            'po_no' => 'required',
+            'product_code' => 'required',
+            'order_qty' => 'required|integer',
+        ]);
 
-        session()->flash('message', 'Order saved successfully.');
-
-        return redirect()->route('order-entry');
+        try {
+            $order = new TdOrder();
+            $order->po_no = $this->po_no;
+            $order->product_code = $this->product_code;
+            $order->product_id = $this->product_id;
+            $order->order_qty = $this->order_qty;
+            $order->order_unit = $this->order_unit;
+            $order->buyer_id = $this->buyer_id;
+            $order->save();
+    
+            session()->flash('message', 'Order saved successfully.');
+    
+            return redirect()->route('order-entry');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+        }
     }
 
     public function cancel()

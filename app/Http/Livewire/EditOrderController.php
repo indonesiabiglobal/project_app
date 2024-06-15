@@ -8,7 +8,7 @@ use App\Models\MsBuyer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class EditOrder extends Component
+class EditOrderController extends Component
 {
     public $buyer;
     public $orderId;
@@ -39,28 +39,35 @@ class EditOrder extends Component
 
     public function save()
     {
-        $order = TdOrder::findOrFail($this->orderId);
-        $order->po_no = $this->po_no;
-        $order->product_id = $this->product_id;
-        $order->order_qty = $this->order_qty;
-        // $order->process_date = Carbon::createFromFormat('d/m/Y', $this->process_date)->format('Y-m-d');
-        // $order->order_date = Carbon::createFromFormat('d/m/Y', $this->order_date)->format('Y-m-d');
-        // $order->stufingdate = Carbon::createFromFormat('d/m/Y', $this->stufingdate)->format('Y-m-d');
-        // $order->etddate = Carbon::createFromFormat('d/m/Y', $this->etddate)->format('Y-m-d');
-        // $order->etadate = Carbon::createFromFormat('d/m/Y', $this->etadate)->format('Y-m-d');
-        $order->save();
+        $validatedData = $this->validate([
+            'po_no' => 'required',
+        ]);
 
-        session()->flash('message', 'Order updated successfully.');
-        return redirect()->route('order-entry');
+        try {
+            $order = TdOrder::findOrFail($this->orderId);
+            $order->po_no = $this->po_no;
+            $order->product_id = $this->product_id;
+            $order->order_qty = $this->order_qty;
+            $order->save();
+
+            session()->flash('message', 'Order updated successfully.');
+            return redirect()->route('order-entry');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+        }
     }
 
     public function delete()
     {
-        $order = TdOrder::findOrFail($this->orderId);
-        $order->delete();
+        try {
+            $order = TdOrder::findOrFail($this->orderId);
+            $order->delete();
 
-        session()->flash('message', 'Order deleted successfully.');
-        return redirect()->route('order-entry');
+            session()->flash('message', 'Order deleted successfully.');
+            return redirect()->route('order-entry');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+        }
     }
 
     public function cancel()
