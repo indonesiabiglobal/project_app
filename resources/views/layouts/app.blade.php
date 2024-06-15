@@ -1,6 +1,18 @@
 <x-layouts.base>
     @if(in_array(request()->route()->getName(), [
-        'dashboard', 
+        'order-entry',
+        'lpk-entry',
+        ]))
+
+        @include('layouts.nav')
+        @include('layouts.sidenav')
+        <main class="content">
+            @include('layouts.topbar')
+            {{ $slot }}
+            @include('layouts.footer')
+        </main>
+
+    @elseif(in_array(request()->route()->getName(), [
         'profile', 
         'profile-example', 
         'users', 
@@ -8,14 +20,13 @@
         'transactions',
         'nippo-infure',
         'loss-infure',
-        'buttons',
-        'order-entry',
-        'lpk-entry',
+        'buttons',        
         'forms', 
         'modals', 
         'notifications', 
         'typography', 
         'upgrade-to-pro',
+
         'nippo-seitai',
         'loss-seitai',
         'mutasi-isi-palet',
@@ -24,7 +35,6 @@
         'kenpin-infure',
         'kenpin-seitai-kenpin',
         'mutasi-isi-palet-kenpin',
-
         'master-pegawai',
         'absensi-pegawai',
         'jadwal-kerja-pegawai',
@@ -37,19 +47,16 @@
         'slip-gaji',
         ]))
 
-        {{-- Nav --}}
-        @include('layouts.nav')
-        {{-- SideNav --}}
-        @include('layouts.sidenav')
+            @include('layouts.nav')
+            @include('layouts.sidenav')
         <main class="content">
-        {{-- TopBar --}}
-        @include('layouts.topbar')
-        {{ $slot }}
-        {{-- Footer --}}
-        @include('layouts.footer')
+            @include('layouts.topbar3')
+            {{ $slot }}
+            @include('layouts.footer')
         </main>
 
     @elseif(in_array(request()->route()->getName(), [
+        'dashboard',
         'cetak-lpk',
         'order-report',
         'checklist-infure',
@@ -75,16 +82,13 @@
         'edit-seitai',
         'add-seitai',
         ]))
-        {{-- Nav --}}
+        
         @include('layouts.nav')
-        {{-- SideNav --}}
         @include('layouts.sidenav')
         <main class="content">
-        {{-- TopBar --}}
-        @include('layouts.topbar2')
-        {{ $slot }}
-        {{-- Footer --}}
-        @include('layouts.footer')
+            @include('layouts.topbar2')
+            {{ $slot }}
+            @include('layouts.footer')
         </main>
 
     @elseif(in_array(request()->route()->getName(), [
@@ -99,9 +103,6 @@
         ]))
 
     {{ $slot }}
-    {{-- Footer --}}
-    {{-- @include('layouts.footer2') --}}
-
 
     @elseif(in_array(request()->route()->getName(), ['404', '500', 'lock']))
 
