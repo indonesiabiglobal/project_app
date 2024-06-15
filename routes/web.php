@@ -46,6 +46,7 @@ use App\Http\Livewire\EditOrderController;
 use App\Http\Livewire\EditSeitaiController;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
+use App\Http\Livewire\InfureJamKerjaController;
 use App\Http\Livewire\KenpinInfure;
 use App\Http\Livewire\KenpinSeitai;
 use App\Http\Livewire\LabelMasukGudang;
@@ -154,7 +155,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mutasi-isi-palet', MutasiIsiPalet::class)->name('mutasi-isi-palet');
     Route::get('/check-list-seitai', CheckListSeitai::class)->name('check-list-seitai');
     Route::get('/label-masuk-gudang', LabelMasukGudang::class)->name('label-masuk-gudang');
-    Route::get('/infure-jam-kerja', InfureJamKerja::class)->name('infure-jam-kerja');
+    Route::get('/infure-jam-kerja', InfureJamKerjaController::class)->name('infure-jam-kerja');
     Route::get('/seitai-jam-kerja', SeitaiJamKerja::class)->name('seitai-jam-kerja');
 
     Route::get('/kenpin-infure', KenpinInfure::class)->name('kenpin-infure');

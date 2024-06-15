@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class InfureJamKerja extends Component
+class InfureJamKerjaController extends Component
 {
     public function render()
     {
