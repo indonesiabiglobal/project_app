@@ -126,6 +126,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/order-entry', OrderLpkController::class)->name('order-entry');
     Route::get('/edit-order/{orderId}', EditOrderController::class)->name('edit-order');
     Route::get('/add-order', AddOrderController::class)->name('add-order');
+    Route::get('/cetak-order', function () {
+        return view('livewire.order-lpk.cetak-order');
+    })->name('cetak-order');
 
     Route::get('/lpk-entry', LpkEntryController::class)->name('lpk-entry');
     Route::get('/edit-lpk/{orderId}', EditLpkController::class)->name('edit-lpk');
