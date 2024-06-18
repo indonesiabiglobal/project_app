@@ -4,13 +4,9 @@
 			{{ session('message') }}
 		</div>
 	@endif
-	@if ($errors->any())
+	@if (session()->has('error'))
 		<div class="alert alert-danger">
-			<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-			</ul>
+			{{ session('error') }}
 		</div>
 	@endif
 	<div class="col-lg-2"></div>
@@ -19,44 +15,39 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Tanggal Proses</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input data-datepicker="" class="form-control datepicker-input" id="process_date" type="text" placeholder="yyyy/mm/dd" wire:model="process_date">
-                <span class="input-group-text">
-                    <svg class="icon icon-xs" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                </span>
+				<div class="input-group col-md-9 col-xs-12">
+					<input class="form-control datepicker-input" type="date" wire:model="process_date" placeholder="yyyy/mm/dd"/>
+					@error('process_date')
+						<span class="invalid-feedback">{{ $message }}</span>
+					@enderror
+				</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">PO Number</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="poNumber" class="form-control"  wire:model="po_no" />
-				{{-- @error('po_no')
+				<input type="text" class="form-control" wire:model="po_no" />
+				@error('po_no')
 					<span class="invalid-feedback">{{ $message }}</span>
-				@enderror --}}
+				@enderror
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Tanggal Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input data-datepicker="" class="form-control datepicker-input" id="order_date" type="text" placeholder="yyyy/mm/dd" wire:model="order_date">
-                <span class="input-group-text">
-                    <svg class="icon icon-xs" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                </span>
+				<input class="form-control datepicker-input" type="date" wire:model="order_date" placeholder="yyyy/mm/dd"/>
+				@error('order_date')
+					<span class="invalid-feedback">{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nomor Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="nomorPo" class="form-control" wire:model="product_code" />
+				<input type="text" id="nomorPo" class="form-control"  wire:model="product_code" />
+				@error('product_code')
+					<span class="invalid-feedback">{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
         <div class="form-group">
@@ -72,19 +63,22 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Dimensi</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="dimensi" class="form-control readonly" readonly="readonly" wire:model="dimensi" />
+				<input type="text" id="dimensi" class="form-control" wire:model="dimensi" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Jumlah Order</label>
 			<div class="input-group col-md-9 col-xs-12">
 				<input type="text" id="order_qty" class="form-control" wire:model="order_qty" />
+				@error('order_qty')
+					<span class="invalid-feedback">{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Unit</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<select id="order_unit" class="js-states form-control" placeholder=""  wire:model="order_unit">
+				<select id="order_unit" class="js-states form-control" placeholder="" wire:model="unit_id">
 					<option value="1">Set</option>
 					<option value="2">Lembar</option>
                     <option value="3">Meter</option>
@@ -93,50 +87,33 @@
 		</div>
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Tanggal Stuffing</label>
-			<div class="input-group col-md-9 col-xs-12">
-				<input data-datepicker="" class="form-control datepicker-input" id="stufingdate" type="text" placeholder="yyyy/mm/dd" wire:model="stufingdate">
-                <span class="input-group-text">
-                    <svg class="icon icon-xs" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                </span>
-			</div>
+			<input class="form-control datepicker-input" type="date" wire:model="stufingdate" placeholder="yyyy/mm/dd"/>
+			@error('stufingdate')
+				<span class="invalid-feedback">{{ $message }}</span>
+			@enderror
 		</div>
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">ETD</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input data-datepicker="" class="form-control datepicker-input" id="etddate" type="text" placeholder="yyyy/mm/dd" wire:model="etddate">
-                <span class="input-group-text">
-                    <svg class="icon icon-xs" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                </span>
+				<input class="form-control datepicker-input" type="date" wire:model="etddate" placeholder="yyyy/mm/dd"/>
+				@error('etddate')
+					<span class="invalid-feedback">{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">ETA</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input data-datepicker="" class="form-control datepicker-input" id="etadate" type="text" placeholder="yyyy/mm/dd" wire:model="etadate">
-                <span class="input-group-text">
-                    <svg class="icon icon-xs" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                </span>
+				<input class="form-control datepicker-input" type="date" wire:model="etadate" placeholder="yyyy/mm/dd"/>
+				@error('etadate')
+					<span class="invalid-feedback">{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Buyer</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<select id="printDept" class="js-states form-control" wire:model="buyer_id" placeholder="">
+				<select class="form-control" wire:model="buyer_id" placeholder="">
 					@foreach ($buyer as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
@@ -159,7 +136,4 @@
         </div>
     </form>        
 	</div>
-	<div class="col-lg-2"></div>
 </div>
-{{-- <input name="lpk_id" type="hidden" value="" />
-<input id="searchLpkNo_selected" type="hidden" value="" /> --}}
