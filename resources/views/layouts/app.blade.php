@@ -2,6 +2,7 @@
     @if(in_array(request()->route()->getName(), [
         'order-entry',
         'lpk-entry',
+        'search-data'
         ]))
 
         @include('layouts.nav')

@@ -64,6 +64,7 @@ use App\Http\Livewire\ReportKenpin;
 use App\Http\Livewire\Transactions;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ResetPasswordExample;
+use App\Http\Livewire\SearchData;
 use App\Http\Livewire\SeitaiJamKerja;
 use App\Http\Livewire\SumberDayaManusia\AbsensiPegawai;
 use App\Http\Livewire\SumberDayaManusia\DaftarPengajuan;
@@ -120,7 +121,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
 
-    // Fukusuke    
+    // Fukusuke
+    // Route::get('/search-data', SearchData::class)->name('search-data');    
     Route::get('/order-entry', OrderLpkController::class)->name('order-entry');
     Route::get('/edit-order/{orderId}', EditOrderController::class)->name('edit-order');
     Route::get('/add-order', AddOrderController::class)->name('add-order');
