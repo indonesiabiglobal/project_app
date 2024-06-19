@@ -15,15 +15,10 @@
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Tanggal LPK</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input data-datepicker="" class="form-control datepicker-input readonly" readonly="readonly" id="lpk_date" type="text" placeholder="yyyy/mm/dd" wire:model="lpk_date">
-                            <span class="input-group-text">
-                                <svg class="icon icon-xs" fill="currentColor"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                    clip-rule="evenodd"></path>
-                                </svg>
-                            </span>
+                            <input class="form-control datepicker-input" type="date" wire:model="lpk_date" placeholder="yyyy/mm/dd"/>
+                            @error('process_date')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
@@ -38,43 +33,64 @@
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">PO Number</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input type="text" id="prev_lpk_no" class="form-control readonly" readonly="readonly" wire:model="prev_lpk_no" />
+                            <input type="text" class="form-control readonly" readonly="readonly" wire:model="po_no" />
+                            @error('po_no')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Nomor Order</label>
                         <div class="input-group col-md-9 col-xs-12">
                             <input type="text" id="order_id" class="form-control readonly" readonly="readonly"  wire:model="order_id" />
+                            @error('order_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Nomor Mesin</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input type="text" id="prev_machine_no" class="form-control" wire:model="prev_machine_no" />
+                            <input type="text" id="machine_no" class="form-control" wire:model="machine_no" />
+                            @error('machine_no')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Jumlah LPK</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input type="text" id="order_qty" class="form-control" wire:model="order_qty" />
+                            <input type="text" id="qty_lpk" class="form-control" wire:model="qty_lpk" />
+                            @error('qty_lpk')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Jumlah Gentan</label>
                         <div class="input-group col-md-9 col-xs-12">
                             <input type="text" id="qty_gentan" class="form-control" wire:model="qty_gentan" />
+                            @error('qty_gentan')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Meter Gulung</label>
                         <div class="input-group col-md-9 col-xs-12">
                             <input type="text" id="qty_gulung" class="form-control" wire:model="qty_gulung" />
+                            @error('qty_gulung')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Panjang LPK</label>
                         <div class="input-group col-md-9 col-xs-12">
                             <input type="text" id="panjang_lpk" class="form-control readonly" readonly="readonly" wire:model="panjang_lpk" />
+                            @error('panjang_lpk')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                            
@@ -84,29 +100,19 @@
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Tanggal Proses</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input data-datepicker="" class="form-control datepicker-input" id="lpk_date" type="text" placeholder="yyyy/mm/dd" wire:model="lpk_date">
-                            <span class="input-group-text">
-                                <svg class="icon icon-xs" fill="currentColor"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                    clip-rule="evenodd"></path>
-                                </svg>
-                            </span>
+                            <input class="form-control datepicker-input" type="date" wire:model="tglproses" placeholder="yyyy/mm/dd"/>
+                            @error('tglproses')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror                            
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-6 col-xs-12">Tanggal PO</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input data-datepicker="" class="form-control datepicker-input" id="lpk_date" type="text" placeholder="yyyy/mm/dd" wire:model="lpk_date">
-                            <span class="input-group-text">
-                                <svg class="icon icon-xs" fill="currentColor"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                    clip-rule="evenodd"></path>
-                                </svg>
-                            </span>
+                            <input class="form-control datepicker-input" type="date" wire:model="tgl_po" placeholder="yyyy/mm/dd"/>
+                            {{-- @error('tglproses')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror  --}}
                         </div>
                     </div>
                     <div class="form-group">
@@ -119,18 +125,27 @@
                         <label class="control-label col-md-9 col-xs-12">Nama Produk</label>
                         <div class="input-group col-md-9 col-xs-12">
                             <input type="text" id="product_id" class="form-control readonly"  readonly="readonly" wire:model="product_id" />
+                            @error('product_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-9 col-xs-12">Nama Mesin</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input type="text" id="machine_id" class="form-control readonly" readonly="readonly" wire:model="machine_id" />
+                            <input type="text" id="machine_no" class="form-control readonly" readonly="readonly" wire:model="machine_no" />
+                            @error('machine_no')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-9 col-xs-12">Panjang Total</label>
                         <div class="input-group col-md-9 col-xs-12">
-                            <input type="text" id="qty_lpk" class="form-control readonly"  readonly="readonly" wire:model="qty_lpk" />
+                            <input type="text" id="qty_lpk" class="form-control readonly"  readonly="readonly" wire:model="panjang_total" />
+                            {{-- @error('machine_no')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="form-group">

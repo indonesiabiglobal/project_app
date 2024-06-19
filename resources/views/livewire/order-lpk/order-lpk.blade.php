@@ -9,7 +9,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
-                <div class="input-group col-md-9 col-xs-8">
+                <div class="input-group">
                     <table>
                         <tr>
                             <td valign="top">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Produk</label>
                 <div class="input-group col-md-9 col-xs-8">
                     <input class="form-control" type="text" list="productList" wire:model.lazy="searchProduct" placeholder="Ketik atau pilih produk">
@@ -50,7 +50,7 @@
                         @endforeach 
                     </datalist>
                 </div>
-            </div>
+            </div> --}}
             
             
             <div class="form-group">
@@ -76,7 +76,7 @@
             </div>
         </div>
     
-        <div class="col-lg-12" style="border-top:1px solid #efefef">
+        <div class="col-lg-12 mt-4" style="border-top:1px solid #efefef">
             <div class="toolbar">
                 <button id="btnFilter" wire:click="search" type="button" class="btn btn-info" style="width:125px;">
                     <i class="fa fa-search"></i> Filter
