@@ -42,7 +42,7 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nomor Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="nomorPo" class="form-control"  wire:model="product_code" />
+				<input type="text" id="nomorPo" class="form-control readonly" readonly="readonly"  wire:model="product_code" />
 				@error('product_code')
 					<span class="invalid-feedback">{{ $message }}</span>
 				@enderror
@@ -73,9 +73,9 @@
 			<label class="control-label col-md-3 col-xs-12">Unit</label>
 			<div class="input-group col-md-9 col-xs-12">
 				<select id="unit" class="form-control" wire:model="unit_id" placeholder="">
-					<option value="1">Set</option>
-					<option value="2">Lembar</option>
-					<option value="3">Meter</option>
+					<option value="0">Set</option>
+					<option value="1">Lembar</option>
+					<option value="2">Meter</option>
 				</select>
 			</div>
 		</div>

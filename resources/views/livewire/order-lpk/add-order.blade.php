@@ -79,9 +79,9 @@
 			<label class="control-label col-md-3 col-xs-12">Unit</label>
 			<div class="input-group col-md-9 col-xs-12">
 				<select id="order_unit" class="js-states form-control" placeholder="" wire:model="unit_id">
-					<option value="1">Set</option>
-					<option value="2">Lembar</option>
-                    <option value="3">Meter</option>
+					<option value="0">Set</option>
+					<option value="1">Lembar</option>
+                    <option value="2">Meter</option>
 				</select>
 			</div>
 		</div>
