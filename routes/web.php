@@ -136,13 +136,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');
     Route::get('/order-report', OrderReport::class)->name('order-report');
     
+    // Nipo Infure
     Route::get('/nippo-infure', NippoInfureController::class)->name('nippo-infure');
     Route::get('/edit-nippo/{orderId}', EditNippoController::class)->name('edit-nippo');
     Route::get('/add-nippo', AddNippoController::class)->name('add-nippo');
 
+    // Loss Infure
     Route::get('/loss-infure', LossInfure::class)->name('loss-infure');
-    Route::get('/edit-loss/{orderId}', EditLossController::class)->name('edit-loss');
-    Route::get('/add-loss', AddLossController::class)->name('add-loss');
+    Route::get('/edit-loss-infure/{orderId}', EditLossController::class)->name('edit-loss-infure');
+    Route::get('/add-loss-infure', AddLossController::class)->name('add-loss-infure');
 
     // Nippo Seitai
     Route::get('/nippo-seitai', NippoSeitaiController::class)->name('nippo-seitai');

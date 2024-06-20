@@ -1,5 +1,4 @@
-<div class="row">
-	
+<div class="row">	
     <form wire:submit.prevent="save">
         <div class="row">
             <div class="col-lg-5 ms-3">

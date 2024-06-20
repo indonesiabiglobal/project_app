@@ -68,7 +68,7 @@ class EditLossController extends Component
 
     public function render()
     {
-        return view('livewire.nippo-infure.edit-loss');
+        return view('livewire.order-lpk.edit-lpk');
     }
 }
 
