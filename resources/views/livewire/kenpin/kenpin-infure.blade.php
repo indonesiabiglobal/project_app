@@ -1,5 +1,5 @@
-<title>Kenpin Infure</title>
-<div class="container mt-5">
+{{-- <title>Kenpin Infure</title> --}}
+<div class="container mt-4">
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
@@ -10,25 +10,15 @@
                             <td>
                                 <div class="form-group" style="margin-left:1px; white-space:nowrap">
                                     <div class="input-group">
-                                        <span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg></span>
-                                    <input data-datepicker=""
+                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+                                        
+                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                                    {{-- <input data-datepicker=""
                                         class="form-control datepicker-input" id="birthday" type="text"
                                         placeholder="yyyy/mm/dd">
-
-                                        <span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg></span>
                                     <input data-datepicker=""
                                         class="form-control datepicker-input" id="birthday" type="text"
-                                        placeholder="yyyy/mm/dd">
+                                        placeholder="yyyy/mm/dd"> --}}
                                     </div>
                                 </div>
                             </td>
@@ -37,30 +27,30 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4" resources="Search">Search </label>
+                <label class="control-label col-md-3 col-xs-4">Search </label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <input id='searchText' name='searchText' class="form-control" type="text" resources-placeholder="SearchTextOrCode" placeholder="search nomor PO, nama produk" />
+                    <input wire:model.defer="searchTerm" class="form-control" type="text" placeholder="search nomor PO, nama produk" />
                 </div>
             </div>
         </div>
     
         <div class="col-lg-6">
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4" resources="OrgBranch">Produk</label>
                 <div class="input-group col-md-9 col-xs-8">
                     <select id='searchProd' name="searchProd" class="js-states form-control" placeholder="- all -"></select>
                 </div>
-            </div>
+            </div> --}}
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4" resources="OrgDivision">Nomor Palet</label>
+                <label class="control-label col-md-3 col-xs-4">Nomor Palet</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id='searchBuyer' name="searchBuyer" class="js-states form-control" placeholder="- all -"></select>
+                    <select class="form-control" placeholder="- all -"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4" resources="OrgDivision">Status</label>
+                <label class="control-label col-md-3 col-xs-4">Status</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id="printStatus" class="js-states form-control" placeholder="- all -">
+                    <select id="printStatus" class="form-control" placeholder="- all -">
                         <option value="">- all -</option>
                         <option value="0">Belum LPK</option>
                         <option value="1">SUdah LPK</option>
@@ -69,20 +59,18 @@
             </div>
         </div>
     
-        <div class="col-lg-12" style="border-top:1px solid #efefef">
+        <div class="col-lg-12 mt-3" style="border-top:1px solid #efefef">
             <div class="toolbar">
                 <button id="btnFilter" type="button" class="btn btn-info" style="width:125px;"><i class="fa fa-search"></i> Filter</button>
                 <button 
                     id="btnCreate" 
                     type="button" 
                     class="btn btn-success" 
-                    style="width:125px;" 
-                    asp-app-role="write" 
+                    style="width:125px;"
                     onclick="window.location.href='{{ route('add-kenpin') }}'">
                     <i class="fa fa-plus"></i> Add
                 </button>
             </div>
-            <table class="table table-bordered" data-height="414" id="tableSrc"></table>
         </div>
     </div>
     <div class="card border-0 shadow mb-4 mt-4">

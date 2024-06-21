@@ -80,13 +80,11 @@
                     id="btnCreate" 
                     type="button" 
                     class="btn btn-success" 
-                    style="width:125px;" 
-                    asp-app-role="write" 
+                    style="width:125px;"
                     onclick="window.location.href='{{ route('add-nippo') }}'">
                     <i class="fa fa-plus"></i> Add
                 </button>
             </div>
-            <table class="table table-bordered" data-height="414" id="tableSrc"></table>
         </div>
     </div>
     <div class="card border-0 shadow mb-4 mt-4">
