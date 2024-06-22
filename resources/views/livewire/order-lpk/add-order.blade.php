@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-md-3 col-xs-12">Nomor Order</label>
+			<label class="control-label col-md-3 col-xs-12" wire:click="addorder">Nomor Order</label>
 			<div class="input-group col-md-9 col-xs-12">
 				<input type="text" id="nomorPo" class="form-control"  wire:model="product_code" />
 				@error('product_code')

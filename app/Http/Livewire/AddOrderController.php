@@ -36,6 +36,14 @@ class AddOrderController extends Component
         $this->buyer = MsBuyer::limit(10)->get();
     }
 
+    public function addorder(){
+        // dd('test');
+        if(isset($this->product_code)){
+            session()->flash('message', 'test.');
+
+        }
+    }
+
     public function save()
     {
         $validatedData = $this->validate([

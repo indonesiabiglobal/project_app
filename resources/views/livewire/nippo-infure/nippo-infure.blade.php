@@ -128,10 +128,10 @@
                                 {{ $item->gentan_no }}
                             </td>
                             <td>
-                                {{ $item->order_id }}
+                                {{ $item->product_code }}
                             </td>
                             <td>
-                                {{ $item->machine_id }}
+                                {{ $item->machineno }}
                             </td>
                             <td>
                                 {{ $item->production_date }}

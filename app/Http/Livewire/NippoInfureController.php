@@ -89,10 +89,14 @@ class NippoInfureController extends Component
             tdol.qty_gulung AS qty_gulung,
             tdol.qty_lpk AS qty_lpk,
             tdol.total_assembly_line AS total_assembly_line,
-            tdol.total_assembly_qty AS total_assembly_qty 
+            tdol.total_assembly_qty AS total_assembly_qty,
+            msm.machineno,
+            tdo.product_code 
         FROM
             tdProduct_assembly AS tda
             INNER JOIN tdOrderLpk AS tdol ON tda.lpk_id = tdol.ID 
+            inner join msmachine as msm on msm.id=tda.machine_id
+            INNER JOIN tdOrder AS tdo ON tdol.order_id=tdo.id
         $tglMasuk
         $tglKeluar
         $searchTerm

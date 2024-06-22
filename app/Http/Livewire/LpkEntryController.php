@@ -21,7 +21,6 @@ class LpkEntryController extends Component
     public function mount()
     {
         $this->product = MsProduct::limit(10)->get();
-        $this->tdOrderLpk = TdOrderLpk::limit(10)->get();
         $this->buyer = MsBuyer::limit(10)->get();
         $this->tglMasuk = Carbon::now()->format('Y-m-d');
         $this->tglKeluar = Carbon::now()->format('Y-m-d'); 
