@@ -11,27 +11,20 @@ use Illuminate\Support\Facades\DB;
 class OrderLpkController extends Component
 {
     public $tdOrder = [];
-    public $product;
+    public $products = [];
     public $buyer;
     public $tglMasuk;
     public $tglKeluar;
     public $searchTerm;
     public $idProduct;
     public $idBuyer;
-    public $searchProduct;
 
     public function mount()
     {
-        $this->product = [];
-        // $this->product = MsProduct::limit(10)->get();
+        $this->products = MsProduct::get();
         $this->buyer = MsBuyer::limit(10)->get();
         $this->tglMasuk = Carbon::now()->format('Y-m-d');
         $this->tglKeluar = Carbon::now()->format('Y-m-d');      
-    }
-
-    public function updatedSearchProduct($value)
-    {
-        $this->product = MsProduct::where('name', 'ilike', '%' . $value . '%')->limit(5)->get();
     }
 
     public function search(){
@@ -49,7 +42,7 @@ class OrderLpkController extends Component
         }
         $idProduct = '';
         if (isset($this->idProduct) && $this->idProduct != '') {
-            $idProduct = "AND mp.name = '" . $this->idProduct . "'";
+            $idProduct = "AND mp.id = '" . $this->idProduct . "'";
         }
         $idBuyer = '';
         if (isset($this->idBuyer) && $this->idBuyer != '') {
@@ -94,7 +87,6 @@ class OrderLpkController extends Component
     {
         return view('livewire.order-lpk.order-lpk', [
             'tdOrder' => $this->tdOrder,
-            'productList' => $this->product
         ]);
     }
 }
