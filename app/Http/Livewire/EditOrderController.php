@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\TdOrder;
 use App\Models\MsBuyer;
 use App\Models\MsProduct;
+use App\Models\TdOrderLpk;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -24,9 +25,10 @@ class EditOrderController extends Component
     public $etadate;
     public $buyer_id;
     public $unit_id;
+    public $status_order;
 
     public function mount($orderId)
-    {
+    {        
         $this->buyer = MsBuyer::limit(10)->get();
 
         $order = TdOrder::findOrFail($orderId);
@@ -42,6 +44,7 @@ class EditOrderController extends Component
         $this->product_id = MsProduct::where('id', $order->product_id)->pluck('name')->first();
         $this->buyer_id = $order->buyer_id;
         $this->unit_id = $order->order_unit;
+        $this->status_order = $order->status_order;
     }
 
     public function save()

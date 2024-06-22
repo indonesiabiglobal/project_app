@@ -127,17 +127,23 @@
                     <i class="fa fa-back"></i> Close
                 </button>
 
-                <button id="btnFilter" type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#modal-default">
-                    <i class="fa fa-trash"></i> Delete
-                </button>
+				@if ($status_order == 0)
+					<button id="btnFilter" type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#modal-default">
+						<i class="fa fa-trash"></i> Delete
+					</button>
 
-                <button id="btnCreate" type="submit" class="btn btn-success">
-                    <i class="fa fa-plus"></i> Update
-                </button>
+					<button id="btnCreate" type="submit" class="btn btn-success">
+						<i class="fa fa-plus"></i> Update
+					</button>
 
-                <button type="button" class="btn btn-success btn-print" wire:click="print">
-                    <i class="fa fa-print"></i> Print
-                </button>
+					<button type="button" class="btn btn-success btn-print" wire:click="print">
+						<i class="fa fa-print"></i> Print
+					</button>				
+				@endif
+				@if ($status_order == 1)
+					<p class="text-secondary mb-0">Data sudah di LPK ! ..</p>
+				@endif
+                
 				<script>
 					document.addEventListener('livewire:load', function () {
 						Livewire.on('redirectToPrint', function () {
