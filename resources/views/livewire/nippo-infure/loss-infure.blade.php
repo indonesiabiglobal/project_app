@@ -149,7 +149,7 @@
                                 {{ $item->production_date }}
                             </td>
                             <td>
-                                {{-- {{ $item->created_on }} --}}
+                                {{ $item->created_on }}
                             </td>
                             <td>
                                 {{ $item->work_shift }}

@@ -4,51 +4,40 @@
 		<div class="col-lg-6">
 			<div class="form-group">
 				<label class="control-label col-md-4 col-xs-12">Filter Tanggal</label>
-				<div class="input-group col-md-8 col-xs-12">
+				{{-- <div class="input-group col-md-8 col-xs-12"> --}}
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon" style="padding:2px;width:55px!important">Awal:&nbsp;</span>
-							<input  data-datepicker="" id='searchDate1' class="form-control datepicker-input" type="text" placeholder="yyyy/mm/dd"  formatter='date, dd MMM yyyy' required="required" />
-							<span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
-								viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd"
-									d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-									clip-rule="evenodd"></path></svg>
-							</span>
+							<span class="input-group-addon">Awal:&nbsp;</span>
+							<input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
 						</div>
 					</div>
-				</div>
+				{{-- </div> --}}
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-12 col-xs-12"></label>
+				{{-- <div class="input-group col-lg-1"> --}}
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">Akhir:&nbsp;</span>
+							<input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+						</div>
+					</div>
+				{{-- </div> --}}
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-4 col-xs-12"></label>
-				<div class="input-group col-md-8 col-xs-12">
+				{{-- <div class="input-group col-md-8 col-xs-12"> --}}
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon" style="padding:2px;width:55px!important">Akhir:&nbsp;</span>
-							<input  data-datepicker="" id='searchDate1' class="form-control datepicker-input" type="text" placeholder="yyyy/mm/dd"  formatter='date, dd MMM yyyy' required="required" />
-							<span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
-								viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd"
-									d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-									clip-rule="evenodd"></path></svg>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-md-4 col-xs-12"></label>
-				<div class="input-group col-md-8 col-xs-12">
-					<div class="form-group">
-						<div class="input-group" style="width:100%!important">
-							<span class="input-group-addon" style="padding:2px;width:55px!important">Filter:&nbsp;</span>
-							<select id="flag" style="!important;width:100%!important" class="form-control">
+							<span class="input-group-addon">Filter:&nbsp;</span>
+							<select class="form-control">
+								<option value=""> -- ALL --</option>
 								<option value="order">Tanggal Order</option>
 								<option value="proses">Tanggal Proses</option>
 							</select>
 						</div>
 					</div>
-				</div>
+				{{-- </div> --}}
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-4 col-xs-12" resources="OrgDivision">Buyer</label>
