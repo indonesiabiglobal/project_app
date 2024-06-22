@@ -15,7 +15,7 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Tanggal Proses</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input class="form-control datepicker-input" type="date" wire:model="process_date" placeholder="yyyy/mm/dd"/>
+				<input class="form-control datepicker-input readonly" readonly="readonly" type="date" wire:model="process_date" placeholder="yyyy/mm/dd"/>
 				@error('process_date')
 					<span class="invalid-feedback">{{ $message }}</span>
 				@enderror
@@ -42,7 +42,7 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nomor Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="nomorPo" class="form-control readonly" readonly="readonly"  wire:model="product_code" />
+				<input type="text" id="nomorPo" class="form-control"  wire:model="product_code" />
 				@error('product_code')
 					<span class="invalid-feedback">{{ $message }}</span>
 				@enderror
@@ -127,7 +127,7 @@
                     <i class="fa fa-back"></i> Close
                 </button>
 
-                <button id="btnFilter" type="button" class="btn btn-danger" wire:click="delete">
+                <button id="btnFilter" type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#modal-default">
                     <i class="fa fa-trash"></i> Delete
                 </button>
 
@@ -147,6 +147,25 @@
 				</script>
             </div>
         </div>
+		<div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					{{-- <div class="modal-header">
+						<h2 class="h6 modal-title">Terms of Service</h2>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div> --}}
+					<div class="modal-body">
+						<h3>
+							Are you sure want to delete ?
+						</h3>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" wire:click="delete">Yes</button>
+						<button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+		</div>
     </form>        
 	</div>
 	<div class="col-lg-2"></div>
