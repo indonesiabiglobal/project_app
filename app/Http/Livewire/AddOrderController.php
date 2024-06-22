@@ -18,7 +18,8 @@ class AddOrderController extends Component
     public $buyer;
     public $po_no;
     public $order_date;
-    public $product_code;
+    public $product_name;
+    public $dimensi;
     public $order_qty;
     public $unit_id;
     public $stufingdate;
@@ -36,11 +37,22 @@ class AddOrderController extends Component
         $this->buyer = MsBuyer::limit(10)->get();
     }
 
+    public function noorder(){
+        if(isset($this->product_id) && $this->product_id != ''){
+            $product=MsProduct::where('code', $this->product_id)->first();
+            if($product == null){
+                session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
+            } else {
+                $this->product_name = $product->name;
+            }
+        }
+    }
+
     public function save()
     {
         $validatedData = $this->validate([
             'po_no' => 'required',
-            'product_code' => 'required',
+            // 'product_code' => 'required',
             'order_qty' => 'required|integer',
             'order_date' => 'required',
             'stufingdate' => 'required',
@@ -80,6 +92,16 @@ class AddOrderController extends Component
 
     public function render()
     {
+        if(isset($this->product_id) && $this->product_id != ''){
+            $product=MsProduct::where('code', $this->product_id)->first();
+            // dd($product);
+            if($product == null){
+                session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
+            } else {
+                $this->product_name = $product->name;
+                $this->dimensi = $product->ketebalan.'x'.$product->diameterlipat.'x'.$product->productlength;
+            }
+        }
         return view('livewire.order-lpk.add-order');
     }
 }

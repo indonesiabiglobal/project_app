@@ -8,9 +8,27 @@
         @endif
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
-                <div class="input-group">
-                    <table>
+                <label class="control-label col-md-3 col-xs-4">
+                    <span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal
+                </label>
+                <div class="input-group col-md-9 col-xs-8">
+                    <div class="col-4 pe-1">
+                        <select class="form-select" id="gender"
+                            aria-label="Gender select example">
+                            <option selected>Proses</option>
+                            <option value="Female">Order</option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+    
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <table>
                         <tr>
                             <td valign="top">
                                 <select class="form-select" id="gender"
@@ -29,7 +47,7 @@
                                 </div>
                             </td>
                         </tr>                        
-                    </table>
+                    </table> --}}
                 </div>
             </div>
             <div class="form-group">

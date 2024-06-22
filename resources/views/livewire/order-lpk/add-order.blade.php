@@ -42,10 +42,10 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-md-3 col-xs-12">Nomor Order</label>
+			<label class="control-label col-md-3 col-xs-12" wire:click="noorder">Nomor Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="nomorPo" class="form-control"  wire:model="product_code" />
-				@error('product_code')
+				<input type="text" id="nomorPo" class="form-control" wire:model.debounce.300ms="product_id" />
+				@error('product_id')
 					<span class="invalid-feedback">{{ $message }}</span>
 				@enderror
 			</div>
@@ -53,17 +53,18 @@
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nama Produk</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<select id="printDept" class="js-states form-control" wire:model="product_id" placeholder="">
+			<input type="text" class="form-control readonly" wire:model="product_name" readonly="readonly" />
+				{{-- <select id="printDept" class="js-states form-control" wire:model="product_id" placeholder="">
 					@foreach ($product as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
-				</select>
+				</select> --}}
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Dimensi</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="dimensi" class="form-control" wire:model="dimensi" />
+				<input type="text" class="form-control readonly" readonly="readonly" wire:model="dimensi" />
 			</div>
 		</div>
 		<div class="form-group">
