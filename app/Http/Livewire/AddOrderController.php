@@ -29,11 +29,11 @@ class AddOrderController extends Component
     public function mount()
     {
         $this->process_date = Carbon::now()->format('Y-m-d');
-        $this->order_date = Carbon::now()->format('Y-m-d');
-        $this->stufingdate = Carbon::now()->format('Y-m-d');
-        $this->etddate = Carbon::now()->format('Y-m-d');
-        $this->etadate = Carbon::now()->format('Y-m-d');
-        $this->product = MsProduct::limit(10)->get();
+        // $this->order_date = Carbon::now()->format('Y-m-d');
+        // $this->stufingdate = Carbon::now()->format('Y-m-d');
+        // $this->etddate = Carbon::now()->format('Y-m-d');
+        // $this->etadate = Carbon::now()->format('Y-m-d');
+        // $this->product = MsProduct::limit(10)->get();
         $this->buyer = MsBuyer::limit(10)->get();
     }
 
@@ -52,7 +52,6 @@ class AddOrderController extends Component
     {
         $validatedData = $this->validate([
             'po_no' => 'required',
-            // 'product_code' => 'required',
             'order_qty' => 'required|integer',
             'order_date' => 'required',
             'stufingdate' => 'required',
@@ -63,12 +62,13 @@ class AddOrderController extends Component
         ]);
 
         try {
+            $product = MsProduct::where('code', $this->product_id)->first();
             $order = new TdOrder();
             $order->processdate = $this->process_date;
             $order->po_no = $this->po_no;
             $order->order_date = $this->order_date;
-            $order->product_code = $this->product_code;
-            $order->product_id = $this->product_id;
+            $order->product_id = $product->id;
+            $order->product_code = $product->code;
             $order->order_qty = $this->order_qty;
             $order->order_unit = $this->unit_id;
             $order->buyer_id = $this->buyer_id;

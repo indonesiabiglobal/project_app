@@ -18,6 +18,7 @@ class OrderLpkController extends Component
     public $searchTerm;
     public $idProduct;
     public $idBuyer;
+    public $transaksi;
 
     public function mount()
     {
@@ -28,14 +29,25 @@ class OrderLpkController extends Component
     }
 
     public function search(){
-        $tglMasuk = '';
-        if (isset($this->tglMasuk) && $this->tglMasuk != '') {
-            $tglMasuk = "WHERE tod.order_date >= '" . $this->tglMasuk . "'";
+        if($this->transaksi == 2){
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tod.order_date >= '" . $this->tglMasuk . "'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tod.order_date <= '" . $this->tglKeluar . "'";
+            }
+        } else {
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tod.processdate >= '" . $this->tglMasuk . "'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tod.processdate <= '" . $this->tglKeluar . "'";
+            }
         }
-        $tglKeluar = '';
-        if (isset($this->tglKeluar) && $this->tglKeluar != '') {
-            $tglKeluar = "AND tod.order_date <= '" . $this->tglKeluar . "'";
-        }
+        
         $searchTerm = '';
         if (isset($this->searchTerm) && $this->searchTerm != '') {
             $searchTerm = "AND (mp.name ilike '%" . $this->searchTerm . "%' OR tod.po_no ilike '%" . $this->searchTerm . "%')";
