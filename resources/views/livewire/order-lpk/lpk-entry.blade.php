@@ -7,7 +7,7 @@
             </div>
         @endif
         <div class="col-lg-6 mb-4">  
-            <div class="form-group">
+            <div class="form-group"> 
                 <label class="control-label col-md-3 col-xs-4" resources="DatePeriod"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
                 <div class="input-group col-md-9 col-xs-8">
                     <table>
