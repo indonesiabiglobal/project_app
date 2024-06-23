@@ -1,4 +1,4 @@
-<title>Fukusuke Dashboard</title>
+{{-- <title>Fukusuke Dashboard</title> --}}
 <div class="py-2">
     <div class="dropdown">
         <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
