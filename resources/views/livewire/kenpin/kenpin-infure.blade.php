@@ -93,12 +93,9 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
-                        @foreach ($tdOrder as $item)
+                        {{-- @foreach ($tdOrder as $item)
                         <tr>
-                            <td>        
-                                {{-- <button id="btnCreate" type="button" class="btn btn-info">
-                                    <i class="fa fa-plus"></i> Edit
-                                </button> --}}
+                            <td>
                                 <a href="{{ route('edit-order', ['orderId' => $item->id]) }}" class="btn btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
@@ -131,7 +128,7 @@
                                 {{ $item->panjang_lpk }}
                             </td>
                         </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
