@@ -116,6 +116,9 @@
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
 				</select>
+				@error('buyer_id')
+					<span class="invalid-feedback">{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
 		<hr />

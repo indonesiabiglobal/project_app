@@ -77,12 +77,13 @@ class AddOrderController extends Component
             $order->etadate = $this->etadate;
             $order->save();
     
-            session()->flash('message', 'Order saved successfully.');
-    
+            // session()->flash('message', 'Order saved successfully.');
+            session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
             return redirect()->route('order-entry');
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save order: ' . $e->getMessage()]);
         }
+        
     }
 
     public function cancel()
