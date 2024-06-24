@@ -2,8 +2,16 @@
 	<div class="col-lg-2"></div>
 	<div class="col-lg-6">
 		<div class="form-group">
-			<label class="control-label col-md-4 col-xs-12">Tanggal Produksi</label>
-			<div class="col-12">
+			<div class="input-group col-md-9 col-xs-8">
+				<label class="control-label col-4">Tanggal Produksi</label>
+				<div class="col-12 col-lg-8">
+					<select class="form-select mb-0" wire:model.defer="transaksi">
+						<option value="1">Produksi</option>
+						<option value="2">Order</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-12 mt-1">
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon col-12 col-lg-2">Awal: </span>

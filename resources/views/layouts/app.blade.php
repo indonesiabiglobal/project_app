@@ -19,12 +19,15 @@
         'users', 
         'bootstrap-tables', 
         'transactions',
+        'nippo-infure',
+        'loss-infure',
         'buttons',        
         'forms', 
         'modals', 
         'notifications', 
         'typography', 
         'upgrade-to-pro',
+
         'nippo-seitai',
         'loss-seitai',
         'mutasi-isi-palet',
@@ -55,7 +58,6 @@
 
     @elseif(in_array(request()->route()->getName(), [
         'dashboard',
-        'nippo-infure',
         'cetak-lpk',
         'order-report',
         'checklist-infure',
@@ -80,7 +82,6 @@
         'add-kenpin',
         'edit-seitai',
         'add-seitai',
-        'loss-infure',
         ]))
         
         @include('layouts.nav')
