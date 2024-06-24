@@ -8,28 +8,25 @@
         @endif
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
-                <div class="input-group">
-                    <table>
-                        <tr>
-                            <td valign="top">
-                                <select class="form-select" id="gender"
-                                    aria-label="Gender select example">
-                                    <option selected>Proses</option>
-                                    <option value="Female">Order</option>
-                                </select>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
-
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>                        
-                    </table>
+                <label class="control-label col-md-3 col-xs-4">
+                    <span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal
+                </label>
+                <div class="input-group col-md-9 col-xs-8">
+                    <div class="col-4 pe-1">
+                        <select class="form-select mb-0" wire:model.defer="transaksi">
+                            <option value="1">Proses</option>
+                            <option value="2">Order</option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+    
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -39,20 +36,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            {{-- <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4">Produk</label>
-                <div class="input-group col-md-9 col-xs-8">
-                    <input class="form-control" type="text" list="productList" wire:model.lazy="searchProduct" placeholder="Ketik atau pilih produk">
-                    <datalist id="productList">
-                        @foreach ($productList as $item)
-                            <option value="{{ $item->name }}">
-                        @endforeach 
-                    </datalist>
-                </div>
-            </div> --}}
-            
-            
+        <div class="col-lg-6">            
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-4">Product</label>
+                <select class="form-control" id="basic-usage" wire:model.defer="idProduct" placeholder="- all -">
+                    <option value="">- all -</option>
+                    @foreach ($products as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach 
+                </select>
+            </div>
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Buyer</label>
                 <div class="input-group col-md-9 col-xs-8">
@@ -67,7 +60,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Status</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id="printStatus" class="js-states form-control" placeholder="- all -">
+                    <select id="printStatus" class="form-control" placeholder="- all -">
                         <option value="">- all -</option>
                         <option value="0">Belum LPK</option>
                         <option value="1">SUdah LPK</option>
@@ -144,19 +137,23 @@
 </div>
 
 
-{{-- <script>
-    function initializeDataTable() {
-        $('#example').DataTable({
-            responsive: true
-        });
-    }
-
-    document.addEventListener('livewire:load', function () {
-        initializeDataTable();
+<script>
+    $( '#basic-usage' ).select2( {
+        theme: "bootstrap-5",
+        width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+        placeholder: $( this ).data( 'placeholder' ),
+        allowClear: true
+    } );
+    $('#basic-usage').on('change', function (e) {
+        @this.set('idProduct', $(this).val(), true);
     });
 
     document.addEventListener('livewire:update', function () {
-        $('#example').DataTable().destroy();
-        initializeDataTable();
+        $('#basic-usage').select2({
+            theme: "bootstrap-5",
+            width: '100%',
+            placeholder: '- all -',
+            allowClear: true
+        });
     });
-</script> --}}
+</script>

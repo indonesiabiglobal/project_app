@@ -27,7 +27,6 @@ class LpkEntryController extends Component
     }
 
     public function search(){
-        // dd($searchTerm);
         $tglMasuk = '';
         if (isset($this->tglMasuk) && $this->tglMasuk != '') {
             $tglMasuk = "WHERE tolp.lpk_date >= '" . $this->tglMasuk . "'";
