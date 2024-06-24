@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="col-lg-6">            
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Product</label>
                 <select class="form-control" id="basic-usage" wire:model.defer="idProduct" placeholder="- all -">
                     <option value="">- all -</option>
@@ -45,7 +45,7 @@
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach 
                 </select>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Buyer</label>
                 <div class="input-group col-md-9 col-xs-8">
