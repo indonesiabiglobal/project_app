@@ -14,166 +14,379 @@
 		</div>
 	@endif
     <form wire:submit.prevent="save">
-        <div class="row">
-            <div class="col-lg-5 ms-3">
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Tanggal LPK</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input data-datepicker="" class="form-control datepicker-input readonly" readonly="readonly" id="lpk_date" type="text" placeholder="yyyy/mm/dd" wire:model="lpk_date">
-                        <span class="input-group-text">
-                            <svg class="icon icon-xs" fill="currentColor"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                clip-rule="evenodd"></path>
-                            </svg>
-                        </span>
+        <div class="row mt-2">
+            <div class="col-4 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label pe-2">Tanggal Produksi</label>
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="production_date" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Nomor LPK</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="lpk_no" class="form-control"  wire:model="lpk_no" />
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label pe-2">Tanggal Proses</label>
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="prosessdate" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">PO Number</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="prev_lpk_no" class="form-control readonly" readonly="readonly" wire:model="prev_lpk_no" />
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5 pe-2">Nomor LPK</label>
+                                <input type="text" class="form-control"  wire:model="lpk_no" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Nomor Order</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="order_id" class="form-control readonly" readonly="readonly"  wire:model="order_id" />
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label pe-2">Tanggal LPK</label>
+                                <input class="form-control readonly datepicker-input" readonly="readonly" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Nomor Mesin</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="prev_machine_no" class="form-control" wire:model="prev_machine_no" />
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label pe-2">Jumlah LPK</label>
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="qty_lpk" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Jumlah LPK</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="order_qty" class="form-control" wire:model="order_qty" />
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5 pe-2">Nomor Order</label>
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="noorder" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Jumlah Gentan</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="qty_gentan" class="form-control" wire:model="qty_gentan" />
+                    <div class="col-12 col-lg-8 mt-1">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="noorder" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Meter Gulung</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="qty_gulung" class="form-control" wire:model="qty_gulung" />
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5 pe-2">Nomor Mesin</label>
+                                <input type="text" placeholder=" ... " class="form-control" wire:model="machine_no" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Panjang LPK</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="panjang_lpk" class="form-control readonly" readonly="readonly" wire:model="panjang_lpk" />
+                    <div class="col-12 col-lg-8 mt-1">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="machinename" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                       
-            </div>
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5 pe-2">Petugas</label>
+                                <input type="text" placeholder=" ... " class="form-control" wire:model="userid" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label"></label>
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="created_by" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5">Jumlah Produksi</label>
+                                <input type="text" placeholder="-" class="form-control" wire:model="qty_produksi" />
+                                <span class="input-group-text">
+                                    mm
+                                </span>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 mt-1">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label col-5">Total Produksi</label>
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="diameterlipat" />
+                                <span class="input-group-text">
+                                    lbr
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mt-1">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label col-3">Selisih</label>
+                                <input type="text" class="form-control readonly" readonly="readonly" wire:model="selisih" />
+                                <span class="input-group-text">
+                                    lbr
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5">Nomor Palet</label>
+                                <input type="text" placeholder="A0000-000000" class="form-control" wire:model="panjang_produksi" />
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-3">Nomor LOT</label>
+                                <input type="text" placeholder="----------" class="form-control" wire:model="total_assembly_qty" />
 
-            <div class="col-lg-5 ms-4">
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Tanggal Proses</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input data-datepicker="" class="form-control datepicker-input" id="lpk_date" type="text" placeholder="yyyy/mm/dd" wire:model="lpk_date">
-                        <span class="input-group-text">
-                            <svg class="icon icon-xs" fill="currentColor"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                clip-rule="evenodd"></path>
-                            </svg>
-                        </span>
+                                <input type="text" class="form-control readonly" readonly="readonly" wire:model="selisih" />
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5">Loss Infure</label>
+                                <input type="text" class="form-control"  wire:model="lossinfure" />
+                                <span class="input-group-text">
+                                    kg
+                                </span>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-3">Petugas Infure</label>
+                                <input type="text" placeholder="..." class="form-control" wire:model="total_assembly_qty" />
+
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="selisih" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5 pe-2">Jam Produksi</label>
+                                <input class="form-control" id="time" type="time" placeholder="hh:mm" wire:model="updated_on">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8 mt-1">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label col-2">Shift Kerja</label>
+                                <input type="text" class="form-control readonly" readonly="readonly" wire:model="work_shift" />
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-md-6 col-xs-12">Tanggal PO</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input data-datepicker="" class="form-control datepicker-input" id="lpk_date" type="text" placeholder="yyyy/mm/dd" wire:model="lpk_date">
-                        <span class="input-group-text">
-                            <svg class="icon icon-xs" fill="currentColor"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                clip-rule="evenodd"></path>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-9 col-xs-12">Buyer</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="buyer_id" class="form-control readonly"  readonly="readonly" wire:model="buyer_id" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-9 col-xs-12">Nama Produk</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="product_id" class="form-control readonly"  readonly="readonly" wire:model="product_id" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-9 col-xs-12">Nama Mesin</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="machine_id" class="form-control readonly" readonly="readonly" wire:model="machine_id" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-9 col-xs-12">Panjang Total</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="qty_lpk" class="form-control readonly"  readonly="readonly" wire:model="qty_lpk" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-9 col-xs-12">Dimensi (TxLxP)</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="dimensi" class="form-control readonly"  readonly="readonly" wire:model="dimensi" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-9 col-xs-12">Default Gulung</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="default_gulung" class="form-control readonly"  readonly="readonly" wire:model="default_gulung" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-9 col-xs-12">Selisih Kurang</label>
-                    <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" id="selisih_kurang" class="form-control readonly"  readonly="readonly" wire:model="selisih_kurang" />
-                    </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-8">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="periode1SP-tab" data-bs-toggle="tab" data-bs-target="#periode1SP" type="button" role="tab" aria-controls="periode1SP" aria-selected="true">Gentan(s)</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="periode2SP-tab" data-bs-toggle="tab" data-bs-target="#periode2SP" type="button" role="tab" aria-controls="periode2SP" aria-selected="false">Loss(s)</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-4" style="border-top:1px solid #efefef">
+                <div class="toolbar">
+                    <button id="btnFilter" type="button" class="btn btn-warning" wire:click="cancel">
+                        <i class="fa fa-back"></i> Close
+                    </button>
+                    <button id="btnCreate" type="submit" class="btn btn-success">
+                        <i class="fa fa-plus"></i> Save
+                    </button>
+                    <button type="button" class="btn btn-success btn-print" disabled="disabled">
+                        <i class="fa fa-print"></i> Print
+                    </button>
                 </div>
             </div>
         </div>
         
-       
-        <hr/>
-        <div class="col-lg-12" style="border-top:1px solid #efefef">
-            <div class="toolbar">
-                <button id="btnFilter" type="button" class="btn btn-warning" wire:click="cancel">
-                    <i class="fa fa-back"></i> Close
-                </button>
-
-                <button id="btnFilter" type="button" class="btn btn-danger" wire:click="delete">
-                    <i class="fa fa-trash"></i> Delete
-                </button>
-
-                <button id="btnCreate" type="submit" class="btn btn-success">
-                    <i class="fa fa-plus"></i> Update
-                </button>
-
-                <button type="button" class="btn btn-success btn-print" disabled="disabled">
-                    <i class="fa fa-print"></i> Print
-                </button>
+        
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="periode1SP" role="tabpanel" aria-labelledby="periode1SP-tab">
+                <div class="row justify-content-start">
+                    <div class="row mt-3">
+                        <div class="col-lg-8">
+                            <button id="btnCreate" type="submit" class="btn btn-warning">
+                                <i class="fa fa-plus"></i> Add Gentan
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow mb-4 mt-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap mb-0 rounded">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="border-0 rounded-start">Action</th>
+                                            <th class="border-0">Gentan</th>
+                                            <th class="border-0">Line</th>
+                                            <th class="border-0">No Mesin</th>
+                                            <th class="border-0">Shift</th>
+                                            <th class="border-0">Petugas</th>
+                                            <th class="border-0">Tg. Produksi</th>
+                                            <th class="border-0 rounded-end">Berat Produksi (kg)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{-- @foreach ($tdOrderLpk as $item)
+                                        <tr>
+                                            <td>
+                                                <a href="{{ route('edit-lpk', ['orderId' => $item->id]) }}" class="btn btn-info">
+                                                    <i class="fa fa-edit"></i> Edit
+                                                </a>
+                                            </td>
+                                            <td>                                
+                                                {{ $item->lpk_no }}
+                                            </td>
+                                            <td>
+                                                {{ $item->lpk_date }}
+                                            </td>
+                                            <td>
+                                                {{ $item->panjang_lpk }}
+                                            </td>
+                                            <td>
+                                                {{ $item->qty_lpk }}
+                                            </td>
+                                            <td>
+                                                {{ $item->qty_gentan }}
+                                            </td>
+                                            <td>
+                                                {{ $item->qty_gulung }}
+                                            </td>
+                                            <td>
+                                                {{ $item->infure }}
+                                            </td>
+                                            <td>
+                                                {{ $item->total_assembly_qty }}
+                                            </td>
+                                            <td>
+                                                {{ $item->po_no }}
+                                            </td>
+                                            <td>
+                                                {{ $item->product_code }}
+                                            </td>
+                                            <td>
+                                                {{ $item->tglproses }}
+                                            </td>
+                                        </tr>
+                                        @endforeach --}}
+                                        <tr>
+                                            <td colspan="8" class="text-center">No results found</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="7" class="text-end">Berat Total (kg):</td>
+                                            <td colspan="1" class="text-center">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="periode2SP" role="tabpanel" aria-labelledby="periode2SP-tab">
+                <div class="row justify-content-start">
+                    <div class="row mt-3">
+                        <div class="col-lg-8">
+                            <button id="btnCreate" type="submit" class="btn btn-success">
+                                <i class="fa fa-plus"></i> Add Loss Seitai
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow mb-4 mt-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap mb-0 rounded">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="border-0 rounded-start">Action</th>
+                                            <th class="border-0">Kode</th>
+                                            <th class="border-0">Nama Loss</th>
+                                            <th class="border-0 rounded-end">Berat (kg)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{-- @foreach ($tdOrderLpk as $item)
+                                        <tr>
+                                            <td>
+                                                <a href="{{ route('edit-lpk', ['orderId' => $item->id]) }}" class="btn btn-info">
+                                                    <i class="fa fa-edit"></i> Edit
+                                                </a>
+                                            </td>
+                                            <td>                                
+                                                {{ $item->lpk_no }}
+                                            </td>
+                                            <td>
+                                                {{ $item->lpk_date }}
+                                            </td>
+                                            <td>
+                                                {{ $item->panjang_lpk }}
+                                            </td>
+                                            <td>
+                                                {{ $item->qty_lpk }}
+                                            </td>
+                                            <td>
+                                                {{ $item->qty_gentan }}
+                                            </td>
+                                            <td>
+                                                {{ $item->qty_gulung }}
+                                            </td>
+                                            <td>
+                                                {{ $item->infure }}
+                                            </td>
+                                            <td>
+                                                {{ $item->total_assembly_qty }}
+                                            </td>
+                                            <td>
+                                                {{ $item->po_no }}
+                                            </td>
+                                            <td>
+                                                {{ $item->product_code }}
+                                            </td>
+                                            <td>
+                                                {{ $item->tglproses }}
+                                            </td>
+                                        </tr>
+                                        @endforeach --}}
+                                        <tr>
+                                            <td colspan="4" class="text-center">No results found</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-end">Berat Loss Total (kg):</td>
+                                            <td colspan="1" class="text-center">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>        

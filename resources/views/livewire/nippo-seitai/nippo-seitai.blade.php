@@ -1,5 +1,5 @@
 {{-- <title>Nippo Seitai</title> --}}
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="row">
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -12,25 +12,21 @@
                     <span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal
                 </label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <table>
-                        <tr style="white-space:nowrap">
-                            <td class="hidden-xs" valign="top">
-                                <select class="form-select mb-0" wire:model.defer="transaksi">
-                                    <option value="1">Proses</option>
-                                    <option value="2">Order</option>
-                                </select>
-                            </td>
-                            <td>
-                                <div class="form-group" style="margin-left:1px; white-space:nowrap">
-                                    <div class="input-group">
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
-
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="col-4 pe-1">
+                        <select class="form-select mb-0" wire:model.defer="transaksi">
+                            <option value="1">Proses</option>
+                            <option value="2">Order</option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+    
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             {{-- <div class="form-group">

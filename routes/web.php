@@ -153,7 +153,7 @@ Route::middleware('auth')->group(function () {
 
     // Loss Seitai
     Route::get('/loss-seitai', LossSeitaiController::class)->name('loss-seitai');
-    Route::get('/add-loss', AddSeitaiController::class)->name('add-seitai');
+    Route::get('/add-loss', AddSeitaiController::class)->name('add-loss');
     Route::get('/edit-loss/{orderId}', EditSeitaiController::class)->name('edit-seitai');
 
     Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
