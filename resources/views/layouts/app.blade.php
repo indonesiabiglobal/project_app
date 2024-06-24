@@ -18,8 +18,7 @@
         'profile-example', 
         'users', 
         'bootstrap-tables', 
-        'transactions',        
-        'loss-infure',
+        'transactions',
         'buttons',        
         'forms', 
         'modals', 
@@ -81,6 +80,7 @@
         'add-kenpin',
         'edit-seitai',
         'add-seitai',
+        'loss-infure',
         ]))
         
         @include('layouts.nav')
