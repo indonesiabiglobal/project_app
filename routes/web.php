@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\AddKenpinController;
+use App\Http\Livewire\AddKenpinSeitaiController;
 use App\Http\Livewire\AddLossController;
 use App\Http\Livewire\AddLpkController;
 use App\Http\Livewire\AddNippoController;
@@ -169,6 +170,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-kenpin', AddKenpinController::class)->name('add-kenpin');
 
     Route::get('/kenpin-seitai-kenpin', KenpinSeitai::class)->name('kenpin-seitai-kenpin');
+    Route::get('/add-kenpin-seitai', AddKenpinSeitaiController::class)->name('add-kenpin-seitai');
+
     Route::get('/mutasi-isi-palet-kenpin', MutasiIsiPaletKenpin::class)->name('mutasi-isi-palet-kenpin');
     Route::get('/print-label-gudang-kenpin', PrintLabelGudangKenpin::class)->name('print-label-gudang-kenpin');
     Route::get('/report-kenpin', ReportKenpin::class)->name('report-kenpin');

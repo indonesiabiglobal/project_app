@@ -1,57 +1,62 @@
-<form id="frmCrud" method="post" action="@_url" onsubmit="return formSubmit(this, '.btn-filter-reset');" role="form" style="padding-top:25px">
-	@Html.AntiForgeryToken()
-	<div class="col-lg-12">
-		<div class="col-md-6" style="padding-right:25px">
-			<div class="input-group">
-				<span class="input-group-addon">Nomor Palet</span>
-				<input id="searchPalet1" type="text" class="form-control nomor_palet" placeholder="search nomor palet ..." tabindex="1" style = "text-transform: uppercase" />
-				<span class="input-group-addon searchPalet1-btn"><i class="fa fa-search"></i></span>
-			</div>
-			<table id="tblDet1" class="table table-bordered" data-height="333"></table>
-		</div>
-
-		<div class="col-md-6" style="padding-left:25px">
-			<div class="form-group">
-				<label class="control-label col-md-3 col-xs-12">Nomor Product</label>
-				<div class="input-group col-md-9 col-xs-12">
-					<span class="form-control SpanFor product_code"></span>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-md-3 col-xs-12">Nama Product</label>
-				<div class="input-group col-md-9 col-xs-12">
-					<span class="form-control SpanFor product_name"></span>
-				</div>
-			</div>
-			<hr />
-			<div class="form-group">
-				<label class="control-label col-md-3 col-xs-12"></label>
-				<div class="input-group col-md-9 col-xs-12">
-					<button type="button" class="btn btn-success btn-print" disabled="disabled" style="width:100%"><i class="fa fa-print"></i> Print</button>
+<form>
+	<div class="row mt-3">
+		<div class="col-12 col-lg-6">
+			<div class="form-group">				
+				<div class="input-group">
+					<span class="input-group-text readonly">
+						Nomor Palet Sumber
+					</span>
+					<input wire:model.defer="searchTerm" class="form-control" type="text" placeholder="A0000-000000" />
+					<button wire:click="search" type="button" class="btn btn-info">
+						<i class="fa fa-search"></i>
+					</button>
 				</div>
 			</div>
 
-		</div>
-
-	</div>
-
-	<div class="col-lg-12 select-product" style="display:none">
-		<div class="modal-footer" style="padding-right:40px;">
-			<div class="col-md-6" style="float:left">
-				<div class="form-group" style="text-align:left">
-					<label class="control-label col-md-2 col-xs-4">Produk</label>
-					<div class="input-group col-md-10 col-xs-8">
-						<select id='searchProd' class="js-states form-control required" placeholder="- pilih -"></select>
+			<div class="card border-0 shadow mb-4 mt-4">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-centered table-nowrap mb-0 rounded">
+							<thead class="thead-light">
+								<tr>
+									<th class="border-0 rounded-start">Nomor LOT</th>
+									<th class="border-0">Mesin</th>
+									<th class="border-0">Tg. Produksi</th>
+									<th class="border-0">Jumlah Box</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="8" class="text-center">No results found</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="col-12 col-lg-6">
+			<div class="form-group">
+				<div class="input-group">
+					<label class="control-label col-3">Nomor Product</label>
+					<input type="text" class="form-control readonly" readonly="readonly" wire:model="product_name" />
+				</div>
+			</div>
+			<div class="form-group mt-1">
+				<div class="input-group">
+					<label class="control-label col-3">Nama Product</label>
+					<input type="text" class="form-control readonly" readonly="readonly" wire:model="product_name" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-4 col-xs-12"></label>
+				<div class="input-group">
+					<button type="button" class="btn btn-success btn-print" style="width:99%"><i class="fa fa-print"></i> Print</button>
+				</div>
+			</div>
+		</div>
+		
 	</div>
-
-	<input type="hidden" name="SaveNext" value="" />
-	<input id="product_code_selected" type="hidden" value="" />
-	<input id="employeeNo_selected" type="hidden" value="" />
-	<input id="searchPalet_selected" type="hidden" value="" />
 </form>
 
 <button type="button" class="btn-filter-reset" style="display:none"></button>

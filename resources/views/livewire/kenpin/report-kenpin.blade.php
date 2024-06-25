@@ -1,88 +1,68 @@
-<div class="row mt-4">
+<div class="row mt-3">
 	<div class="col-lg-2"></div>
 	<div class="col-lg-6">
 		<div class="form-group">
-			<label class="control-label col-md-4 col-xs-12">Filter Tanggal</label>
-			<div class="input-group col-md-8 col-xs-12">
+			<label class="control-label col-md-4 col-xs-12">Tanggal Kenpin</label>
+			<div class="col-12 mt-1">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon" style="padding:2px;width:55px!important">Awal:&nbsp;</span>
-						<input  data-datepicker="" id='searchDate1' class="form-control datepicker-input" type="text" placeholder="yyyy/mm/dd"  formatter='date, dd MMM yyyy' required="required" />
-                        <span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                clip-rule="evenodd"></path></svg>
-                        </span>
+						<span class="input-group-addon col-12 col-lg-2">Awal: </span>
+						<input class="form-control datepicker-input" type="datetime-local" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd hh:mm" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="control-label col-md-4 col-xs-12"></label>
-			<div class="input-group col-md-8 col-xs-12">
+		<div class="form-group mt-1">
+			<div class="col-12">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon" style="padding:2px;width:55px!important">Akhir:&nbsp;</span>
-						<input  data-datepicker="" id='searchDate1' class="form-control datepicker-input" type="text" placeholder="yyyy/mm/dd"  formatter='date, dd MMM yyyy' required="required" />
-                        <span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                clip-rule="evenodd"></path></svg>
-                        </span>
+						<span class="input-group-addon col-12 col-lg-2">Akhir: </span>
+						<input class="form-control datepicker-input" type="datetime-local" wire:model.defer="tglAkhir" placeholder="yyyy/mm/dd hh:mm" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="control-label col-md-4 col-xs-12"></label>
-			<div class="input-group col-md-8 col-xs-12">
-				<div class="form-group">
-					<div class="input-group" style="width:100%!important">
-						<span class="input-group-addon" style="padding:2px;width:55px!important">Departemen:&nbsp;</span>
-						<select id="flag" style="!important;width:100%!important" class="form-control">
-							<option value="order">Infure</option>
-							<option value="proses">Seitai</option>
-						</select>
-					</div>
-				</div>
+		<div class="form-group mt-1">
+			<div class="input-group">
+				<span class="input-group-addon col-12 col-lg-3">Departement</span>
+				<select class="form-control">
+					<option value="">- all -</option>
+					<option value="1"></option>
+					<option value="2"></option>
+				</select>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="control-label col-md-4 col-xs-12" resources="OrgDivision">Nomor LPK</label>
-			<div class="input-group col-md-8 col-xs-12">
-				<select id='searchBuyer' class="js-states form-control" placeholder="- all -"></select>
+		<div class="form-group mt-1">
+			<div class="input-group">
+				<span class="input-group-addon col-12 col-lg-3">Nomor LPK </span>
+				<input type="text" class="form-control" placeholder="000000-000">
 			</div>
 		</div>
-        <div class="form-group">
-			<label class="control-label col-md-4 col-xs-12" resources="OrgDivision">Nomor Order</label>
-			<div class="input-group col-md-8 col-xs-12">
-				<select id='searchBuyer' class="js-states form-control" placeholder="- all -"></select>
+        <div class="form-group mt-1">
+			<div class="input-group">
+				<span class="input-group-addon col-12 col-lg-3">Nomor Order </span>
+				<input type="text" class="form-control" placeholder="..">
 			</div>
 		</div>
-        <div class="form-group">
-			<label class="control-label col-md-4 col-xs-12" resources="OrgDivision">Nomor Kenpin</label>
-			<div class="input-group col-md-8 col-xs-12">
-				<select id='searchBuyer' class="js-states form-control" placeholder="- all -"></select>
+        <div class="form-group mt-1">
+			<div class="input-group">
+				<span class="input-group-addon col-12 col-lg-3">Nomor Kenpin </span>
+				<input type="text" class="form-control" placeholder="_____-_____">
 			</div>
 		</div>
-        <div class="form-group">
-			<label class="control-label col-md-4 col-xs-12" resources="OrgDivision">Nomor Han</label>
-			<div class="input-group col-md-8 col-xs-12">
-				<select id='searchBuyer' class="js-states form-control" placeholder="- all -"></select>
+        <div class="form-group mt-1">
+			<div class="input-group">
+				<span class="input-group-addon col-12 col-lg-3">Nomor Han </span>
+				<input type="text" class="form-control" placeholder="00-00-00A">
 			</div>
 		</div>
-		<br />
-		<div class="form-group">
-			<label class="control-label col-md-4 col-xs-12">Status</label>
-			<div class="input-group col-md-8 col-xs-12">
-				<select id="typeReport" class="form-control" placeholder="- pilih jenis report -">
-					<option value="1">Daftar Order</option>
-					<option value="2">Daftar Order Per Buyer Per Tipe</option>
-					<option value="3">CheckList Order</option>
-					<option value="4">CheckList LPK</option>
-					<option value="5">Progress Order</option>
+		<div class="form-group mt-1">
+			<div class="input-group">
+				<span class="input-group-addon col-12 col-lg-3">Status</span>
+				<select class="form-control">
+					<option value="">- all -</option>
+					<option value="1">Proses</option>
+					<option value="2">Finish</option>
 				</select>
 			</div>
 		</div>

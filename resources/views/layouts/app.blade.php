@@ -80,6 +80,7 @@
         'add-loss-infure',
         'edit-kenpin',
         'add-kenpin',
+        'add-kenpin-seitai',
         'edit-seitai',
         'add-seitai',
         ]))
