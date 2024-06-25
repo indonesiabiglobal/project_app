@@ -367,16 +367,16 @@
             Request::segment(1) == 'katanuki' || 
             Request::segment(1) == 'mesin' || 
             Request::segment(1) == 'warehouse' || 
-            Request::segment(1) == 'working-shift' || 
-            Request::segment(1) == 'menu-loss-infure' || 
-            Request::segment(1) == 'menu-loss-seitai' || 
-            Request::segment(1) == 'menu-loss-klasifikasi' || 
-            Request::segment(1) == 'menu-loss-kategori' || 
+            Request::segment(1) == 'working-shift' ||              
             Request::segment(1) == 'kemasan-box' || 
             Request::segment(1) == 'kemasan-inner' || 
             Request::segment(1) == 'kemasan-layer' || 
             Request::segment(1) == 'kemasan-gaiso' || 
-            Request::segment(1) == 'master-produk' ? 'show' : '' }}" role="list"
+            Request::segment(1) == 'master-produk' ||
+            Request::segment(1) == 'menu-loss-infure' || 
+            Request::segment(1) == 'menu-loss-seitai' || 
+            Request::segment(1) == 'menu-loss-klasifikasi' || 
+            Request::segment(1) == 'menu-loss-kategori' ? 'show' : '' }}" role="list"
             id="master-tabel" aria-expanded="false">
             <ul class="flex-column nav">
               <li class="nav-item {{ Request::segment(1) == 'buyer' ? 'active' : '' }}">
@@ -384,21 +384,55 @@
                   <span class="sidebar-text">Buyer</span>
                 </a>
               </li>
-              <li class="nav-item {{ Request::segment(1) == 'master-produk' ? 'active' : '' }}">
-                <a class="nav-link" href="/master-produk">
-                  <span class="sidebar-text">Master Produk</span>
-                </a>
+
+              <li class="nav-item">
+                <span
+                  class="nav-link {{ Request::segment(1) !== 'bootstrap-tables' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
+                  data-bs-toggle="collapse" data-bs-target="#produk">
+                  <span>
+                    <span class="sidebar-icon">
+                      <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
+                          clip-rule="evenodd"></path>
+                      </svg></span>
+                    <span class="sidebar-text">Produk</span>
+                  </span>
+                  <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd"></path>
+                    </svg></span>
+                </span>
+                <div class="multi-level collapse {{
+                  Request::segment(1) == 'tipe-produk' || 
+                  Request::segment(1) == 'jenis-produk' || 
+                  Request::segment(1) == 'master-produk' ? 'show' : '' }}" role="list"
+                  id="produk" aria-expanded="false">
+                  <ul class="flex-column nav">
+                    <li class="nav-item {{ Request::segment(1) == 'master-produk' ? 'active' : '' }}">
+                      <a class="nav-link" href="/master-produk">
+                        <span class="sidebar-text">Master Produk</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'tipe-produk' ? 'active' : '' }}">
+                      <a class="nav-link" href="/tipe-produk">
+                        <span class="sidebar-text">Tipe Produk</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'jenis-produk' ? 'active' : '' }}">
+                      <a class="nav-link" href="/jenis-produk">
+                        <span class="sidebar-text">Jenis Produk</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li class="nav-item {{ Request::segment(1) == 'tipe-produk' ? 'active' : '' }}">
-                <a class="nav-link" href="/tipe-produk">
-                  <span class="sidebar-text">Tipe Produk</span>
-                </a>
-              </li>
-              <li class="nav-item {{ Request::segment(1) == 'jenis-produk' ? 'active' : '' }}">
-                <a class="nav-link" href="/jenis-produk">
-                  <span class="sidebar-text">Jenis Produk</span>
-                </a>
-              </li>
+              
+
+
               <li class="nav-item {{ Request::segment(1) == 'departemen' ? 'active' : '' }}">
                 <a class="nav-link" href="/departemen">
                   <span class="sidebar-text">Departemen</span>
@@ -429,25 +463,109 @@
                   <span class="sidebar-text">Working Shift</span>
                 </a>
               </li>
-              <li class="nav-item {{ Request::segment(1) == 'menu-loss-infure' ? 'active' : '' }}">
-                <a class="nav-link" href="/menu-loss-infure">
-                  <span class="sidebar-text">Loss Infure</span>
-                </a>
+
+              <li class="nav-item">
+                <span
+                  class="nav-link {{ Request::segment(1) !== 'bootstrap-tables' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
+                  data-bs-toggle="collapse" data-bs-target="#loss">
+                  <span>
+                    <span class="sidebar-icon">
+                      <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
+                          clip-rule="evenodd"></path>
+                      </svg></span>
+                    <span class="sidebar-text">Loss</span>
+                  </span>
+                  <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd"></path>
+                    </svg></span>
+                </span>
+                <div class="multi-level collapse {{
+                  Request::segment(1) == 'menu-loss-infure' || 
+                  Request::segment(1) == 'menu-loss-seitai' || 
+                  Request::segment(1) == 'menu-loss-klasifikasi' || 
+                  Request::segment(1) == 'menu-loss-kategori' ? 'show' : '' }}" role="list"
+                  id="loss" aria-expanded="false">
+                  <ul class="flex-column nav">
+                    <li class="nav-item {{ Request::segment(1) == 'menu-loss-infure' ? 'active' : '' }}">
+                      <a class="nav-link" href="/menu-loss-infure">
+                        <span class="sidebar-text">Loss Infure</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'menu-loss-seitai' ? 'active' : '' }}">
+                      <a class="nav-link" href="/menu-loss-seitai">
+                        <span class="sidebar-text">Loss Seitai</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'menu-loss-klasifikasi' ? 'active' : '' }}">
+                      <a class="nav-link" href="/menu-loss-klasifikasi">
+                        <span class="sidebar-text">Loss Klasifikasi</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'menu-loss-kategori' ? 'active' : '' }}">
+                      <a class="nav-link" href="/menu-loss-kategori">
+                        <span class="sidebar-text">Loss Kategori</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li class="nav-item {{ Request::segment(1) == 'menu-loss-seitai' ? 'active' : '' }}">
-                <a class="nav-link" href="/menu-loss-seitai">
-                  <span class="sidebar-text">Loss Seitai</span>
-                </a>
-              </li>
-              <li class="nav-item {{ Request::segment(1) == 'menu-loss-klasifikasi' ? 'active' : '' }}">
-                <a class="nav-link" href="/menu-loss-klasifikasi">
-                  <span class="sidebar-text">Loss Klasifikasi</span>
-                </a>
-              </li>
-              <li class="nav-item {{ Request::segment(1) == 'menu-loss-kategori' ? 'active' : '' }}">
-                <a class="nav-link" href="/menu-loss-kategori">
-                  <span class="sidebar-text">Loss Kategori</span>
-                </a>
+
+              <li class="nav-item">
+                <span
+                  class="nav-link {{ Request::segment(1) !== 'bootstrap-tables' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
+                  data-bs-toggle="collapse" data-bs-target="#kemasan">
+                  <span>
+                    <span class="sidebar-icon">
+                      <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
+                          clip-rule="evenodd"></path>
+                      </svg></span>
+                    <span class="sidebar-text">Kemasan</span>
+                  </span>
+                  <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd"></path>
+                    </svg></span>
+                </span>
+                <div class="multi-level collapse {{
+                  Request::segment(1) == 'kemasan-box' || 
+                  Request::segment(1) == 'kemasan-inner' || 
+                  Request::segment(1) == 'kemasan-layer' || 
+                  Request::segment(1) == 'kemasan-gasio' ? 'show' : '' }}" role="list"
+                  id="kemasan" aria-expanded="false">
+                  <ul class="flex-column nav">
+                    <li class="nav-item {{ Request::segment(1) == 'kemasan-box' ? 'active' : '' }}">
+                      <a class="nav-link" href="/kemasan-box">
+                        <span class="sidebar-text">Kemasan Box</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'kemasan-inner' ? 'active' : '' }}">
+                      <a class="nav-link" href="/kemasan-inner">
+                        <span class="sidebar-text">Kemasan Inner</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'kemasan-layer' ? 'active' : '' }}">
+                      <a class="nav-link" href="/kemasan-layer">
+                        <span class="sidebar-text">Kemasan Layer</span>
+                      </a>
+                    </li>
+                    <li class="nav-item {{ Request::segment(1) == 'kemasan-gasio' ? 'active' : '' }}">
+                      <a class="nav-link" href="/kemasan-gasio">
+                        <span class="sidebar-text">Kemasan Gasio</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
           </div>
