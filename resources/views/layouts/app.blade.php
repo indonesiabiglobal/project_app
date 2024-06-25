@@ -46,6 +46,14 @@
         'daftar-persetujuan-lembur',
         'perhitungan-payroll',
         'slip-gaji',
+
+        'buyer',
+        'departemen',
+        'karyawan',
+        'katanuki',
+        'mesin',
+        'warehouse',
+        'working-shift',
         ]))
 
             @include('layouts.nav')

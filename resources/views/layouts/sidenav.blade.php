@@ -358,71 +358,59 @@
                   clip-rule="evenodd"></path>
               </svg></span>
           </span>
-          <div class="multi-level collapse {{ Request::segment(1) == '' ? 'show' : '' }}" role="list"
+          <div class="multi-level collapse {{ 
+            Request::segment(1) == 'buyer' || 
+            Request::segment(1) == 'tipe-produk' || 
+            Request::segment(1) == 'jenis-produk' || 
+            Request::segment(1) == 'departemen' || 
+            Request::segment(1) == 'karyawan' || 
+            Request::segment(1) == 'katanuki' || 
+            Request::segment(1) == 'mesin' || 
+            Request::segment(1) == 'warehouse' || 
+            Request::segment(1) == 'working-shift' || 
+            Request::segment(1) == 'menu-loss-infure' || 
+            Request::segment(1) == 'menu-loss-seitai' || 
+            Request::segment(1) == 'menu-loss-klasifikasi' || 
+            Request::segment(1) == 'menu-loss-kategori' || 
+            Request::segment(1) == 'kemasan-box' || 
+            Request::segment(1) == 'kemasan-inner' || 
+            Request::segment(1) == 'kemasan-layer' || 
+            Request::segment(1) == 'kemasan-gaiso' || 
+            Request::segment(1) == 'master-produk' ? 'show' : '' }}" role="list"
             id="master-tabel" aria-expanded="false">
             <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+              <li class="nav-item {{ Request::segment(1) == 'buyer' ? 'active' : '' }}">
+                <a class="nav-link" href="/buyer">
                   <span class="sidebar-text">Buyer</span>
                 </a>
               </li>
-            </ul>
-          </div>
-          <div class="multi-level collapse {{ Request::segment(1) == '' ? 'show' : '' }}" role="list"
-            id="master-tabel" aria-expanded="false">
-            <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+              <li class="nav-item {{ Request::segment(1) == 'departemen' ? 'active' : '' }}">
+                <a class="nav-link" href="/departemen">
                   <span class="sidebar-text">Departemen</span>
                 </a>
               </li>
-            </ul>
-          </div>
-          <div class="multi-level collapse {{ Request::segment(1) == '' ? 'show' : '' }}" role="list"
-            id="master-tabel" aria-expanded="false">
-            <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+              <li class="nav-item {{ Request::segment(1) == 'karyawan' ? 'active' : '' }}">
+                <a class="nav-link" href="/karyawan">
                   <span class="sidebar-text">Karyawan</span>
                 </a>
               </li>
-            </ul>
-          </div>
-          <div class="multi-level collapse {{ Request::segment(1) == '' ? 'show' : '' }}" role="list"
-            id="master-tabel" aria-expanded="false">
-            <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+              <li class="nav-item {{ Request::segment(1) == 'katanuki' ? 'active' : '' }}">
+                <a class="nav-link" href="/katanuki">
                   <span class="sidebar-text">Katanuki</span>
                 </a>
               </li>
-            </ul>
-          </div>
-          <div class="multi-level collapse {{ Request::segment(1) == '' ? 'show' : '' }}" role="list"
-            id="master-tabel" aria-expanded="false">
-            <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+              <li class="nav-item {{ Request::segment(1) == 'mesin' ? 'active' : '' }}">
+                <a class="nav-link" href="/mesin">
                   <span class="sidebar-text">Mesin</span>
                 </a>
               </li>
-            </ul>
-          </div>
-          <div class="multi-level collapse {{ Request::segment(1) == '' ? 'show' : '' }}" role="list"
-            id="master-tabel" aria-expanded="false">
-            <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+              <li class="nav-item {{ Request::segment(1) == 'warehouse' ? 'active' : '' }}">
+                <a class="nav-link" href="/warehouse">
                   <span class="sidebar-text">Warehouse</span>
                 </a>
               </li>
-            </ul>
-          </div>
-          <div class="multi-level collapse {{ Request::segment(1) == '' ? 'show' : '' }}" role="list"
-            id="master-tabel" aria-expanded="false">
-            <ul class="flex-column nav">
-              <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+              <li class="nav-item {{ Request::segment(1) == 'working-shift' ? 'active' : '' }}">
+                <a class="nav-link" href="/working-shift">
                   <span class="sidebar-text">Working Shift</span>
                 </a>
               </li>

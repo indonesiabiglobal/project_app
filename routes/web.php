@@ -23,6 +23,7 @@ use App\Http\Livewire\Lock;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Profile;
 use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\BuyerController;
 use App\Http\Livewire\CetakLpk;
 use App\Http\Livewire\ForgotPasswordExample;
 use App\Http\Livewire\Index;
@@ -39,6 +40,7 @@ use App\Http\Livewire\LossInfure;
 use App\Http\Livewire\LossSeitai;
 use App\Http\Livewire\MutasiIsiPalet;
 use App\Http\Livewire\CheckListSeitai;
+use App\Http\Livewire\DepartemenController;
 use App\Http\Livewire\DetailReport;
 use App\Http\Livewire\EditLossController;
 use App\Http\Livewire\EditLpkController;
@@ -48,11 +50,14 @@ use App\Http\Livewire\EditSeitaiController;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
 use App\Http\Livewire\InfureJamKerjaController;
+use App\Http\Livewire\KaryawanController;
+use App\Http\Livewire\KatanukiController;
 use App\Http\Livewire\KenpinInfure;
 use App\Http\Livewire\KenpinSeitai;
 use App\Http\Livewire\LabelMasukGudang;
 use App\Http\Livewire\LossSeitaiController;
 use App\Http\Livewire\LpkEntryController;
+use App\Http\Livewire\MesinController;
 use App\Http\Livewire\SumberDayaManusia\MasterPegawai;
 use App\Http\Livewire\MutasiIsiPaletKenpin;
 use App\Http\Livewire\NippoInfureController;
@@ -78,6 +83,8 @@ use App\Http\Livewire\SumberDayaManusia\PerhitunganPayroll;
 use App\Http\Livewire\SumberDayaManusia\SlipGaji;
 use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
+use App\Http\Livewire\WarehouseController;
+use App\Http\Livewire\WorkingShiftController;
 
 /*
 |--------------------------------------------------------------------------
@@ -181,6 +188,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/general-report', GeneralReport::class)->name('general-report');
     Route::get('/detail-report', DetailReport::class)->name('detail-report');
+
+    // Master Tabel
+    Route::get('/buyer', BuyerController::class)->name('buyer');
+    Route::get('/departemen', DepartemenController::class)->name('departemen');
+    Route::get('/karyawan', KaryawanController::class)->name('karyawan');
+    Route::get('/katanuki', KatanukiController::class)->name('katanuki');
+    Route::get('/mesin', MesinController::class)->name('mesin');
+    Route::get('/warehouse', WarehouseController::class)->name('warehouse');
+    Route::get('/working-shift', WorkingShiftController::class)->name('working-shift');
 
     // SDM
     Route::get('/master-pegawai', MasterPegawai::class)->name('master-pegawai');
