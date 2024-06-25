@@ -3,27 +3,19 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4" resources="DatePeriod"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
+                <label class="control-label col-md-3 col-xs-4">
+                    <span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Tanggal </span>Kenpin
+                </label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <table>
-                        <tr style="white-space:nowrap">
-                            <td>
-                                <div class="form-group" style="margin-left:1px; white-space:nowrap">
-                                    <div class="input-group">
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
-                                        
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
-                                    {{-- <input data-datepicker=""
-                                        class="form-control datepicker-input" id="birthday" type="text"
-                                        placeholder="yyyy/mm/dd">
-                                    <input data-datepicker=""
-                                        class="form-control datepicker-input" id="birthday" type="text"
-                                        placeholder="yyyy/mm/dd"> --}}
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+    
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -42,9 +34,9 @@
                 </div>
             </div> --}}
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4">Nomor Palet</label>
+                <label class="control-label col-md-3 col-xs-4">Nomor Han </label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select class="form-control" placeholder="- all -"></select>
+                    <input wire:model.defer="searchTerm" class="form-control" type="text" placeholder="00-00-00-00A" />
                 </div>
             </div>
             <div class="form-group">
@@ -80,15 +72,15 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="border-0 rounded-start">Action</th>
-                            <th class="border-0">PO Number</th>
+                            <th class="border-0">Tgl.Kenpin</th>
+                            <th class="border-0">No Kenpin</th>
+                            <th class="border-0">No LPK</th>
+                            <th class="border-0">Tgl. LPK</th>
                             <th class="border-0">Nama Produk</th>
-                            <th class="border-0">Kode Produk</th>
-                            <th class="border-0">Buyer</th>
-                            <th class="border-0">Quantity</th>
-                            <th class="border-0 rounded-end">Tgl. Order</th>
-                            <th class="border-0">Etd</th>
-                            <th class="border-0">Tgl Proses</th>
-                            <th class="border-0 rounded-end">No.</th>
+                            <th class="border-0">No Order</th>
+                            <th class="border-0">Petugas</th>
+                            <th class="border-0">Berat Loss (kg)</th>
+                            <th class="border-0 rounded-end">Status</th>
                         </tr>
                     </thead>
                     <tbody>
