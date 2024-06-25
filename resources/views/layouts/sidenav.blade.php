@@ -384,6 +384,21 @@
                   <span class="sidebar-text">Buyer</span>
                 </a>
               </li>
+              <li class="nav-item {{ Request::segment(1) == 'master-produk' ? 'active' : '' }}">
+                <a class="nav-link" href="/master-produk">
+                  <span class="sidebar-text">Master Produk</span>
+                </a>
+              </li>
+              <li class="nav-item {{ Request::segment(1) == 'tipe-produk' ? 'active' : '' }}">
+                <a class="nav-link" href="/tipe-produk">
+                  <span class="sidebar-text">Tipe Produk</span>
+                </a>
+              </li>
+              <li class="nav-item {{ Request::segment(1) == 'jenis-produk' ? 'active' : '' }}">
+                <a class="nav-link" href="/jenis-produk">
+                  <span class="sidebar-text">Jenis Produk</span>
+                </a>
+              </li>
               <li class="nav-item {{ Request::segment(1) == 'departemen' ? 'active' : '' }}">
                 <a class="nav-link" href="/departemen">
                   <span class="sidebar-text">Departemen</span>

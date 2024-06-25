@@ -50,6 +50,7 @@ use App\Http\Livewire\EditSeitaiController;
 use App\Http\Livewire\GeneralReport;
 use App\Http\Livewire\InfureJamKerja;
 use App\Http\Livewire\InfureJamKerjaController;
+use App\Http\Livewire\JenisProdukController;
 use App\Http\Livewire\KaryawanController;
 use App\Http\Livewire\KatanukiController;
 use App\Http\Livewire\KenpinInfure;
@@ -57,6 +58,7 @@ use App\Http\Livewire\KenpinSeitai;
 use App\Http\Livewire\LabelMasukGudang;
 use App\Http\Livewire\LossSeitaiController;
 use App\Http\Livewire\LpkEntryController;
+use App\Http\Livewire\MasterProdukController;
 use App\Http\Livewire\MesinController;
 use App\Http\Livewire\SumberDayaManusia\MasterPegawai;
 use App\Http\Livewire\MutasiIsiPaletKenpin;
@@ -81,6 +83,7 @@ use App\Http\Livewire\SumberDayaManusia\PengajuanKehadiran;
 use App\Http\Livewire\SumberDayaManusia\PengajuanLembur;
 use App\Http\Livewire\SumberDayaManusia\PerhitunganPayroll;
 use App\Http\Livewire\SumberDayaManusia\SlipGaji;
+use App\Http\Livewire\TipeProdukController;
 use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\WarehouseController;
@@ -191,6 +194,9 @@ Route::middleware('auth')->group(function () {
 
     // Master Tabel
     Route::get('/buyer', BuyerController::class)->name('buyer');
+    Route::get('/master-produk', MasterProdukController::class)->name('master-produk');
+    Route::get('/tipe-produk', TipeProdukController::class)->name('tipe-produk');
+    Route::get('/jenis-produk', JenisProdukController::class)->name('jenis-produk');
     Route::get('/departemen', DepartemenController::class)->name('departemen');
     Route::get('/karyawan', KaryawanController::class)->name('karyawan');
     Route::get('/katanuki', KatanukiController::class)->name('katanuki');

@@ -48,6 +48,9 @@
         'slip-gaji',
 
         'buyer',
+        'master-produk',
+        'tipe-produk',
+        'jenis-produk',
         'departemen',
         'karyawan',
         'katanuki',
