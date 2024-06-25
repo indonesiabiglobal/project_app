@@ -56,9 +56,13 @@ use App\Http\Livewire\KatanukiController;
 use App\Http\Livewire\KenpinInfure;
 use App\Http\Livewire\KenpinSeitai;
 use App\Http\Livewire\LabelMasukGudang;
+use App\Http\Livewire\LossInfureController;
+use App\Http\Livewire\LossKategoriController;
+use App\Http\Livewire\LossKlasifikasiController;
 use App\Http\Livewire\LossSeitaiController;
 use App\Http\Livewire\LpkEntryController;
 use App\Http\Livewire\MasterProdukController;
+use App\Http\Livewire\MenuLossSeitaiController;
 use App\Http\Livewire\MesinController;
 use App\Http\Livewire\SumberDayaManusia\MasterPegawai;
 use App\Http\Livewire\MutasiIsiPaletKenpin;
@@ -203,6 +207,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/mesin', MesinController::class)->name('mesin');
     Route::get('/warehouse', WarehouseController::class)->name('warehouse');
     Route::get('/working-shift', WorkingShiftController::class)->name('working-shift');
+    Route::get('/menu-loss-infure', LossInfureController::class)->name('menu-loss-infure');
+    Route::get('/menu-loss-seitai', MenuLossSeitaiController::class)->name('menu-loss-seitai');
+    Route::get('/menu-loss-klasifikasi', LossKlasifikasiController::class)->name('menu-loss-klasifikasi');
+    Route::get('/menu-loss-kategori', LossKategoriController::class)->name('menu-loss-kategori');
 
     // SDM
     Route::get('/master-pegawai', MasterPegawai::class)->name('master-pegawai');

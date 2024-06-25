@@ -429,6 +429,26 @@
                   <span class="sidebar-text">Working Shift</span>
                 </a>
               </li>
+              <li class="nav-item {{ Request::segment(1) == 'menu-loss-infure' ? 'active' : '' }}">
+                <a class="nav-link" href="/menu-loss-infure">
+                  <span class="sidebar-text">Loss Infure</span>
+                </a>
+              </li>
+              <li class="nav-item {{ Request::segment(1) == 'menu-loss-seitai' ? 'active' : '' }}">
+                <a class="nav-link" href="/menu-loss-seitai">
+                  <span class="sidebar-text">Loss Seitai</span>
+                </a>
+              </li>
+              <li class="nav-item {{ Request::segment(1) == 'menu-loss-klasifikasi' ? 'active' : '' }}">
+                <a class="nav-link" href="/menu-loss-klasifikasi">
+                  <span class="sidebar-text">Loss Klasifikasi</span>
+                </a>
+              </li>
+              <li class="nav-item {{ Request::segment(1) == 'menu-loss-kategori' ? 'active' : '' }}">
+                <a class="nav-link" href="/menu-loss-kategori">
+                  <span class="sidebar-text">Loss Kategori</span>
+                </a>
+              </li>
             </ul>
           </div>
         </li>

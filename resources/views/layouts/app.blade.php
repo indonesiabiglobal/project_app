@@ -57,6 +57,10 @@
         'mesin',
         'warehouse',
         'working-shift',
+        'menu-loss-infure',
+        'menu-loss-seitai',
+        'menu-loss-klasifikasi',
+        'menu-loss-kategori',
         ]))
 
             @include('layouts.nav')
