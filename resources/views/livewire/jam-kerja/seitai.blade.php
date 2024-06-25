@@ -5,25 +5,15 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4" resources="DatePeriod"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <table>
-                        <tr style="white-space:nowrap">
-                            <td class="hidden-xs" valign="top">
-                                <select class="form-select mb-0" wire:model.defer="transaksi">
-                                    <option value="1">Proses</option>
-                                    <option value="2">Order</option>
-                                </select>
-                            </td>
-                            <td>
-                                <div class="form-group" style="margin-left:1px; white-space:nowrap">
-                                    <div class="input-group">
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
-
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>                
-                    </table>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+    
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -79,17 +69,7 @@
                                 <label for="">Tanggal</label>
                                 <div class="form-group" style="margin-left:1px; white-space:nowrap">
                                     <div class="input-group">
-                                        <span class="input-group-text">
-                                            <svg class="icon icon-xs" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd"></path>
-                                            </svg>
-                                        </span>
-                                        <input data-datepicker=""
-                                        class="form-control datepicker-input" id="birthday" type="text"
-                                        placeholder="yyyy/mm/dd">
+                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +85,8 @@
                                 <div class="form-group">
                                     <label>Nomor Mesin </label>
                                     <div class="input-group col-md-9 col-xs-8">
-                                        <input id='searchText' name='searchText' class="form-control" type="text" resources-placeholder="SearchTextOrCode" placeholder="..." />
+                                        <input class="form-control" type="text" placeholder="..." />
+                                        <input class="form-control readonly" readonly="readonly" type="text" placeholder="..." />
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +94,8 @@
                                 <div class="form-group">
                                     <label>Petugas </label>
                                     <div class="input-group col-md-9 col-xs-8">
-                                        <input id='searchText' name='searchText' class="form-control" type="text" resources-placeholder="SearchTextOrCode" placeholder="..." />
+                                        <input class="form-control" type="text" placeholder="..." />
+                                        <input class="form-control readonly" readonly="readonly" type="text" placeholder="..." />
                                     </div>
                                 </div>
                             </div>
