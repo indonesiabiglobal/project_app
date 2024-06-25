@@ -3,28 +3,25 @@
     <div class="row">
         <div class="col-lg-6 mb-3">
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4" resources="DatePeriod"><span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal</label>
+                <label class="control-label col-md-3 col-xs-4">
+                    <span class="hidden-xs" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Filter </span>Tanggal
+                </label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <table>
-                        <tr style="white-space:nowrap">
-                            <td class="hidden-xs" valign="top">
-                                <select class="form-select mb-0" id="gender"
-                                    aria-label="Gender select example">
-                                    <option selected>Proses</option>
-                                    <option value="Female">Order</option>
-                                </select>
-                            </td>
-                            <td>
-                                <div class="form-group" style="margin-left:1px; white-space:nowrap">
-                                    <div class="input-group">
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
-
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="col-4 pe-1">
+                        <select class="form-select mb-0" wire:model.defer="transaksi">
+                            <option value="1">Produksi</option>
+                            <option value="2">Proses</option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+    
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>    
@@ -85,5 +82,10 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div class="col-12 text-end">
+        <button type="button" class="btn btn-success">
+            <i class="fa fa-plus"></i> Proses Penarikan
+        </button>
     </div>
 </div>

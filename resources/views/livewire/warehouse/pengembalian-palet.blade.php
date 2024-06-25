@@ -1,19 +1,19 @@
 {{-- <title>Order Entry</title> --}}
-<div class="container mt-3">
+<div class="container mt-2">
     <div class="row">
         <div class="col-lg-6 mb-3">
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4">Search </label>
+                <label class="control-label col-md-3 col-xs-4">Nomor Palet </label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <input id='search' name='search' wire:model.defer="searchTerm" class="form-control" type="text" placeholder="search nomor PO, nama produk" />
+                    <input wire:model.defer="searchTerm" class="form-control" type="text" placeholder="A0000-000000" />
                 </div>
             </div>
         </div>    
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="control-label col-md-3 col-xs-4" resources="OrgBranch">Produk</label>
+                <label class="control-label col-md-3 col-xs-4">Produk</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id='searchProd' name="searchProd" class="js-states form-control" placeholder="- all -"></select>
+                    <select class="form-control" placeholder="- all -"></select>
                 </div>
             </div>            
         </div>
@@ -62,5 +62,10 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div class="col-12 text-end">
+        <button type="button" class="btn btn-success">
+            <i class="fa fa-plus"></i> Proses Retur
+        </button>
     </div>
 </div>
