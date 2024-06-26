@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\TdOrderLpk;
 use App\Models\MsBuyer;
+use App\Models\MsMachine;
 use App\Models\MsProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,19 +19,29 @@ class EditLpkController extends Component
     public $lpk_no;
     public $po_no; 
     public $order_id;
-    public $machine_no; 
+    public $machineno;
+    public $machinename; 
     public $qty_lpk; 
     public $qty_gentan; 
     public $qty_gulung; 
     public $panjang_lpk; 
-    public $tglproses; 
+    public $processdate; 
     public $tgl_po; 
-    public $buyer_id; 
-    public $product_id;
+    public $buyer_name; 
+    public $product_name;
+    public $order_date;
+    public $no_order;
+    public $total_assembly_line;
+    public $productlength;
+    public $defaultgulung;
+    public $selisihkurang;
+    public $dimensi;
 
     public function mount($orderId)
     {
-        $this->buyer = MsBuyer::limit(10)->get();
+        $this->total_assembly_line=0;
+        $this->productlength=1;
+        $this->defaultgulung=1;
 
         // $order = TdOrderLpk::findOrFail($orderId);
         $order = DB::table('tdorderlpk as tolp')
@@ -45,13 +56,21 @@ class EditLpkController extends Component
             'tolp.qty_gulung',
             'tolp.total_assembly_line as infure',
             'tolp.total_assembly_qty',
+            'tolp.total_assembly_line',
             'tod.po_no',
             'mp.name as product_name',
+            'mp.code',
+            'mp.ketebalan',
+            'mp.diameterlipat',
+            'mp.productlength',
             'tod.product_code',
-            'mm.machineno as machine_no',
+            'tod.order_date',
+            'mm.machineno',
+            'mm.machinename',
             'mbu.id as buyer_id',
             'mbu.name as buyer_name',
             'tolp.created_on as tglproses',
+            'mp.productlength',
             'tolp.seq_no',
             'tolp.updated_by',
             'tolp.updated_on as updatedt'
@@ -67,19 +86,20 @@ class EditLpkController extends Component
         $this->lpk_no = $order->lpk_no;
         $this->po_no = $order->po_no;
         $this->order_id = $order->order_id;
-        $this->machine_no = $order->machine_no;
+        $this->machineno = $order->machineno;
+        $this->machinename = $order->machinename;
         $this->qty_lpk = $order->qty_lpk;
         $this->qty_gentan = $order->qty_gentan;
         $this->qty_gulung = $order->qty_gulung;
         $this->panjang_lpk = $order->panjang_lpk;
-        $this->tglproses = Carbon::parse($order->tglproses)->format('Y-m-d');
-        // $this->tgl_po = 
-        $this->buyer_id = $order->buyer_name;
-        $this->product_id = $order->product_name;
-        // $this->panjang_total = 
-        // $this->dimensi = 
-        // $this->default_gulung =
-        // $this->selisih_kurang = 
+        $this->processdate = Carbon::parse($order->tglproses)->format('Y-m-d');
+        $this->order_date = Carbon::parse($order->order_date)->format('Y-m-d');
+        $this->buyer_name = $order->buyer_name;
+        $this->product_name = $order->product_name;
+        $this->no_order = $order->code;
+        $this->dimensi = $order->ketebalan.'x'.$order->diameterlipat.'x'.$order->productlength;
+        $this->total_assembly_line = $order->total_assembly_line;
+        $this->productlength = $order->productlength;
     }
 
     public function save()
@@ -89,39 +109,44 @@ class EditLpkController extends Component
             'lpk_no' => 'required',
             'po_no' => 'required',
             'order_id' => 'required',
-            'machine_no' => 'required',
+            'machineno' => 'required',
             'qty_lpk' => 'required',
             'qty_gentan' => 'required',
             'qty_gulung' => 'required',
             'panjang_lpk' => 'required',
-            'tglproses' => 'required',
-            'buyer_id' => 'required',
-            'product_id' => 'required',
+            // 'tglproses' => 'required',
+            // 'buyer_id' => 'required',
+            // 'product_id' => 'required',
         ]);
 
         try {
-            $order = TdOrderLpk::findOrFail($this->orderId);
-            $order->lpk_date = $this->lpk_date;
-            $order->lpk_no = $this->lpk_no;
-            // $order->po_no = $this->po_no;
-            // $order->order_id = $this->order_id;
-            // $order->machine_no = $this->machine_no;
-            $order->qty_lpk = $this->qty_lpk;
-            $order->qty_gentan = $this->qty_gentan;
-            $order->qty_gulung = $this->qty_gulung;
-            $order->panjang_lpk = $this->panjang_lpk;
-            // $order->tglproses = $this->tglproses;
-            // $order->buyer_id = $this->buyer_id;
-            // $order->product_id = $this->product_id;
-            $order->save();
+            $machine=MsMachine::where('machineno', $this->machineno)->first();
 
-            session()->flash('message', 'Order updated successfully.');
+            $orderlpk = TdOrderLpk::findOrFail($this->orderId);
+            $orderlpk->lpk_no = $this->lpk_no;
+            $orderlpk->lpk_date = $this->lpk_date;
+            $orderlpk->order_id = $orderlpk->id;
+            $orderlpk->product_id = $orderlpk->product_id;
+            $orderlpk->machine_id = $machine->id;
+            $orderlpk->qty_lpk = $this->qty_lpk;
+            if(isset($this->remark)){
+                $orderlpk->remark = $this->remark;
+            }
+            $orderlpk->qty_gentan = $this->qty_gentan;
+            $orderlpk->panjang_lpk = $this->panjang_lpk;
+            $orderlpk->total_assembly_line = $this->total_assembly_line;
+            $orderlpk->qty_gulung = $this->qty_gulung;
+            $orderlpk->created_on = Carbon::now()->format('Y-m-d H:i:s');
+            
+            $orderlpk->save();
+
+            // session()->flash('message', 'Order updated successfully.');
+            session()->flash('notification', ['type' => 'success', 'message' => 'Order updated successfully.']);
             return redirect()->route('lpk-entry');
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+            // session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
         }
-
-        
     }
 
     public function delete()
@@ -130,13 +155,12 @@ class EditLpkController extends Component
             $order = TdOrderLpk::findOrFail($this->orderId);
             $order->delete();
 
-            session()->flash('message', 'Order deleted successfully.');
+            // session()->flash('message', 'Order deleted successfully.');
+            session()->flash('notification', ['type' => 'success', 'message' => 'Order deleted successfully.']);
             return redirect()->route('lpk-entry');
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Mesin ' . $this->machineno . ' Tidak Terdaftar']);
         }
-
-        
     }
 
     public function cancel()
@@ -146,6 +170,12 @@ class EditLpkController extends Component
 
     public function render()
     {
+        // $this->total_assembly_line = floatval($this->qty_lpk) * floatval($this->productlength);
+        // $this->qty_gentan = $this->productlength / $this->defaultgulung;
+        // $this->qty_gulung = $this->productlength * $this->qty_gentan;
+        // $this->panjang_lpk = $this->qty_gentan * $this->qty_gulung;
+        // $this->selisihkurang = $this->productlength - $this->panjang_lpk;
+
         return view('livewire.order-lpk.edit-lpk');
     }
 }

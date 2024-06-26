@@ -80,11 +80,11 @@
                 <div class="form-group">
                     <label class="control-label col-md-6 col-xs-12">Meter Gulung</label>
                     <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" class="form-control" wire:model="product_panjanggulung" />
+                        <input type="text" class="form-control" wire:model="qty_gulung" />
                         <span class="input-group-text">
                             meter
                         </span>
-                        @error('product_panjanggulung')
+                        @error('qty_gulung')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
@@ -141,7 +141,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-9 col-xs-12">Panjang Total</label>
                     <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" class="form-control readonly"  readonly="readonly" />
+                        <input type="text" class="form-control readonly"  readonly="readonly" wire:model="total_assembly_line" />
                         <span class="input-group-text">
                             meter
                         </span>
@@ -156,7 +156,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-9 col-xs-12">Default Gulung</label>
                     <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" class="form-control readonly"  readonly="readonly" />
+                        <input type="text" class="form-control readonly"  readonly="readonly" wire:model="defaultgulung" />
                         <span class="input-group-text" id="basic-addon2">
                             meter
                         </span>
@@ -165,7 +165,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-9 col-xs-12">Selisih Kurang</label>
                     <div class="input-group col-md-9 col-xs-12">
-                        <input type="text" class="form-control readonly"  readonly="readonly" />
+                        <input type="text" class="form-control readonly"  readonly="readonly" wire:model="selisihkurang" />
                         <span class="input-group-text">
                             meter
                         </span>
