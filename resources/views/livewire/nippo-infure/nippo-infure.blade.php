@@ -1,11 +1,11 @@
 {{-- <title>Nippo Infure</title> --}}
-<div class="container">
+<div class="container mt-3">
     <div class="row">
-        @if (session()->has('message'))
+        {{-- @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session('message') }}
             </div>
-        @endif
+        @endif --}}
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4" resources="DatePeriod">

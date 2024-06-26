@@ -22,6 +22,9 @@
                             <div class="input-group">
                                 <label class="control-label pe-2">Tanggal Produksi</label>
                                 <input class="form-control datepicker-input" type="date" wire:model.defer="production_date" placeholder="yyyy/mm/dd"/>
+                                @error('production_date')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -29,7 +32,10 @@
                         <div class="form-group">                            
                             <div class="input-group">
                                 <label class="control-label pe-2">Tanggal Proses</label>
-                                <input class="form-control datepicker-input" type="date" wire:model.defer="prosessdate" placeholder="yyyy/mm/dd"/>
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="created_on" placeholder="yyyy/mm/dd"/>
+                                @error('created_on')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -37,7 +43,10 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor LPK</label>
-                                <input type="text" class="form-control"  wire:model="lpk_no" />
+                                <input type="text" class="form-control" wire:model.debounce.300ms="lpk_no" />
+                                @error('lpk_no')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -45,7 +54,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label pe-2">Tanggal LPK</label>
-                                <input class="form-control readonly datepicker-input" readonly="readonly" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+                                <input class="form-control readonly datepicker-input" readonly="readonly" type="date" wire:model.defer="lpk_date" placeholder="yyyy/mm/dd"/>
                             </div>
                         </div>
                     </div>
@@ -54,6 +63,9 @@
                             <div class="input-group">
                                 <label class="control-label pe-2">Panjang LPK</label>
                                 <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="panjang_lpk" />
+                                <span class="input-group-text">
+                                    m
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -61,7 +73,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor Order</label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="noorder" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="code" />
                             </div>
                         </div>
                     </div>
@@ -69,7 +81,7 @@
                         <div class="form-group">                            
                             <div class="input-group">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="noorder" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="name" />
                             </div>
                         </div>
                     </div>
@@ -77,7 +89,10 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor Mesin</label>
-                                <input type="text" placeholder=" ... " class="form-control" wire:model="machine_no" />
+                                <input type="text" placeholder=" ... " class="form-control"  wire:model.debounce.300ms="machineno" />
+                                @error('machineno')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -93,7 +108,10 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Petugas</label>
-                                <input type="text" placeholder=" ... " class="form-control" wire:model="userid" />
+                                <input type="text" placeholder=" ... " class="form-control" wire:model="employeeno" />
+                                @error('employeeno')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -101,7 +119,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="-" class="form-control" wire:model="created_by" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="empname" />
                             </div>
                         </div>
                     </div>
@@ -109,7 +127,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5">Dimensi Infure</label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="ketebalan" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="dimensiinfure" />
                                 <span class="input-group-text">
                                     mm
                                 </span>
@@ -120,13 +138,13 @@
                         <div class="form-group">                            
                             <div class="input-group">
                                 <label class="control-label col-3">Meter Gulung</label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="diameterlipat" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="qty_gulung" />
                                 <span class="input-group-text">
                                     m
                                 </span>
 
-                                <input type="text" class="form-control readonly" readonly="readonly" placeholder=" .. X .." wire:model="lpk_no" />
-                                <input type="text" class="form-control readonly" readonly="readonly" wire:model="productlength" />
+                                <input type="text" class="form-control readonly" readonly="readonly" placeholder=" .. X .." />
+                                <input type="text" class="form-control readonly" readonly="readonly" wire:model="qty_gentan" />
                                 <span class="input-group-text">
                                     roll
                                 </span>
@@ -203,7 +221,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Jam Produksi</label>
-                                <input class="form-control" id="time" type="time" placeholder="hh:mm" wire:model="updated_on">
+                                <input class="form-control" type="time" placeholder="hh:mm" wire:model="work_hour" step="1">
                             </div>
                         </div>
                     </div>
