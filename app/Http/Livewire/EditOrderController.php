@@ -75,10 +75,12 @@ class EditOrderController extends Component
             $order->buyer_id = $this->buyer_id;
             $order->save();
 
-            session()->flash('message', 'Order updated successfully.');
+            // session()->flash('message', 'Order updated successfully.');
+            session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
             return redirect()->route('order-entry');
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+            // session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save order: ' . $e->getMessage()]);
         }
     }
 
@@ -88,10 +90,9 @@ class EditOrderController extends Component
             $order = TdOrder::findOrFail($this->orderId);
             $order->delete();
 
-            session()->flash('message', 'Order deleted successfully.');
-            return redirect()->route('order-entry');
+            session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
         } catch (\Exception $e) {
-            session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save order: ' . $e->getMessage()]);
         }
     }
 
