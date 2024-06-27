@@ -158,8 +158,8 @@ Route::middleware('auth')->group(function () {
 
     // Loss Infure
     Route::get('/loss-infure', LossInfure::class)->name('loss-infure');
-    Route::get('/edit-loss-infure/{orderId}', EditLossController::class)->name('edit-loss-infure');
-    Route::get('/add-loss-infure', AddLossController::class)->name('add-loss-infure');
+    // Route::get('/edit-loss-infure/{orderId}', EditLossController::class)->name('edit-loss-infure');
+    // Route::get('/add-loss-infure', AddLossController::class)->name('add-loss-infure');
 
     // Nippo Seitai
     Route::get('/nippo-seitai', NippoSeitaiController::class)->name('nippo-seitai');
