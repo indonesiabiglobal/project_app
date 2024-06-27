@@ -169,7 +169,7 @@ Route::middleware('auth')->group(function () {
     // Loss Seitai
     Route::get('/loss-seitai', LossSeitaiController::class)->name('loss-seitai');
     Route::get('/add-loss', AddSeitaiController::class)->name('add-loss');
-    Route::get('/edit-loss/{orderId}', EditSeitaiController::class)->name('edit-seitai');
+    // Route::get('/edit-loss/{orderId}', EditLossController::class)->name('edit-loss');
 
     Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
     Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');    
