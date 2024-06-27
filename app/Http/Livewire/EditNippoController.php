@@ -94,6 +94,7 @@ class EditNippoController extends Component
         )
         ->where('tda.id', $orderId)
         ->first();
+        // dd($orderId);
 
         $this->orderId = $orderId;
         $this->production_no = $data->production_no;
@@ -140,7 +141,7 @@ class EditNippoController extends Component
             $product->lpk_id = $lpkid->id;
             $product->gentan_no = $this->gentan_no;
             $product->nomor_han = $this->nomor_han;
-            $product->product_id = $products->product_id;
+            $product->product_id = $products->id;
 
             // $product->panjang_produksi = $this->panjang_produksi;
             // $product->panjang_printing_inline = $this->panjang_printing_inline;

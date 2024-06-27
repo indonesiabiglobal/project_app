@@ -1,5 +1,5 @@
 <div class="row">
-	@if (session()->has('message'))
+	{{-- @if (session()->has('message'))
 		<div class="alert alert-success">
 			{{ session('message') }}
 		</div>
@@ -8,7 +8,7 @@
 		<div class="alert alert-danger">
 			{{ session('error') }}
 		</div>
-	@endif
+	@endif --}}
     <form wire:submit.prevent="save">
         <div class="row">
             <div class="col-lg-5 ms-3">

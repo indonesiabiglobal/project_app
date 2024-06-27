@@ -1,5 +1,5 @@
 {{-- <title>Loss Infure</title> --}}
-<div class="container">
+<div class="container mt-3">
     <div class="row">
         <div class="col-lg-6 mb-3">
             <div class="form-group">
@@ -75,20 +75,11 @@
                 <button id="btnFilter" wire:click="search" type="button" class="btn btn-info" style="width:125px;">
                     <i class="fa fa-search"></i> Filter
                 </button>
-                <button 
-                    id="btnCreate" 
-                    type="button" 
-                    class="btn btn-success" 
-                    style="width:125px;" 
-                    asp-app-role="write" 
-                    onclick="window.location.href='{{ route('add-loss-infure') }}'">
-                    <i class="fa fa-plus"></i> Add
-                </button>
             </div>
             <table class="table table-bordered" data-height="414" id="tableSrc"></table>
         </div>
     </div>
-    <div class="card border-0 shadow mb-4 mt-4">
+    <div class="card border-0 shadow mb-4 mt-2">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-centered table-nowrap mb-0 rounded">
@@ -112,13 +103,8 @@
                         <!-- Item -->
                         @foreach ($loss as $item)
                         <tr>
-                            {{-- <td>
-                                <a href="{{ route('edit-loss-infure', ['orderId' => $item->id]) }}" class="btn btn-info">
-                                    <i class="fa fa-edit"></i> Edit
-                                </a>
-                            </td> --}}
                             <td>
-                                <a href="{{ route('edit-loss-infure', ['orderId' => $item->id]) }}" class="btn btn-info">
+                                <a href="{{ route('edit-nippo', ['orderId' => $item->id]) }}" class="btn btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
                             </td>
