@@ -1,5 +1,5 @@
 <div class="row">
-	@if (session()->has('message'))
+	{{-- @if (session()->has('message'))
 		<div class="alert alert-success">
 			{{ session('message') }}
 		</div>
@@ -12,7 +12,7 @@
 				@endforeach
 			</ul>
 		</div>
-	@endif
+	@endif --}}
     <form wire:submit.prevent="save">
         <div class="row mt-2">
             <div class="col-4 col-lg-12">

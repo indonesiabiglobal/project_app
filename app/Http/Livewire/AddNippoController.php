@@ -63,6 +63,7 @@ class AddNippoController extends Component
             $lpkid = TdOrderLpk::where('lpk_no', $this->lpk_no)->first();
             $machine = MsMachine::where('machineno', $this->machineno)->first();
             $employe = MsEmployee::where('employeeno', $this->employeeno)->first();
+            $products = MsProduct::where('code', $this->code)->first();
 
             $seqno = 1;
             if(!empty($lastSeq)){
@@ -83,6 +84,7 @@ class AddNippoController extends Component
             $product->seq_no = $seqno;
             $product->gentan_no = $this->gentan_no;
             $product->nomor_han = $this->nomor_han;
+            $product->product_id = $products->id;
 
             // $product->panjang_produksi = $this->panjang_produksi;
             // $product->panjang_printing_inline = $this->panjang_printing_inline;
