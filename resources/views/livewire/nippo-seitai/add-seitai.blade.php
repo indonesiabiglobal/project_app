@@ -29,7 +29,7 @@
                         <div class="form-group">                            
                             <div class="input-group">
                                 <label class="control-label pe-2">Tanggal Proses</label>
-                                <input class="form-control datepicker-input" type="date" wire:model.defer="prosessdate" placeholder="yyyy/mm/dd"/>
+                                <input class="form-control datepicker-input" type="date" wire:model.defer="created_on" placeholder="yyyy/mm/dd"/>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label pe-2">Tanggal LPK</label>
-                                <input class="form-control readonly datepicker-input" readonly="readonly" type="date" wire:model.defer="tglMasuk" placeholder="yyyy/mm/dd"/>
+                                <input class="form-control readonly datepicker-input" readonly="readonly" type="date" wire:model.defer="lpk_date" placeholder="yyyy/mm/dd"/>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor Order</label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="noorder" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="code" />
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                         <div class="form-group">                            
                             <div class="input-group">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="noorder" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="name" />
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor Mesin</label>
-                                <input type="text" placeholder=" ... " class="form-control" wire:model="machine_no" />
+                                <input type="text" placeholder=" ... " class="form-control" wire:model.debounce.300ms="machineno" />
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Petugas</label>
-                                <input type="text" placeholder=" ... " class="form-control" wire:model="userid" />
+                                <input type="text" placeholder=" ... " class="form-control" wire:model="employeeno" />
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label"></label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="created_by" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="empname" />
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                         <div class="form-group">                            
                             <div class="input-group">
                                 <label class="control-label col-5">Total Produksi</label>
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="diameterlipat" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="total_produksi" />
                                 <span class="input-group-text">
                                     lbr
                                 </span>
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5">Nomor Palet</label>
-                                <input type="text" placeholder="A0000-000000" class="form-control" wire:model="panjang_produksi" />
+                                <input type="text" placeholder="A0000-000000" class="form-control" wire:model="nomor_palet" />
                             </div>                            
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-3">Nomor LOT</label>
-                                <input type="text" placeholder="----------" class="form-control" wire:model="total_assembly_qty" />
+                                <input type="text" placeholder="----------" class="form-control" wire:model="nomor_lot" />
 
                                 <input type="text" class="form-control readonly" readonly="readonly" wire:model="selisih" />
                             </div>
@@ -161,7 +161,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5">Loss Infure</label>
-                                <input type="text" class="form-control"  wire:model="lossinfure" />
+                                <input type="text" class="form-control"  wire:model="infure_berat_loss" />
                                 <span class="input-group-text">
                                     kg
                                 </span>
@@ -172,9 +172,9 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-3">Petugas Infure</label>
-                                <input type="text" placeholder="..." class="form-control" wire:model="total_assembly_qty" />
+                                <input type="text" placeholder="..." class="form-control" wire:model="employeenoinfure" />
 
-                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="selisih" />
+                                <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="empnameinfure" />
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Jam Produksi</label>
-                                <input class="form-control" id="time" type="time" placeholder="hh:mm" wire:model="updated_on">
+                                <input class="form-control" type="time" placeholder="hh:mm" wire:model="work_hour">
                             </div>
                         </div>
                     </div>
