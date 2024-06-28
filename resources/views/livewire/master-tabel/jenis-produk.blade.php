@@ -11,7 +11,7 @@
             <div class="form-group">
                 <div class="input-group col-12 col-lg-6 text-end">
                     <label class="control-label col-12 col-lg-4 pe-2">Filter</label>
-                    <input class="form-control" type="text"  placeholder="Pencarian" />
+                    <input class="form-control" type="text" wire:model="searchTerm" placeholder="Pencarian" />
                 </div>
             </div>
         </div>
@@ -68,40 +68,36 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
-                        {{-- @foreach ($jamkerja as $item)
+                        @foreach ($jenisproduk as $item)
                         <tr>
                             <td>
-                                <a href="{{ route('edit-seitai', ['orderId' => $item->id]) }}" class="btn btn-info">
+                                {{-- <a href="{{ route('edit-seitai', ['orderId' => $item->id]) }}" class="btn btn-info">
                                     <i class="fa fa-edit"></i> Edit
-                                </a>
+                                </a> --}}
                             </td>
                             <td>                                
-                                {{ $item->working_date }}
+                                {{ $item->code}}
                             </td>
                             <td>
-                                {{ $item->work_shift }}
+                                {{ $item->name}}
                             </td>
                             <td>
-                                {{ $item->machine_id }}
+                                @if ($item->status==1)
+                                {{'aktif'}}
+                                @else
+                                {{'tidak aktif'}}
+                                @endif
                             </td>
                             <td>
-                                
+                                {{ $item->updated_by}}
                             </td>
                             <td>
-                                
+                                {{ $item->updated_on}}
                             </td>
-                            <td>
-                                {{ $item->work_hour }}
-                            </td>
-                            <td>
-                                {{ $item->off_hour }}
-                            </td>
-                            <td>
-                                {{ $item->on_hour }}
-                            </td>
+                           
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
