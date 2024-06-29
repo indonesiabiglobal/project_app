@@ -55,7 +55,7 @@
                 </button>
             </div>
         </div>
-        <div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="modal-add" aria-hidden="true">
+        <div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="modal-add" aria-hidden="true" wire:ignore.self>
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -68,7 +68,10 @@
                                 <label for="">Tanggal</label>
                                 <div class="form-group" style="margin-left:1px; white-space:nowrap">
                                     <div class="input-group">
-                                        <input class="form-control datepicker-input" type="date" wire:model.defer="tglKeluar" placeholder="yyyy/mm/dd"/>
+                                        <input class="form-control datepicker-input" type="date" wire:model.defer="working_date" placeholder="yyyy/mm/dd"/>
+                                        @error('working_date')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +79,10 @@
                                 <div class="form-group">
                                     <label>Shift </label>
                                     <div class="input-group col-md-9 col-xs-8">
-                                        <input id='searchText' name='searchText' class="form-control" type="text" resources-placeholder="SearchTextOrCode" placeholder="..." />
+                                        <input class="form-control" type="text" wire:model.defer="work_shift" placeholder="..." />
+                                        @error('work_shift')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -84,8 +90,11 @@
                                 <div class="form-group">
                                     <label>Nomor Mesin </label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="..." />
-                                        <input class="form-control readonly" readonly="readonly" type="text" placeholder="..." />
+                                        <input class="form-control" type="text" wire:model="machineno" placeholder="..." />
+                                        <input class="form-control readonly" readonly="readonly" type="text" wire:model="machinename" placeholder="..." />
+                                        @error('machineno')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -93,21 +102,30 @@
                                 <div class="form-group">
                                     <label>Petugas </label>
                                     <div class="input-group col-md-9 col-xs-8">
-                                        <input class="form-control" type="text" placeholder="..." />
-                                        <input class="form-control readonly" readonly="readonly" type="text" placeholder="..." />
+                                        <input class="form-control" wire:model="employeeno" type="text" placeholder="..." />
+                                        <input class="form-control readonly" readonly="readonly" type="text" wire:model="empname" placeholder="..." />
+                                        @error('employeeno')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-1">
                                 <label for="">Jam Kerja</label>
                                 <div class="form-group" style="margin-left:1px; white-space:nowrap">
-                                    <input class="form-control" id="time" type="time" placeholder="hh:mm">
+                                    <input class="form-control" wire:model="work_hour" type="time" placeholder="hh:mm">
+                                    @error('work_hour')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-1">
                                 <label for="">Lama Mesin Mati</label>
                                 <div class="form-group" style="margin-left:1px; white-space:nowrap">
-                                    <input class="form-control" id="time" type="time" placeholder="hh:mm">
+                                    <input class="form-control" wire:model="on_hour" type="time" placeholder="hh:mm">
+                                    @error('on_hour')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -115,7 +133,7 @@
                     <div class="modal-footer">
                         {{-- <button type="button" class="btn btn-secondary">Accept</button> --}}
                         <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">
+                        <button type="submit" class="btn btn-success" wire:click="save">
                             Save
                         </button>
                     </div>
@@ -145,10 +163,15 @@
                         @foreach ($jamkerja as $item)
                         <tr>
                             <td>
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-add" wire:click="edit(['orderid' => {{$item->orderid}}])">
+                                    <i class="fa fa-edit"></i> Edit
+                                </button>
+                            </td>                                                    
+                            {{-- <td>
                                 <a href="{{ route('edit-seitai', ['orderId' => $item->id]) }}" class="btn btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
-                            </td>
+                            </td> --}}
                             <td>                                
                                 {{ $item->working_date }}
                             </td>
@@ -182,3 +205,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        // Listener untuk menampilkan modal
+        window.livewire.on('showModal', () => {
+            var modal = new bootstrap.Modal(document.getElementById('modal-add'));
+            modal.show();
+        });
+
+        // Listener untuk menutup modal
+        window.livewire.on('closeModal', () => {
+            var modal = bootstrap.Modal.getInstance(document.getElementById('modal-add'));
+            if (modal) {
+                modal.hide();
+            }
+        });
+    });
+</script>

@@ -2,28 +2,39 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\MsEmployee;
 use App\Models\MsMachine;
+use App\Models\TdJamKerjaMesin;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
 class InfureJamKerjaController extends Component
 {
-    public $jamkerja = [];
-    // public $product;
-    // public $buyer;
     public $tglMasuk;
     public $tglKeluar;
+    public $jamkerja = [];
+    public $machinename;
+    public $machineno;
     public $machine;
+    public $msemployee;
+    public $employeeno;
     public $transaksi;
+    public $working_date;
+    public $empname;
+    public $work_shift;
+    public $machine_id;
+    public $employee_id;
+    public $work_hour;
+    public $on_hour;
+    public $orderid;
 
     public function mount()
     {
-        // $this->product = MsProduct::limit(10)->get();
-        // $this->buyer = MsBuyer::limit(10)->get();
-        $this->machine = MsMachine::limit(10)->get();
         $this->tglMasuk = Carbon::now()->format('Y-m-d');
         $this->tglKeluar = Carbon::now()->format('Y-m-d'); 
+        $this->machine  = MsMachine::limit(10)->get();
+        $this->working_date = Carbon::now()->format('Y-m-d');
     }
 
     public function search(){
@@ -110,7 +121,7 @@ class InfureJamKerjaController extends Component
 
             $this->jamkerja = DB::select("
             SELECT
-                tdjkm.ID AS ID,
+                tdjkm.id AS orderid,
                 tdjkm.working_date AS working_date,
                 tdjkm.work_shift AS work_shift,
                 tdjkm.machine_id AS machine_id,
@@ -124,7 +135,7 @@ class InfureJamKerjaController extends Component
                 tdjkm.updated_by AS updated_by,
                 tdjkm.updated_on AS updated_on 
             FROM
-                tdJamKerjaMesin AS tdjkm 
+                tdjamkerjamesin AS tdjkm 
             $tglMasuk
             $tglKeluar
                 LIMIT 5
@@ -132,8 +143,98 @@ class InfureJamKerjaController extends Component
         }
     }
 
+    public function edit($orderid)
+    {
+        $item = TdJamKerjaMesin::find($orderid);
+        if($item){
+            $machine=MsMachine::where('id', $item->machine_id)->first();
+            $msemployee=MsEmployee::where('id', $item->employee_id)->first();
+
+            $this->orderid = $item->id;
+            $this->working_date = $item->working_date;
+            $this->work_shift = $item->work_shift;
+            $this->machineno = $machine->machineno;
+            $this->machinename = $machine->machinename;
+            $this->employeeno = $msemployee->employeeno;
+            $this->empname = $msemployee->empname;
+            $this->work_hour = $item->working_date;
+            $this->on_hour = $item->work_shift;
+        }else{
+            return redirect()->to('jam-kerja/infure');
+        }
+
+        // $machine=MsMachine::where('id', $item->machine_id)->first();
+        // $msemployee=MsEmployee::where('id', $item->employee_id)->first();
+
+        // $this->working_date = $item->working_date;
+        // $this->work_shift = $item->work_shift;
+        // $this->machineno = $machine->machineno;
+        // $this->machinename = $machine->machinename;
+        // $this->employeeno = $msemployee->employeeno;
+        // $this->empname = $msemployee->empname;
+        // $this->work_hour = $item->working_date;
+        // $this->on_hour = $item->work_shift;
+        // $this->orderid = $item->orderid;
+        // $item->orderid = $item->id;
+
+        // $this->dispatchBrowserEvent('showModal');
+    }
+
+    public function save(){
+        $validatedData = $this->validate([
+            'working_date' => 'required',
+            'work_shift' => 'required',
+            'machineno' => 'required',
+            'employeeno' => 'required',
+            'work_hour' => 'required',
+            'on_hour' => 'required'
+        ]);
+
+        try {
+            $machine=MsMachine::where('machineno', $this->machineno)->first();
+            $msemployee=MsEmployee::where('employeeno', $this->employeeno)->first();
+
+            $orderlpk = new TdJamKerjaMesin();
+            $orderlpk->working_date = $this->working_date;
+            $orderlpk->work_shift = $this->work_shift;
+            $orderlpk->machine_id = $machine->id;
+            $orderlpk->employee_id = $msemployee->id;
+            $orderlpk->work_hour = $this->work_hour;
+            $orderlpk->on_hour = $this->on_hour;
+            
+            $orderlpk->save();
+
+            $this->reset(['employeeno', 'empname', 'machineno', 'machinename', 'working_date', 'work_shift']);
+            $this->dispatchBrowserEvent('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
+            return redirect()->route('infure-jam-kerja');
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
+        }
+    }
+
     public function render()
     {
+        if(isset($this->machineno) && $this->machineno != ''){
+            $machine=MsMachine::where('machineno', $this->machineno)->first();
+            
+            if($machine == null){
+                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Machine ' . $this->machineno . ' Tidak Terdaftar']);
+            } else {
+                $this->machinename = $machine->machinename;
+            }
+        }
+
+        if(isset($this->employeeno) && $this->employeeno != ''){
+            $msemployee=MsEmployee::where('employeeno', $this->employeeno)->first();
+
+            if($msemployee == null){
+                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Employee ' . $this->employeeno . ' Tidak Terdaftar']);
+            } else {
+                $this->empname = $msemployee->empname;
+            }
+        }
+
         return view('livewire.jam-kerja.infure');
+        
     }
 }
