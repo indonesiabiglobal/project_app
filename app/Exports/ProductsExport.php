@@ -11,9 +11,44 @@ use Illuminate\Support\Facades\DB;
 class ProductsExport implements FromCollection, WithHeadings
 {
     // use Exportable;
+    protected $tglMasuk;
+    protected $tglKeluar;
+    protected $buyer_id;
+    protected $filter;
+
+    public function __construct($tglMasuk, $tglKeluar, $buyer_id, $filter)
+    {
+        $this->tglMasuk = $tglMasuk;
+        $this->tglKeluar = $tglKeluar;
+        $this->buyer_id = $buyer_id;
+        $this->filter = $filter;
+    }
 
     public function collection()
     {
+        if($this->filter == 2){
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tod.order_date >= '" . $this->tglMasuk . "'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tod.order_date <= '" . $this->tglKeluar . "'";
+            }
+        } else {
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tod.processdate >= '" . $this->tglMasuk . "'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tod.processdate <= '" . $this->tglKeluar . "'";
+            }
+        }
+        $buyer_id = '';
+        if (isset($this->buyer_id) && $this->buyer_id != '') {
+            $buyer_id = "AND tod.buyer_id = '" . $this->buyer_id . "'";
+        }
         return collect(DB::select("
             SELECT
                 tod.id,
@@ -34,7 +69,9 @@ class ProductsExport implements FromCollection, WithHeadings
                 tdorder AS tod
             INNER JOIN msproduct AS mp ON mp.id = tod.product_id
             INNER JOIN msbuyer AS mbu ON mbu.id = tod.buyer_id
-            limit 5
+            $tglMasuk
+            $tglKeluar
+            $buyer_id
         "));
     }
 

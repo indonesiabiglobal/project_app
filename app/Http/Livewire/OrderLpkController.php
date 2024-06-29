@@ -39,6 +39,7 @@ class OrderLpkController extends Component
                 $tglKeluar = "AND tod.order_date <= '" . $this->tglKeluar . "'";
             }
         } else {
+            $tglMasuk = '';
             if (isset($this->tglMasuk) && $this->tglMasuk != '') {
                 $tglMasuk = "WHERE tod.processdate >= '" . $this->tglMasuk . "'";
             }
