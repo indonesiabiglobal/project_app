@@ -78,6 +78,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ResetPasswordExample;
 use App\Http\Livewire\SearchData;
 use App\Http\Livewire\SeitaiJamKerja;
+use App\Http\Livewire\SeitaiJamKerjaController;
 use App\Http\Livewire\SumberDayaManusia\AbsensiPegawai;
 use App\Http\Livewire\SumberDayaManusia\DaftarPengajuan;
 use App\Http\Livewire\SumberDayaManusia\DaftarPersetujuan;
@@ -178,7 +179,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/check-list-seitai', CheckListSeitai::class)->name('check-list-seitai');
     Route::get('/label-masuk-gudang', LabelMasukGudang::class)->name('label-masuk-gudang');
     Route::get('/infure-jam-kerja', InfureJamKerjaController::class)->name('infure-jam-kerja');
-    Route::get('/seitai-jam-kerja', SeitaiJamKerja::class)->name('seitai-jam-kerja');
+    Route::get('/seitai-jam-kerja', SeitaiJamKerjaController::class)->name('seitai-jam-kerja');
 
     Route::get('/kenpin-infure', KenpinInfure::class)->name('kenpin-infure');
     Route::get('/add-kenpin', AddKenpinController::class)->name('add-kenpin');

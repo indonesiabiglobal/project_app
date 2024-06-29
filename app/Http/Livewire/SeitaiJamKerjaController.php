@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
-class InfureJamKerjaController extends Component
+class SeitaiJamKerjaController extends Component
 {
     public $tglMasuk;
     public $tglKeluar;
@@ -121,7 +121,7 @@ class InfureJamKerjaController extends Component
 
             $jamkerja = DB::select("
             SELECT
-                tdjkm.id AS orderid,
+                tdjkm.ID AS ID,
                 tdjkm.working_date AS working_date,
                 tdjkm.work_shift AS work_shift,
                 tdjkm.machine_id AS machine_id,
@@ -135,10 +135,10 @@ class InfureJamKerjaController extends Component
                 tdjkm.updated_by AS updated_by,
                 tdjkm.updated_on AS updated_on 
             FROM
-                tdjamkerjamesin AS tdjkm 
+                tdJamKerjaMesin AS tdjkm
             $tglMasuk
             $tglKeluar
-                LIMIT 5
+            LIMIT 5
             ");
         }
     }
@@ -160,7 +160,7 @@ class InfureJamKerjaController extends Component
             $this->work_hour = Carbon::parse($item->work_hour)->format('H:i');
             $this->on_hour = Carbon::parse($item->on_hour)->format('H:i');
         }else{
-            return redirect()->to('jam-kerja/infure');
+            return redirect()->to('jam-kerja/seitai');
         }
     }
 
@@ -221,7 +221,7 @@ class InfureJamKerjaController extends Component
 
             $this->reset(['employeeno', 'empname', 'machineno', 'machinename', 'working_date', 'work_shift']);
             $this->dispatchBrowserEvent('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
-            return redirect()->route('infure-jam-kerja');
+            return redirect()->route('seitai-jam-kerja');
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
         }
@@ -265,13 +265,12 @@ class InfureJamKerjaController extends Component
             tdjkm.updated_by AS updated_by,
             tdjkm.updated_on AS updated_on 
         FROM
-            tdjamkerjamesin AS tdjkm
-            WHERE tdjkm.working_date >= '01-06-2024'
-            AND tdjkm.working_date <= '29-06-2024'
-            LIMIT 5
+            tdJamKerjaMesin AS tdjkm
+        WHERE tdjkm.working_date >= '01-06-2024'
+        AND tdjkm.working_date <= '29-06-2024'
+        LIMIT 5
         ");
 
-        return view('livewire.jam-kerja.infure', ['jamkerja' => $jamkerja]);
-        
+        return view('livewire.jam-kerja.seitai', ['jamkerja' => $jamkerja]);
     }
 }
