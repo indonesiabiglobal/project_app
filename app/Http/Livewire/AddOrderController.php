@@ -41,7 +41,8 @@ class AddOrderController extends Component
         if(isset($this->product_id) && $this->product_id != ''){
             $product=MsProduct::where('code', $this->product_id)->first();
             if($product == null){
-                session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
+                // session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
+                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar']);
             } else {
                 $this->product_name = $product->name;
             }
@@ -97,7 +98,8 @@ class AddOrderController extends Component
             $product=MsProduct::where('code', $this->product_id)->first();
             // dd($product);
             if($product == null){
-                session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
+                // session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
+                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar']);
             } else {
                 $this->product_name = $product->name;
                 $this->dimensi = $product->ketebalan.'x'.$product->diameterlipat.'x'.$product->productlength;
