@@ -146,8 +146,19 @@
                 
 				<script>
 					document.addEventListener('livewire:load', function () {
-						Livewire.on('redirectToPrint', function () {
-							window.open('{{ route('cetak-order') }}', '_blank');
+						Livewire.on('redirectToPrint', function (data) {
+							var printUrl = '{{ route('cetak-order') }}?processdate=' +  data.processdate + 
+							'&po_no=' + data.po_no +
+							'&order_date=' + data.order_date +
+							'&code=' + data.code +
+							'&name=' + data.name +
+							'&dimensi=' + data.dimensi +
+							'&order_qty=' + data.order_qty +
+							'&stufingdate=' + data.stufingdate +
+							'&etddate=' + data.etddate +
+							'&etadate=' + data.etadate +
+							'&namabuyer=' + data.namabuyer;
+							window.open(printUrl, '_blank');
 						});
 					});
 				</script>

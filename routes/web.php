@@ -93,6 +93,7 @@ use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\WarehouseController;
 use App\Http\Livewire\WorkingShiftController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,8 +143,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/order-entry', OrderLpkController::class)->name('order-entry');
     Route::get('/edit-order/{orderId}', EditOrderController::class)->name('edit-order');
     Route::get('/add-order', AddOrderController::class)->name('add-order');
-    Route::get('/cetak-order', function () {
-        return view('livewire.order-lpk.cetak-order');
+    Route::get('/cetak-order', function (Request $request) {
+        $processdate = $request->query('processdate');
+        $po_no = $request->query('po_no');
+        $order_date = $request->query('order_date');
+        $code = $request->query('code');
+        $name = $request->query('name');
+        $dimensi = $request->query('dimensi');
+        $order_qty = $request->query('order_qty');
+        $stufingdate = $request->query('stufingdate');
+        $etddate = $request->query('etddate');
+        $etadate = $request->query('etadate');
+        $namabuyer = $request->query('namabuyer');
+        return view('livewire.order-lpk.cetak-order', compact('processdate','po_no', 'order_date', 'code', 'name', 'dimensi', 'order_qty', 'stufingdate', 'etddate', 'etadate', 'namabuyer'));
     })->name('cetak-order');
 
     Route::get('/lpk-entry', LpkEntryController::class)->name('lpk-entry');

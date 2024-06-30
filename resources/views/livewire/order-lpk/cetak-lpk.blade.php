@@ -14,48 +14,48 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nomor LPK</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="searchLpkNo" class="form-control lpkManual" />
+				<input type="text" class="form-control" wire:model.debounce.300ms="lpk_no"/>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Tanggal LPK</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" name="lpk_date" class="form-control readonly" readonly="readonly" />
+				<input type="text"wire:model.debounce.300ms="lpk_date" class="form-control readonly" readonly="readonly" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Jumlah LPK</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" name="qty_lpk" class="form-control readonly integer" readonly="readonly" />
+				<input type="text" wire:model.debounce.300ms="qty_lpk" class="form-control readonly integer" readonly="readonly" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nomor Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" name="product_code" class="form-control readonly" readonly="readonly" />
+				<input type="text" wire:model.debounce.300ms="code" class="form-control readonly" readonly="readonly" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nama Produk</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" name="product_name" class="form-control readonly" readonly="readonly" />
+				<input type="text" wire:model.debounce.300ms="product_name" class="form-control readonly" readonly="readonly" />
 			</div>
 		</div>
 		<div class="form-group reprint_no">
 			<label class="control-label col-md-3 col-xs-12">Re-Print</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" name="reprint_no" class="form-control readonly" readonly="readonly" />
+				<input type="text" wire:model.debounce.300ms="reprint_no" class="form-control readonly" readonly="readonly" />
 			</div>
 		</div>
 		<hr />
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12"></label>
 			<div class="input-group col-md-9 col-xs-12">
-				<button type="button" class="btn btn-success btn-print" disabled="disabled"><i class="fa fa-print"></i> Print</button>
+				<button type="button" class="btn btn-success btn-print" wire:click="print">
+					<i class="fa fa-print"></i> Print</button>
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-2"></div>
+	<div class="col-lg-2">
+	</div>
 </div>
-<input name="lpk_id" type="hidden" value="" />
-<input id="searchLpkNo_selected" type="hidden" value="" />
