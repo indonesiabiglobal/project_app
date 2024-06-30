@@ -112,7 +112,7 @@ class EditOrderController extends Component
             tod.order_date,
             mp.code,
             mp.name,
-            mp.ketebalan||'x'||mp.diameterlipat||'x'||mp.productlength as diameter,
+            mp.ketebalan||'x'||mp.diameterlipat||'x'||mp.productlength as dimensi,
             tod.order_qty,
             tod.stufingdate,
             tod.etddate,
