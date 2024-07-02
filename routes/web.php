@@ -64,6 +64,7 @@ use App\Http\Livewire\LpkEntryController;
 use App\Http\Livewire\MasterProdukController;
 use App\Http\Livewire\MenuLossSeitaiController;
 use App\Http\Livewire\MesinController;
+use App\Http\Livewire\MutasiIsiPaletController;
 use App\Http\Livewire\SumberDayaManusia\MasterPegawai;
 use App\Http\Livewire\MutasiIsiPaletKenpin;
 use App\Http\Livewire\NippoInfureController;
@@ -209,7 +210,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/checklist-infure', CheckListInfure::class)->name('checklist-infure');
     Route::get('/label-gentan', LabelGentan::class)->name('label-gentan');    
     
-    Route::get('/mutasi-isi-palet', MutasiIsiPalet::class)->name('mutasi-isi-palet');
+    Route::get('/mutasi-isi-palet', MutasiIsiPaletController::class)->name('mutasi-isi-palet');
     Route::get('/check-list-seitai', CheckListSeitai::class)->name('check-list-seitai');
     Route::get('/label-masuk-gudang', LabelMasukGudang::class)->name('label-masuk-gudang');
     Route::get('/infure-jam-kerja', InfureJamKerjaController::class)->name('infure-jam-kerja');
