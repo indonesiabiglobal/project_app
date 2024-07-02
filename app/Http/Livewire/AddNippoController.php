@@ -6,11 +6,13 @@ use Livewire\Component;
 use App\Models\TdOrder;
 use App\Models\MsBuyer;
 use App\Models\MsEmployee;
+use App\Models\MsLossInfure;
 use App\Models\MsMachine;
 use App\Models\MsProduct;
 use App\Models\MsWorkingShift;
 use App\Models\TdOrderLpk;
 use App\Models\TdProductAssembly;
+use App\Models\TdProductAssemblyLoss;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +37,11 @@ class AddNippoController extends Component
     public $work_shift;
     public $gentan_no;
     public $nomor_han;
+    public $name_infure;
+    public $loss_infure_id;
+    public $berat_loss;
+    public $details = [];
+    public $orderid;
 
     public function mount()
     {
@@ -56,6 +63,7 @@ class AddNippoController extends Component
             'employeeno' => 'required',
         ]);
 
+        DB::beginTransaction();
         try {
             $lastSeq = TdProductAssembly::whereDate('created_on', Carbon::today())
                     ->orderBy('seq_no', 'desc')
@@ -70,7 +78,6 @@ class AddNippoController extends Component
                 $seqno = $lastSeq->seq_no + 1;
             }
             $today = Carbon::now();
-            // dd($today->format('dmy').'-'.$seqno);
 
             $product = new TdProductAssembly();
             $product->production_no = $today->format('dmy').'-'.$seqno;
@@ -85,6 +92,11 @@ class AddNippoController extends Component
             $product->gentan_no = $this->gentan_no;
             $product->nomor_han = $this->nomor_han;
             $product->product_id = $products->id;
+            $product->save();
+
+            TdProductAssemblyLoss::where('lpk_id',$lpkid->id)->update([
+                'product_assembly_id' => $product->id,
+            ]);            
 
             // $product->panjang_produksi = $this->panjang_produksi;
             // $product->panjang_printing_inline = $this->panjang_printing_inline;
@@ -94,13 +106,56 @@ class AddNippoController extends Component
             // $product->status_kenpin = $this->status_kenpin;
             // $product->infure_cost = $this->infure_cost;
             // $product->product_id = $this->product_id;
-            $product->save();
-
+            
+            $transStatus = 'true';            
+        } catch (\Exception $e) {            
+            $transStatus = 'false';
+        }
+        
+        if ($transStatus == 'true') {
             session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
-            return redirect()->route('nippo-infure');
-        } catch (\Exception $e) {
+            // return redirect()->route('nippo-infure');
+        } else {
             $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
-        }        
+            DB::rollBack();
+        }
+    }
+
+    public function addLossInfure()
+    {
+        $validatedData = $this->validate([
+            'lpk_no' => 'required',
+            'machineno' => 'required',
+            'employeeno' => 'required',
+            // 'panjang_produksi' => 'required',
+            // 'qty_gentan' => 'required'
+        ]);
+
+        if ($validatedData) {
+            $this->emit('showModal');
+        }
+    }
+
+    public function saveInfure()
+    {
+        $lpkid = TdOrderLpk::where('lpk_no', $this->lpk_no)->first();
+
+        $datas = new TdProductAssemblyLoss();
+        $datas->loss_infure_id = $this->loss_infure_id;
+        $datas->berat_loss = $this->berat_loss;
+        $datas->lpk_id = $lpkid->id;
+        
+        $datas->save();
+
+        $this->emit('closeModal');
+    }
+
+    public function deleteInfure($orderId)
+    {
+        $data = TdProductAssemblyLoss::findOrFail($orderId);
+        $data->delete();
+
+        $this->dispatchBrowserEvent('notification', ['type' => 'success', 'message' => 'Data Berhasil di Hapus']);
     }
 
     public function cancel()
@@ -113,6 +168,7 @@ class AddNippoController extends Component
         if(isset($this->lpk_no) && $this->lpk_no != ''){
             $tdorderlpk = DB::table('tdorderlpk as tolp')
             ->select(
+                'tolp.id',
                 'tolp.lpk_date',
                 'tolp.panjang_lpk',                
                 'tolp.created_on',
@@ -139,6 +195,17 @@ class AddNippoController extends Component
                 $this->dimensiinfure = $tdorderlpk->ketebalan.'x'.$tdorderlpk->diameterlipat;
                 $this->qty_gulung = $tdorderlpk->qty_gulung;
                 $this->qty_gentan = $tdorderlpk->qty_gentan;
+
+                $this->details = DB::table('tdproduct_assembly_loss as tal')
+                ->select(
+                    'tal.loss_infure_id',
+                    'tal.berat_loss',
+                    'tal.id',
+                    'msi.name as name_infure'
+                )
+                ->join('mslossinfure as msi', 'msi.id', '=', 'tal.loss_infure_id')
+                ->where('tal.lpk_id', $tdorderlpk->id)
+                ->get();
             }
         }
 
@@ -164,6 +231,17 @@ class AddNippoController extends Component
             }
         }
 
+        if(isset($this->loss_infure_id) && $this->loss_infure_id != ''){
+            $lossinfure=MsLossInfure::where('id', $this->loss_infure_id)->first();
+
+            if($lossinfure == null){
+                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
+                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Employee ' . $this->loss_infure_id . ' Tidak Terdaftar']);
+            } else {
+                $this->name_infure = $lossinfure->name;
+            }
+        }
+
         $lpkid = TdOrderLpk::where('lpk_no', $this->lpk_no)->first();
 
         $this->gentan_no = 1;
@@ -177,7 +255,6 @@ class AddNippoController extends Component
             }
             $this->gentan_no=$nogentan;
         }
-        
 
         return view('livewire.nippo-infure.add-nippo');
     }
