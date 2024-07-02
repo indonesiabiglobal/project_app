@@ -143,6 +143,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/order-entry', OrderLpkController::class)->name('order-entry');
     Route::get('/edit-order/{orderId}', EditOrderController::class)->name('edit-order');
     Route::get('/add-order', AddOrderController::class)->name('add-order');
+
     Route::get('/cetak-order', function (Request $request) {
         $processdate = $request->query('processdate');
         $po_no = $request->query('po_no');
@@ -157,6 +158,11 @@ Route::middleware('auth')->group(function () {
         $namabuyer = $request->query('namabuyer');
         return view('livewire.order-lpk.cetak-order', compact('processdate','po_no', 'order_date', 'code', 'name', 'dimensi', 'order_qty', 'stufingdate', 'etddate', 'etadate', 'namabuyer'));
     })->name('cetak-order');
+
+    Route::get('/report-lpk', function (Request $request) {
+        $test = $request->query('test');
+        return view('livewire.order-lpk.report-lpk', compact('test'));
+    })->name('report-lpk');
 
     Route::get('/lpk-entry', LpkEntryController::class)->name('lpk-entry');
     Route::get('/edit-lpk/{orderId}', EditLpkController::class)->name('edit-lpk');

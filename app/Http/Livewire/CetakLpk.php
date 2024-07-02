@@ -18,30 +18,28 @@ class CetakLpk extends Component
 
     public function print()
     {
-        $results = DB::table('tdorderlpk as tolp')
-            ->join('tdorder as tod', 'tod.id', '=', 'tolp.order_id')
-            ->join('msproduct as mp', 'mp.id', '=', 'tolp.product_id')
-            ->join('msmachine as mm', 'mm.id', '=', 'tolp.machine_id')
-            ->join('msbuyer as mbu', 'mbu.id', '=', 'tod.buyer_id')
-            ->select(
-                'tolp.lpk_no as lpk_no',
-                'tolp.lpk_date as lpk_date',
-                'tolp.panjang_lpk as panjang_lpk',
-                'tolp.qty_lpk as qty_lpk',
-                'tod.po_no as po_no',
-                'mp.name as product_name',
-                'tod.product_code as product_code',
-                'tolp.reprint_no as reprint_no'
-            )
-            ->where('tolp.lpk_no', $this->lpk_no)
-            ->first();
-
-            if ($results) {
-                $this->results = (array) $results;
-                $this->emit('showPrintModal');
-            } else {
-                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Data Tidak ditemukan']);
-            }
+        $data = collect(DB::select("
+        SELECT
+            tod.processdate,
+            tod.po_no,
+            tod.order_date,
+            mp.code,
+            mp.name,
+            mp.ketebalan||'x'||mp.diameterlipat||'x'||mp.productlength as dimensi,
+            tod.order_qty,
+            tod.stufingdate,
+            tod.etddate,
+            tod.etadate,
+            mbu.name as namabuyer
+        FROM
+            tdorder AS tod
+            INNER JOIN msproduct AS mp ON mp.ID = tod.product_id
+            INNER JOIN msbuyer AS mbu ON mbu.ID = tod.buyer_id 
+        WHERE
+            tod.id = '12766'
+        "))->first();
+        
+        $this->emit('redirectToPrint', $data);
             
     }
     public function render()

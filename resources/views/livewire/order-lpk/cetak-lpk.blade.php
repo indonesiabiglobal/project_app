@@ -59,3 +59,11 @@
 	<div class="col-lg-2">
 	</div>
 </div>
+<script>
+	document.addEventListener('livewire:load', function () {
+		Livewire.on('redirectToPrint', function (data) {
+			var printUrl = '{{ route('report-lpk') }}?test=' +  'data.test';
+			window.open(printUrl, '_blank');
+		});
+	});
+</script>
