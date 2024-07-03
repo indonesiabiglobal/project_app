@@ -40,8 +40,8 @@ class CetakLpk extends Component
         "))->first();
         
         $this->emit('redirectToPrint', $data);
-            
     }
+    
     public function render()
     {
         if(isset($this->lpk_no) && $this->lpk_no != ''){

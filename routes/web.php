@@ -181,6 +181,11 @@ Route::middleware('auth')->group(function () {
         return view('livewire.order-lpk.report-lpk', compact('test'));
     })->name('report-lpk');
 
+    Route::get('/report-masuk-gudang', function (Request $request) {
+        $test = $request->query('test');
+        return view('livewire.nippo-seitai.report-masuk-gudang', compact('test'));
+    })->name('report-masuk-gudang');
+
     Route::get('/lpk-entry', LpkEntryController::class)->name('lpk-entry');
     Route::get('/edit-lpk/{orderId}', EditLpkController::class)->name('edit-lpk');
     Route::get('/add-lpk', AddLpkController::class)->name('add-lpk');
