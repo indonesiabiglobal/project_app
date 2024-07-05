@@ -1,25 +1,11 @@
 <div class="row">
-	@if (session()->has('message'))
-		<div class="alert alert-success">
-			{{ session('message') }}
-		</div>
-	@endif
-	@if ($errors->any())
-		<div class="alert alert-danger">
-			<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-			</ul>
-		</div>
-	@endif
     <form wire:submit.prevent="save">
         <div class="row mt-2">
 			<div class="col-12 col-lg-12">
 				<div class="form-group">                            
 					<div class="input-group">
 						<label class="control-label col-12 col-lg-2">Tanggal Kenpin</label>
-						<input class="form-control datepicker-input" type="date" wire:model.defer="production_date" placeholder="yyyy/mm/dd"/>
+						<input class="form-control datepicker-input" type="date" wire:model.defer="kenpin_date" placeholder="yyyy/mm/dd"/>
 					</div>
 				</div>
 			</div>
@@ -27,7 +13,7 @@
 				<div class="form-group">
 					<div class="input-group">
 						<label class="control-label col-12 col-lg-2">Nomor Kenpin</label>
-						<input type="text" class="form-control"  wire:model="lpk_no" />
+						<input type="text" class="form-control" wire:model="kenpin_no" />
 					</div>
 				</div>
 			</div>			
@@ -35,7 +21,7 @@
 				<div class="form-group">
 					<div class="input-group">
 						<label class="control-label col-12 col-lg-6">Nomor Order</label>
-						<input type="text" placeholder="-" class="form-control col-4" wire:model="noorder" />
+						<input type="text" placeholder="-" class="form-control col-4" wire:model.debounce.300ms="code" />
 					</div>
 				</div>
 			</div>
@@ -43,7 +29,7 @@
 				<div class="form-group">                            
 					<div class="input-group">
 						<label class="control-label"></label>
-						<input type="text" placeholder="-" class="form-control col-8 readonly" readonly="readonly" wire:model="noorder" />
+						<input type="text" placeholder="-" class="form-control col-8 readonly" readonly="readonly" wire:model="name" />
 					</div>
 				</div>
 			</div>
@@ -51,7 +37,10 @@
 				<div class="form-group">
 					<div class="input-group">
 						<label class="control-label col-12 col-lg-6">Petugas</label>
-						<input type="text" placeholder="-" class="form-control" wire:model="userid" />
+						<input type="text" placeholder="-" class="form-control" wire:model="employeeno" />
+						@error('employeeno')
+							<span class="invalid-feedback">{{ $message }}</span>
+						@enderror
 					</div>
 				</div>
 			</div>
@@ -59,7 +48,7 @@
 				<div class="form-group">
 					<div class="input-group">
 						<label class="control-label"></label>
-						<input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="created_by" />
+						<input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="empname" />
 					</div>
 				</div>
 			</div>
@@ -67,7 +56,7 @@
 				<div class="form-group">
 					<div class="input-group">
 						<label class="control-label col-12 col-lg-2">NG</label>
-						<input type="text" class="form-control"  wire:model="lpk_no" />
+						<input type="text" class="form-control" wire:model="remark" />
 					</div>
 				</div>
 			</div>
@@ -75,10 +64,10 @@
 				<div class="form-group">
 					<div class="input-group">
 						<label class="control-label col-12 col-lg-2">Status</label>
-						<select class="form-control" placeholder="- all -">
+						<select wire:model="status" class="form-control" placeholder="- all -">
 							<option value="">- all -</option>
-							<option value="0">Proses</option>
-							<option value="1">Finish</option>
+							<option value="1">Proses</option>
+							<option value="2">Finish</option>
 						</select>
 					</div>
 				</div>
@@ -92,7 +81,7 @@
 						<span class="input-group-text readonly">
 							Nomor Palet
 						</span>
-						<input wire:model.defer="searchTerm" class="form-control" type="text" placeholder="A0000-000000" />
+						<input wire:model.defer="nomor_palet" class="form-control" type="text" placeholder="A0000-000000" />
 						<button wire:click="search" type="button" class="btn btn-info">
 							<i class="fa fa-search"></i>
 						</button>
@@ -102,10 +91,10 @@
 			<div class="col-lg-3"></div>
             <div class="col-lg-4" style="border-top:1px solid #efefef">
                 <div class="toolbar">
-                    <button id="btnFilter" type="button" class="btn btn-warning" wire:click="cancel">
+                    <button type="button" class="btn btn-warning" wire:click="cancel">
                         <i class="fa fa-back"></i> Close
                     </button>
-                    <button id="btnCreate" type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-success">
                         <i class="fa fa-plus"></i> Save
                     </button>
                     <button type="button" class="btn btn-success btn-print" disabled="disabled">
@@ -114,7 +103,82 @@
                 </div>
             </div>
         </div>
-        
+        <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="h6 modal-title">Edit Palet Setai	</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-1">
+                                    <div class="form-group">
+                                        <label>Nomor Palet </label>
+                                        <div class="input-group col-md-9 col-xs-8">
+                                            <input class="form-control readonly" readonly="readonly" type="text" wire:model.defer="no_palet" placeholder="..." />
+                                            @error('no_palet')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-12 mb-1">
+                                    <div class="form-group">
+                                        <label>Nomor Lot </label>
+                                        <div class="input-group col-md-9 col-xs-8">
+                                            <input class="form-control readonly" readonly="readonly" type="text" wire:model.defer="no_lot" placeholder="..." />
+                                            @error('no_lot')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-12 mb-1">
+                                    <div class="form-group">
+                                        <label>No LPK </label>
+                                        <div class="input-group col-md-9 col-xs-8">
+                                            <input class="form-control readonly" readonly="readonly" type="text" wire:model.defer="no_lpk" placeholder="..." />
+                                            @error('no_lpk')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-12 mb-1">
+                                    <div class="form-group">
+                                        <label>Quantity </label>
+                                        <div class="input-group col-md-9 col-xs-8">
+                                            <input class="form-control readonly" readonly="readonly" type="text" wire:model.defer="quantity" placeholder="..." />
+                                            @error('quantity')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-12 mb-1">
+                                    <div class="form-group">
+                                        <label>Loss (Lembar) </label>
+                                        <div class="input-group col-md-9 col-xs-8">
+                                            <input class="form-control" type="text" wire:model.defer="qty_loss" placeholder="..." />
+                                            @error('qty_loss')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {{-- <button type="button" class="btn btn-secondary">Accept</button> --}}
+                            <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" wire:click="saveSeitai">
+                                Save
+                            </button>
+                        </div>
+                </div>
+            </div>
+        </div>
         <div class="card border-0 shadow mb-4 mt-4">
             <div class="card-body">
                 <div class="table-responsive">
@@ -131,51 +195,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($tdOrderLpk as $item)
-                            <tr>
+                            @forelse ($details as $item)
+							<tr>
                                 <td>
-                                    <a href="{{ route('edit-lpk', ['orderId' => $item->id]) }}" class="btn btn-info">
-                                        <i class="fa fa-edit"></i> Edit
-                                    </a>
-                                </td>
+									<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-edit" wire:click="edit({{$item->id}})">
+										<i class="fa fa-edit"></i> Edit
+									</button>
+
+									<button type="button" class="btn btn-danger" wire:click="deleteSeitai({{$item->id}})">
+										<i class="fa fa-trash"></i> Delete
+									</button>
+								</td>
                                 <td>                                
+                                    {{ $item->nomor_palet }}
+                                </td>
+                                <td>
+                                    {{ $item->nomor_lot }}
+                                </td>
+                                <td>
                                     {{ $item->lpk_no }}
                                 </td>
                                 <td>
-                                    {{ $item->lpk_date }}
+                                    {{ $item->production_date }}
                                 </td>
                                 <td>
-                                    {{ $item->panjang_lpk }}
+                                    {{ $item->qty_produksi }}
                                 </td>
-                                <td>
-                                    {{ $item->qty_lpk }}
-                                </td>
-                                <td>
-                                    {{ $item->qty_gentan }}
-                                </td>
-                                <td>
-                                    {{ $item->qty_gulung }}
-                                </td>
-                                <td>
-                                    {{ $item->infure }}
-                                </td>
-                                <td>
-                                    {{ $item->total_assembly_qty }}
-                                </td>
-                                <td>
-                                    {{ $item->po_no }}
-                                </td>
-                                <td>
-                                    {{ $item->product_code }}
-                                </td>
-                                <td>
-                                    {{ $item->tglproses }}
+								<td>
+                                    {{ $item->qty_loss }}
                                 </td>
                             </tr>
-                            @endforeach --}}
-                            <tr>
+							@empty
+							<tr>
                                 <td colspan="7" class="text-center">No results found</td>
                             </tr>
+							@endforelse
                             <tr>
                                 <td colspan="6" class="text-end">Berat Loss Total (kg):</td>
                                 <td colspan="1" class="text-center">0</td>
@@ -187,3 +241,13 @@
         </div>
     </form>
 </div>
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('showModal', () => {
+            $('#modal-edit').modal('show');
+        });
+        Livewire.on('closeModal', () => {
+            $('#modal-edit').modal('hide');
+        });
+    });
+</script>
