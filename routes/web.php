@@ -54,6 +54,7 @@ use App\Http\Livewire\JenisProdukController;
 use App\Http\Livewire\KaryawanController;
 use App\Http\Livewire\KatanukiController;
 use App\Http\Livewire\KenpinInfure;
+use App\Http\Livewire\KenpinInfureController;
 use App\Http\Livewire\KenpinSeitai;
 use App\Http\Livewire\LabelMasukGudang;
 use App\Http\Livewire\LossInfureController;
@@ -221,7 +222,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/infure-jam-kerja', InfureJamKerjaController::class)->name('infure-jam-kerja');
     Route::get('/seitai-jam-kerja', SeitaiJamKerjaController::class)->name('seitai-jam-kerja');
 
-    Route::get('/kenpin-infure', KenpinInfure::class)->name('kenpin-infure');
+    Route::get('/kenpin-infure', KenpinInfureController::class)->name('kenpin-infure');
     Route::get('/add-kenpin', AddKenpinController::class)->name('add-kenpin');
 
     Route::get('/kenpin-seitai-kenpin', KenpinSeitai::class)->name('kenpin-seitai-kenpin');

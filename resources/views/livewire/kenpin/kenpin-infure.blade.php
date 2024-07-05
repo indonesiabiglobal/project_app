@@ -42,10 +42,10 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Status</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id="printStatus" class="form-control" placeholder="- all -">
+                    <select class="form-control" placeholder="- all -">
                         <option value="">- all -</option>
-                        <option value="0">Belum LPK</option>
-                        <option value="1">SUdah LPK</option>
+                        <option value="1">Proses</option>
+                        <option value="2">Finish</option>
                     </select>
                 </div>
             </div>
@@ -53,7 +53,7 @@
     
         <div class="col-lg-12 mt-3" style="border-top:1px solid #efefef">
             <div class="toolbar">
-                <button id="btnFilter" type="button" class="btn btn-info" style="width:125px;"><i class="fa fa-search"></i> Filter</button>
+                <button wire:click="search" type="button" class="btn btn-info" style="width:125px;"><i class="fa fa-search"></i> Filter</button>
                 <button 
                     id="btnCreate" 
                     type="button" 
@@ -85,7 +85,7 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
-                        {{-- @foreach ($tdOrder as $item)
+                        @foreach ($data as $item)
                         <tr>
                             <td>
                                 <a href="{{ route('edit-order', ['orderId' => $item->id]) }}" class="btn btn-info">
@@ -93,34 +93,34 @@
                                 </a>
                             </td>
                             <td>                                
-                                {{ $item->po_no }}
+                                {{ $item->kenpin_date }}
                             </td>
                             <td>
-                                {{ $item->product_id }}
+                                {{ $item->kenpin_no }}
                             </td>
                             <td>
-                                {{ $item->product_code }}
+                                {{ $item->lpk_no }}
                             </td>
                             <td>
-                                {{ $item->order_qty }}
+                                {{ $item->lpk_date }}
                             </td>
                             <td>
-                                {{ $item->order_unit }}
+                                {{ $item->namaproduk }}
                             </td>
                             <td>
-                                {{ $item->qty_gentan }}
+                                {{ $item->code }}
                             </td>
                             <td>
-                                {{ $item->qty_gulung }}
+                                {{ $item->namapetugas }}
                             </td>
                             <td>
-                                {{ $item->qty_lpk }}
+                                {{ $item->berat_loss }}
                             </td>
                             <td>
-                                {{ $item->panjang_lpk }}
+                                {{ $item->status_kenpin }}
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
