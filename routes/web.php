@@ -71,10 +71,12 @@ use App\Http\Livewire\MutasiIsiPaletKenpin;
 use App\Http\Livewire\NippoInfureController;
 use App\Http\Livewire\NippoSeitaiController;
 use App\Http\Livewire\OrderLpkController;
+use App\Http\Livewire\OrderReportController;
 use App\Http\Livewire\PenarikanPalet;
 use App\Http\Livewire\PengembalianPalet;
 use App\Http\Livewire\PrintLabelGudangKenpin;
 use App\Http\Livewire\ReportKenpin;
+use App\Http\Livewire\ReportKenpinController;
 use App\Http\Livewire\Transactions;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ResetPasswordExample;
@@ -196,7 +198,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-lpk/{orderId}', EditLpkController::class)->name('edit-lpk');
     Route::get('/add-lpk', AddLpkController::class)->name('add-lpk');
     Route::get('/cetak-lpk', CetakLpk::class)->name('cetak-lpk');
-    Route::get('/order-report', OrderReport::class)->name('order-report');
+    Route::get('/order-report', OrderReportController::class)->name('order-report');
     
     // Nipo Infure
     Route::get('/nippo-infure', NippoInfureController::class)->name('nippo-infure');
@@ -235,7 +237,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/mutasi-isi-palet-kenpin', MutasiIsiPaletKenpin::class)->name('mutasi-isi-palet-kenpin');
     Route::get('/print-label-gudang-kenpin', PrintLabelGudangKenpin::class)->name('print-label-gudang-kenpin');
-    Route::get('/report-kenpin', ReportKenpin::class)->name('report-kenpin');
+    Route::get('/report-kenpin', ReportKenpinController::class)->name('report-kenpin');
 
     Route::get('/penarikan-palet', PenarikanPalet::class)->name('penarikan-palet');
     Route::get('/pengembalian-palet', PengembalianPalet::class)->name('pengembalian-palet');

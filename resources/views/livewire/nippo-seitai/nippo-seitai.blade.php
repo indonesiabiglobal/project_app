@@ -71,6 +71,12 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-xs-4">Gentan No </label>
+                <div class="input-group col-md-9 col-xs-8">
+                    <input wire:model.defer="gentan_no" class="form-control" type="text" placeholder="Nomor Gentan" />
+                </div>
+            </div>
         </div>
     
         <div class="col-lg-12" style="border-top:1px solid #efefef">

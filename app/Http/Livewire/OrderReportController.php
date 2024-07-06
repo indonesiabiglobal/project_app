@@ -10,7 +10,7 @@ use App\Models\MsBuyer;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 
-class OrderReport extends Component
+class OrderReportController extends Component
 {
     public $tglMasuk;
     public $tglKeluar;

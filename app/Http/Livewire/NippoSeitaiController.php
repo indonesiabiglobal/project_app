@@ -18,6 +18,7 @@ class NippoSeitaiController extends Component
     public $tglKeluar;
     public $machine;
     public $transaksi;
+    public $gentan_no;
 
     public function mount()
     {
@@ -53,6 +54,10 @@ class NippoSeitaiController extends Component
                 "%' OR tdpg.product_id ilike '%" . $this->searchTerm .
                 "%' OR tdpg.machine_id ilike '%" . $this->searchTerm . 
                 "%')";
+            }
+            $gentan_no = '';
+            if(isset($this->gentan_no) && $this->gentan_no != ''){
+                $gentan_no = "AND ta.gentan_no='".$this->gentan_no."'";
             }
 
             $this->seitai = DB::select("
@@ -90,11 +95,14 @@ class NippoSeitaiController extends Component
                 tdol.qty_lpk AS qty_lpk,
                 tdol.total_assembly_qty AS total_assembly_qty 
             FROM
-                tdProduct_Goods AS tdpg
-                INNER JOIN tdOrderLpk AS tdol ON tdpg.lpk_id = tdol.ID 
+                tdproduct_goods AS tdpg
+                INNER JOIN tdorderlpk AS tdol ON tdpg.lpk_id = tdol.id
+                LEFT JOIN tdproduct_goods_assembly AS tga ON tga.product_goods_id = tdpg.id 
+                LEFT JOIN tdproduct_assembly as ta on ta.id = tga.product_assembly_id
             $tglMasuk
             $tglKeluar
             $searchTerm
+            $gentan_no
             limit 5
             ");
         } else {
@@ -116,6 +124,10 @@ class NippoSeitaiController extends Component
                 "%' OR tdpg.product_id ilike '%" . $this->searchTerm .
                 "%' OR tdpg.machine_id ilike '%" . $this->searchTerm . 
                 "%')";
+            }
+            $gentan_no = '';
+            if(isset($this->gentan_no) && $this->gentan_no != ''){
+                $gentan_no = "AND ta.gentan_no='".$this->gentan_no."'";
             }
 
             $this->seitai = DB::select("
@@ -153,7 +165,9 @@ class NippoSeitaiController extends Component
                 tdol.qty_lpk AS qty_lpk, 
                 tdol.total_assembly_qty AS total_assembly_qty
             FROM  tdProduct_Goods AS tdpg
-            INNER JOIN tdOrderLpk AS tdol ON tdpg.lpk_id = tdol.id 
+            INNER JOIN tdorderlpk AS tdol ON tdpg.lpk_id = tdol.id 
+            LEFT JOIN tdproduct_goods_assembly AS tga ON tga.product_goods_id = tdpg.id 
+            LEFT JOIN tdproduct_assembly as ta on ta.id = tga.product_assembly_id
             $tglMasuk
             $tglKeluar
             $searchTerm
