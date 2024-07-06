@@ -42,6 +42,7 @@ class AddNippoController extends Component
     public $berat_loss;
     public $details = [];
     public $orderid;
+    public $nomor_barcode;
 
     public function mount()
     {
@@ -254,6 +255,12 @@ class AddNippoController extends Component
                 $nogentan = $lastGentan->seq_no + 1;
             }
             $this->gentan_no=$nogentan;
+        }
+
+        if(isset($this->nomor_barcode) && $this->nomor_barcode != ''){
+            if($this->code != $this->nomor_barcode){
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor Barcode ' . $this->nomor_barcode . ' Tidak Terdaftar']);
+            }
         }
 
         return view('livewire.nippo-infure.add-nippo');
