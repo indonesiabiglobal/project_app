@@ -37,6 +37,7 @@ class EditNippoController extends Component
     public $work_shift;
     public $gentan_no;
     public $nomor_han;
+    public $nomor_barcode;
 
     public function mount($orderId)
     {
@@ -123,6 +124,7 @@ class EditNippoController extends Component
             'lpk_no' => 'required',
             'machineno' => 'required',
             'employeeno' => 'required',
+            'nomor_barcode' => 'required'
         ]);
 
         try {
@@ -234,7 +236,12 @@ class EditNippoController extends Component
             }
             $this->gentan_no=$nogentan;
         }
-        
+
+        if(isset($this->nomor_barcode) && $this->nomor_barcode != ''){
+            if($this->code != $this->nomor_barcode){
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor Barcode ' . $this->nomor_barcode . ' Tidak Terdaftar']);
+            }
+        }
 
         return view('livewire.nippo-infure.edit-nippo');
     }

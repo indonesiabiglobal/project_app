@@ -236,11 +236,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-8 mt-1">
+                    <div class="col-12 col-lg-4 mt-1">
                         <div class="form-group">                            
                             <div class="input-group">
-                                <label class="control-label col-2">Shift Kerja</label>
+                                <label class="control-label col-4">Shift Kerja</label>
                                 <input type="text" class="form-control readonly" readonly="readonly" wire:model="work_shift" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">                            
+                            <div class="input-group">
+                                <label class="control-label col-4">Nomor Han</label>
+                                <input type="text" class="form-control" placeholder="00-00-00-00A" wire:model="nomor_han" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 mt-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="control-label col-5 pe-2">Nomor Barcode</label>
+                                <input type="text" class="form-control" wire:model.debounce.300ms="nomor_barcode" />
+                                @error('nomor_barcode')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -249,14 +269,6 @@
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor Gentan</label>
                                 <input type="text" class="form-control readonly" readonly="readonly" wire:model="gentan_no" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-8 mt-1">
-                        <div class="form-group">                            
-                            <div class="input-group">
-                                <label class="control-label col-2">Nomor Han</label>
-                                <input type="text" class="form-control" placeholder="00-00-00-00A" wire:model="nomor_han" />
                             </div>
                         </div>
                     </div>

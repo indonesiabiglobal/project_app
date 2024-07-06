@@ -67,16 +67,13 @@ class KenpinExport implements FromCollection, WithHeadings
             INNER JOIN msbuyer AS mbu ON mbu.id = tod.buyer_id
             $tglMasuk
             $tglKeluar
-            $buyer_id
         "));
     }
 
     public function headings(): array
     {
         return [
-            'ID', 'PO No', 'Produk Name', 'Product Code', 'Buyer Name', 
-            'Order Qty', 'Order Date', 'Stufing Date', 'ETD Date', 
-            'ETA Date', 'Process Date', 'Process Seq', 'Updated By', 'Updated On'
+            'Kode','Nama Produk','Nomor Kenpin','Status','Tanggal Kenpin','PIC Kenpin','Nomor LPK','NG','Nomor Gentan','Nomor Mesin','Nomor Han','Tanggal Produksi','Kode Shift','Panjang Infure (meter)','Berat Loss (kg)'
         ];
     }
 }
