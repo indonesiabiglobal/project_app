@@ -50,20 +50,46 @@
             <div class="card-body">
                 <div class="row d-block d-xl-flex align-items-center">
                     <figure class="highcharts-figure">
-                        <div id="container"></div>
-                        <p class="highcharts-description">
-                            A basic column chart comparing estimated corn and wheat production
-                            in some countries.
-                    
-                            The chart is making use of the axis crosshair feature, to highlight
-                            the hovered country.
-                        </p>
+                        <div id="infureMachine"></div>
                     </figure>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+    <div class="col-12 col-sm-6 col-xl-6 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <div class="row d-block d-xl-flex align-items-center">
+                    <figure class="highcharts-figure">
+                        <div id="seitaiMachine"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-6 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <div class="row d-block d-xl-flex align-items-center">
+                    <figure class="highcharts-figure">
+                        <div id="infureTen"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-6 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <div class="row d-block d-xl-flex align-items-center">
+                    <figure class="highcharts-figure">
+                        <div id="seitaiTen"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <div class="col-12 col-sm-6 col-xl-4 mb-4">
         <div class="card border-0 shadow">
             <div class="card-body">
                 <div class="row d-block d-xl-flex align-items-center">
@@ -122,9 +148,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
-<div class="row">
+{{-- <div class="row">
     <div class="col-12 col-xl-8">
         <div class="row">
             <div class="col-12 mb-4">
@@ -544,10 +570,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <style>
-    .highcharts-figure,
+.highcharts-figure,
 .highcharts-data-table table {
     min-width: 310px;
     max-width: 800px;
@@ -594,55 +620,255 @@
     background: #f1f7ff;
 }
 
+
 </style>
 
 <script>
-    Highcharts.chart('container', {
+Highcharts.chart('infureMachine', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Corn vs wheat estimated production for 2020',
-        align: 'left'
+        align: 'left',
+        text: 'INFURE Machine Running Rate (Kadou Jikan)'
     },
-    subtitle: {
-        text:
-            'Source: <a target="_blank" ' +
-            'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>',
+    accessibility: {
+        announceNewData: {
+            enabled: true
+        }
+    },
+    xAxis: {
+        type: 'category'
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}%'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: ' +
+            '<b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [
+        {
+            name: 'Mesin Jalan',
+            colorByPoint: true,
+            data: [
+                {
+                    name: 'INFURE PAB A',
+                    y: 86.87,
+                    drilldown: 'INFURE PAB A'
+                },
+                {
+                    name: 'INFURE PAB C',
+                    y: 91.71,
+                    drilldown: 'INFURE PAB C'
+                },
+                {
+                    name: 'INFURE PAB ',
+                    y: 84.27,
+                    drilldown: 'INFURE PAB A'
+                }
+            ]
+        }
+    ],
+    drilldown: {
+        breadcrumbs: {
+            position: {
+                align: 'right'
+            }
+        },
+    }
+});
+
+Highcharts.chart('seitaiMachine', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        align: 'left',
+        text: 'SEITAI Machine Running Rate (Kadou Jikan)'
+    },
+    accessibility: {
+        announceNewData: {
+            enabled: true
+        }
+    },
+    xAxis: {
+        type: 'category'
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}%'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: ' +
+            '<b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [
+        {
+            name: 'Mesin Jalan',
+            colorByPoint: true,
+            data: [
+                {
+                    name: 'SEITAI PAB A',
+                    y: 86.87,
+                    drilldown: 'SEITAI PAB A'
+                },
+                {
+                    name: 'SEITAI PAB C',
+                    y: 91.71,
+                    drilldown: 'SEITAI PAB C'
+                },
+                {
+                    name: 'SEITAI PAB ',
+                    y: 84.27,
+                    drilldown: 'SEITAI PAB A'
+                }
+            ]
+        }
+    ],
+    drilldown: {
+        breadcrumbs: {
+            position: {
+                align: 'right'
+            }
+        },
+    }
+});
+
+Highcharts.chart('infureTen', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'INFURE, Top 10 Loss',
         align: 'left'
     },
     xAxis: {
-        categories: ['USA', 'China', 'Brazil', 'EU', 'India', 'Russia'],
-        crosshair: true,
-        accessibility: {
-            description: 'Countries'
-        }
+        categories: ['Heniku', 'Shiwa', 'Tachiage Lain lain', 'Putus Pinhole', 'Buble Goyang', 'Amigae', 'Jusi Keras', 'Printing ke Printing', 'Potong Gentan', 'mimihaba'],
+        title: {
+            text: null
+        },
+        gridLineWidth: 1,
+        lineWidth: 0
     },
     yAxis: {
         min: 0,
-        title: {
-            text: '1000 metric tons (MT)'
-        }
+        labels: {
+            overflow: 'justify'
+        },
+        gridLineWidth: 0
     },
     tooltip: {
-        valueSuffix: ' (1000 MT)'
+        valueSuffix: ' millions'
     },
     plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
+        bar: {
+            borderRadius: '50%',
+            dataLabels: {
+                enabled: true
+            },
+            groupPadding: 0.1
         }
     },
-    series: [
-        {
-            name: 'Corn',
-            data: [406292, 260000, 107000, 68300, 27500, 14500]
-        },
-        {
-            name: 'Wheat',
-            data: [51086, 136000, 5500, 141000, 107180, 77000]
-        }
-    ]
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        data: [632, 727, 3202, 721,632, 727, 3202, 721,632, 727]
+    }]
 });
+
+Highcharts.chart('seitaiTen', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Seitai, Top 10 Loss',
+        align: 'left'
+    },
+    xAxis: {
+        categories: ['Heniku', 'Shiwa', 'Tachiage Lain lain', 'Putus Pinhole', 'Buble Goyang', 'Amigae', 'Jusi Keras', 'Printing ke Printing', 'Potong Gentan', 'mimihaba'],
+        title: {
+            text: null
+        },
+        gridLineWidth: 1,
+        lineWidth: 0
+    },
+    yAxis: {
+        min: 0,
+        labels: {
+            overflow: 'justify'
+        },
+        gridLineWidth: 0
+    },
+    tooltip: {
+        valueSuffix: ' millions'
+    },
+    plotOptions: {
+        bar: {
+            borderRadius: '50%',
+            dataLabels: {
+                enabled: true
+            },
+            groupPadding: 0.1
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        data: [632, 727, 3202, 721,632, 727, 3202, 721,632, 727]
+    }]
+});
+
+
+
 
 </script>
