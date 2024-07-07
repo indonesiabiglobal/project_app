@@ -27,11 +27,13 @@ class EditOrderController extends Component
     public $buyer_id;
     public $unit_id;
     public $status_order;
+    public $dimensi;
+    public $product_name;
     // public $data = '';
 
     public function mount($orderId)
     {        
-        $this->buyer = MsBuyer::limit(10)->get();
+        $this->buyer = MsBuyer::limit(10)->get();        
 
         $order = TdOrder::findOrFail($orderId);
         $this->orderId = $order->id;
@@ -43,7 +45,10 @@ class EditOrderController extends Component
         $this->stufingdate = Carbon::parse($order->stufingdate)->format('Y-m-d');
         $this->etddate = Carbon::parse($order->etddate)->format('Y-m-d');
         $this->etadate = Carbon::parse($order->etadate)->format('Y-m-d');
-        $this->product_id = MsProduct::where('id', $order->product_id)->pluck('name')->first();
+        $product = MsProduct::where('id', $order->product_id)->first();
+        $this->product_id = $product->code;
+        $this->product_name = $product->name;
+        $this->dimensi = $product->ketebalan.'x'.$product->diameterlipat.'x'.$product->productlength;
         $this->buyer_id = $order->buyer_id;
         $this->unit_id = $order->order_unit;
         $this->status_order = $order->status_order;
@@ -77,11 +82,9 @@ class EditOrderController extends Component
             $order->buyer_id = $this->buyer_id;
             $order->save();
 
-            // session()->flash('message', 'Order updated successfully.');
             session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
             return redirect()->route('order-entry');
         } catch (\Exception $e) {
-            // session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
             $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save order: ' . $e->getMessage()]);
         }
     }
@@ -131,6 +134,17 @@ class EditOrderController extends Component
 
     public function render()
     {
+        if(isset($this->product_id) && $this->product_id != ''){
+            $product=MsProduct::where('code', $this->product_id)->first();
+            // dd($product);
+            if($product == null){
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar']);
+            } else {
+                $this->product_id = $product->name;
+                $this->dimensi = $product->ketebalan.'x'.$product->diameterlipat.'x'.$product->productlength;
+            }
+        }
+
         return view('livewire.order-lpk.edit-order');
     }
 }

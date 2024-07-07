@@ -29,11 +29,6 @@ class AddOrderController extends Component
     public function mount()
     {
         $this->process_date = Carbon::now()->format('Y-m-d');
-        // $this->order_date = Carbon::now()->format('Y-m-d');
-        // $this->stufingdate = Carbon::now()->format('Y-m-d');
-        // $this->etddate = Carbon::now()->format('Y-m-d');
-        // $this->etadate = Carbon::now()->format('Y-m-d');
-        // $this->product = MsProduct::limit(10)->get();
         $this->buyer = MsBuyer::limit(10)->get();
     }
 
@@ -41,8 +36,7 @@ class AddOrderController extends Component
         if(isset($this->product_id) && $this->product_id != ''){
             $product=MsProduct::where('code', $this->product_id)->first();
             if($product == null){
-                // session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar']);
             } else {
                 $this->product_name = $product->name;
             }
@@ -98,8 +92,7 @@ class AddOrderController extends Component
             $product=MsProduct::where('code', $this->product_id)->first();
             // dd($product);
             if($product == null){
-                // session()->flash('error', 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor Order ' . $this->product_id . ' Tidak Terdaftar']);
             } else {
                 $this->product_name = $product->name;
                 $this->dimensi = $product->ketebalan.'x'.$product->diameterlipat.'x'.$product->productlength;

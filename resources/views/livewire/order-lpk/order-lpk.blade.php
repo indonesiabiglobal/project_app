@@ -163,9 +163,6 @@
                     @for ($i = 1; $i <= ceil($total / $perPage); $i++)
                         <li class="page-item {{ $currentPage == $i ? 'active' : '' }}">
                             <button class="page-link" wire:click="$set('currentPage', {{ $i }})">{{ $i }}
-                                <div wire:loading>
-                                    <span class="fa fa-spinner fa-spin"></span>
-                                </div>
                             </button>
                         </li>
                     @endfor

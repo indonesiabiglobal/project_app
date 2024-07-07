@@ -1,14 +1,4 @@
 <div class="row">
-	@if (session()->has('message'))
-		<div class="alert alert-success">
-			{{ session('message') }}
-		</div>
-	@endif
-	@if (session()->has('error'))
-		<div class="alert alert-danger">
-			{{ session('error') }}
-		</div>
-	@endif
 	<div class="col-lg-2"></div>
 	<div class="col-lg-8">
     <form wire:submit.prevent="save">
@@ -42,8 +32,8 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nomor Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="nomorPo" class="form-control"  wire:model="product_code" />
-				@error('product_code')
+				<input type="text" class="form-control" wire:model.debounce.300ms="product_id" />
+				@error('product_id')
 					<span class="invalid-feedback">{{ $message }}</span>
 				@enderror
 			</div>			
@@ -51,19 +41,19 @@
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Nama Produk</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="product_id" class="form-control readonly"  readonly="readonly" wire:model="product_id" />
+				<input type="text" class="form-control readonly"  readonly="readonly" wire:model="product_name" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Dimensi</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="dimensi" class="form-control readonly"  readonly="readonly" wire:model="po_no" />
+				<input type="text" class="form-control readonly"  readonly="readonly" wire:model="dimensi" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Jumlah Order</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<input type="text" id="order_qty" class="form-control" wire:model="order_qty" />
+				<input type="text" class="form-control" wire:model="order_qty" />
 				@error('order_qty')
 					<span class="invalid-feedback">{{ $message }}</span>
 				@enderror
@@ -72,7 +62,7 @@
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Unit</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<select id="unit" class="form-control" wire:model="unit_id" placeholder="">
+				<select class="form-control" wire:model="unit_id" placeholder="">
 					<option value="0">Set</option>
 					<option value="1">Lembar</option>
 					<option value="2">Meter</option>
@@ -109,7 +99,7 @@
         <div class="form-group">
 			<label class="control-label col-md-3 col-xs-12">Buyer</label>
 			<div class="input-group col-md-9 col-xs-12">
-				<select id="printDept" class="form-control" wire:model="buyer_id" placeholder="">
+				<select class="form-control" wire:model="buyer_id" placeholder="">
 					@foreach ($buyer as $item)
 						@if ( $item->id == $buyer_id )
 							<option value="{{ $item->id }}">{{ $item->name }}</option>
