@@ -52,19 +52,17 @@ class ProductsExport implements FromCollection, WithHeadings
         return collect(DB::select("
             SELECT
                 tod.id,
+                tod.order_date,
                 tod.po_no,
+                mp.code,
                 mp.name AS produk_name,
                 tod.product_code,
-                mbu.NAME AS buyer_name,
                 tod.order_qty,
-                tod.order_date,
+                tod.order_unit,
                 tod.stufingdate,
                 tod.etddate,
                 tod.etadate,
-                tod.processdate,
-                tod.processseq,
-                tod.updated_by,
-                tod.updated_on 
+                mbu.NAME AS buyer_name
             FROM
                 tdorder AS tod
             INNER JOIN msproduct AS mp ON mp.id = tod.product_id
@@ -78,9 +76,9 @@ class ProductsExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'ID', 'PO No', 'Produk Name', 'Product Code', 'Buyer Name', 
-            'Order Qty', 'Order Date', 'Stufing Date', 'ETD Date', 
-            'ETA Date', 'Process Date', 'Process Seq', 'Updated By', 'Updated On'
+            'No', 'Order Date', 'PO Number', 'Order No', 'Product Name', 
+            'Type Code', 'Order Quantity', 'Unit', 'Stufing Date', 
+            'ETD Date', 'Eta Date', 'Buyer'
         ];
     }
 }

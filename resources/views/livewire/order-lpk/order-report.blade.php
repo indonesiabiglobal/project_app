@@ -76,6 +76,9 @@
 				<div class="input-group col-md-8 col-xs-12">
 					<button type="button" class="btn btn-success btn-print" wire:click="export" style="width:99%">
 						<i class="fa fa-print"></i> Generate Report
+						<div wire:loading wire:target="export">
+                            <span class="fa fa-spinner fa-spin"></span>
+                        </div>
 					</button>
 				</div>
 			</div>
