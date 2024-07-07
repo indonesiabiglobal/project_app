@@ -15,7 +15,7 @@
                     <div class="col-4 pe-1">
                         <select class="form-select mb-0" wire:model.defer="transaksi">
                             <option value="1">Proses</option>
-                            <option value="2">Order</option>
+                            <option value="2">Produksi</option>
                         </select>
                     </div>
                     <div class="col-8">
@@ -47,7 +47,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Mesin</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id='searchBuyer' name="searchBuyer" class="form-control" placeholder="- all -">
+                    <select wire:model.defer="machineId" class="form-control" placeholder="- all -">
                         <option value="">- all -</option>
                         @foreach ($machine as $item)
                             <option value="{{ $item->id }}">{{ $item->machinename }}</option>
@@ -58,10 +58,11 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Status</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id="printStatus" class="form-control" placeholder="- all -">
+                    <select wire:model.defer="status" class="form-control" placeholder="- all -">
                         <option value="">- all -</option>
-                        <option value="0">Belum LPK</option>
-                        <option value="1">SUdah LPK</option>
+                        <option value="0">Open </option>
+                        <option value="1">Seitai</option>
+                        <option value="2">Kenpin</option>
                     </select>
                 </div>
             </div>
@@ -71,6 +72,9 @@
             <div class="toolbar">
                 <button id="btnFilter" wire:click="search" type="button" class="btn btn-info" style="width:125px;">
                     <i class="fa fa-search"></i> Filter
+                    <div wire:loading wire:target="search">
+                        <span class="fa fa-spinner fa-spin"></span>
+                    </div>
                 </button>
 
                 <button 

@@ -19,6 +19,9 @@ class NippoInfureController extends Component
     public $machine;
     public $tglMasuk;
     public $tglKeluar;
+    public $transaksi;
+    public $machineId;
+    public $status;
 
     public function mount()
     {
@@ -31,17 +34,44 @@ class NippoInfureController extends Component
     }
 
     public function search(){
-        $tglMasuk = '';
-        if (isset($this->tglMasuk) && $this->tglMasuk != '') {
-            $tglMasuk = "WHERE tda.production_date >= '" . $this->tglMasuk . "'";
+        if($this->transaksi == 2){
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tda.production_date >= '" . $this->tglMasuk . "'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tda.production_date <= '" . $this->tglKeluar . "'";
+            }
+        } else {
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tda.created_on >= '" . $this->tglMasuk . " 00:00'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tda.created_on <= '" . $this->tglKeluar . " 23:59'";
+            }
         }
-        $tglKeluar = '';
-        if (isset($this->tglKeluar) && $this->tglKeluar != '') {
-            $tglKeluar = "AND tda.production_date <= '" . $this->tglKeluar . "'";
+
+        $machineId = '';
+        if (isset($this->machineId) && $this->machineId != "" && $this->machineId != "undefined") {
+            $machineId = "AND msm.id = '" . $this->machineId . "'";
         }
+
+        $status = '';
+        if (isset($this->status) && $this->status != "" && $this->status != "undefined") {
+            if ($this->status == 0){
+                $status = "AND tda.status_production = 0 AND tda.status_kenpin = 0";
+            } else if ($this->status == 1){
+                $status = "AND tda.status_production = 1";
+            } else if ($this->status == 2){
+                $status = "AND tda.status_kenpin = 1";
+            }
+            
+        }
+        
         // produk
-        // mesin
-        // status
         $searchTerm = '';
         if (isset($this->searchTerm) && $this->searchTerm != '') {
             $searchTerm = "AND (tdol.lpk_no ilike '%" . $this->searchTerm . 
@@ -100,7 +130,8 @@ class NippoInfureController extends Component
         $tglMasuk
         $tglKeluar
         $searchTerm
-            limit 5
+        $machineId
+        $status
         ");
     }
 
