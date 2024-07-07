@@ -3,12 +3,12 @@
     <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
 
       <div class="d-flex align-items-center">
-        <a target="_blank"><button class="btn mx-1 me-2 btn-success" type="button"><i
+        {{-- <a target="_blank"><button class="btn mx-1 me-2 btn-success" type="button"><i
             class="fas fa-arrow-up mx-1"></i>Upload Excel</button></a>
         <a target="_blank"><button class="btn mx-1 me-2 btn-info" type="button"><i
               class="fas fa-arrow-down mx-1"></i>Download</button></a>
         <a target="_blank"><button class="btn mx-1 me-2 btn-white" type="button"><i
-          class="fas fa-print mx-1"></i>Print</button></a>
+          class="fas fa-print mx-1"></i>Print</button></a> --}}
       </div>
 
       <!-- Navbar links -->
