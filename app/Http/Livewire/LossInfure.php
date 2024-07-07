@@ -17,6 +17,10 @@ class LossInfure extends Component
     public $machine;
     public $tglMasuk;
     public $tglKeluar;
+    public $transaksi;
+    public $machineId;
+    public $status;
+    public $searchTerm;
 
     public function mount()
     {
@@ -33,23 +37,48 @@ class LossInfure extends Component
     }
 
     public function search(){
-        $tglMasuk = '';
-        if (isset($this->tglMasuk) && $this->tglMasuk != '') {
-            $tglMasuk = "WHERE tdpa.production_date >= '" . $this->tglMasuk . "'";
-        }
-        $tglKeluar = '';
-        if (isset($this->tglKeluar) && $this->tglKeluar != '') {
-            $tglKeluar = "AND tdpa.production_date <= '" . $this->tglKeluar . "'";
+        if($this->transaksi == 2){
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tdpa.production_date >= '" . $this->tglMasuk . "'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tdpa.production_date <= '" . $this->tglKeluar . "'";
+            }
+        } else {
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tdpa.created_on >= '" . $this->tglMasuk . " 00:00'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tdpa.created_on <= '" . $this->tglKeluar . " 23:59'";
+            }
         }
         // produk
-        // mesin
-        // status
+        
+        $machineId = '';
+        if (isset($this->machineId) && $this->machineId != "" && $this->machineId != "undefined") {
+            $machineId = "AND msm.id = '" . $this->machineId . "'";
+        }
+
+        $status = '';
+        if (isset($this->status) && $this->status != "" && $this->status != "undefined") {
+            if ($this->status == 0){
+                $status = "AND tdpa.status_production = 0 AND tdpa.status_kenpin = 0";
+            } else if ($this->status == 1){
+                $status = "AND tdpa.status_production = 1";
+            } else if ($this->status == 2){
+                $status = "AND tdpa.status_kenpin = 1";
+            }
+            
+        }
+
         $searchTerm = '';
         if (isset($this->searchTerm) && $this->searchTerm != '') {
             $searchTerm = "AND (tdol.lpk_no ilike '%" . $this->searchTerm . 
             "%' OR tdpa.production_no ilike '%" . $this->searchTerm . 
-            "%' OR tdpa.product_id ilike '%" . $this->searchTerm .
-            "%' OR tdpa.machine_id ilike '%" . $this->searchTerm . 
             "%')";
         }
 
@@ -93,12 +122,14 @@ class LossInfure extends Component
             tdol.total_assembly_line AS total_assembly_line,
             tdol.total_assembly_qty AS total_assembly_qty 
         FROM
-            tdProduct_assembly AS tdpa
-            INNER JOIN tdOrderLpk AS tdol ON tdpa.lpk_id = tdol.ID 
+            tdproduct_assembly AS tdpa
+            INNER JOIN tdorderlpk AS tdol ON tdpa.lpk_id = tdol.ID 
+            inner join msmachine as msm on msm.id=tdpa.machine_id
         $tglMasuk
         $tglKeluar
         $searchTerm
-        limit 5
+        $machineId
+        $status
         ");
     }
 
