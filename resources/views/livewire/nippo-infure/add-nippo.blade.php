@@ -1,18 +1,4 @@
 <div class="row">
-	{{-- @if (session()->has('message'))
-		<div class="alert alert-success">
-			{{ session('message') }}
-		</div>
-	@endif
-	@if ($errors->any())
-		<div class="alert alert-danger">
-			<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-			</ul>
-		</div>
-	@endif --}}
     <form wire:submit.prevent="save">
         <div class="row mt-2">
             <div class="col-4 col-lg-12">
@@ -55,6 +41,9 @@
                             <div class="input-group">
                                 <label class="control-label pe-2">Tanggal LPK</label>
                                 <input class="form-control readonly datepicker-input" readonly="readonly" type="date" wire:model.defer="lpk_date" placeholder="yyyy/mm/dd"/>
+                                @error('lpk_date')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -66,6 +55,9 @@
                                 <span class="input-group-text">
                                     m
                                 </span>
+                                @error('panjang_lpk')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -74,6 +66,9 @@
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor Order</label>
                                 <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="code" />
+                                @error('code')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -82,6 +77,9 @@
                             <div class="input-group">
                                 <label class="control-label"></label>
                                 <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="name" />
+                                @error('name')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -101,6 +99,9 @@
                             <div class="input-group">
                                 <label class="control-label"></label>
                                 <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="machinename" />
+                                @error('machinename')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -120,6 +121,9 @@
                             <div class="input-group">
                                 <label class="control-label"></label>
                                 <input type="text" placeholder="-" class="form-control readonly" readonly="readonly" wire:model="empname" />
+                                @error('empname')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -131,6 +135,9 @@
                                 <span class="input-group-text">
                                     mm
                                 </span>
+                                @error('dimensiinfure')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>                            
                         </div>
                     </div>
@@ -142,12 +149,18 @@
                                 <span class="input-group-text">
                                     m
                                 </span>
+                                @error('qty_gulung')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
 
                                 <input type="text" class="form-control readonly" readonly="readonly" placeholder=" .. X .." />
                                 <input type="text" class="form-control readonly" readonly="readonly" wire:model="qty_gentan" />
                                 <span class="input-group-text">
                                     roll
                                 </span>
+                                @error('qty_gentan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -159,6 +172,9 @@
                                 <span class="input-group-text">
                                     m
                                 </span>
+                                @error('panjang_produksi')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>                            
                         </div>
                     </div>
@@ -170,6 +186,9 @@
                                 <span class="input-group-text">
                                     m
                                 </span>
+                                @error('total_assembly_qty')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -181,6 +200,9 @@
                                 <span class="input-group-text">
                                     m
                                 </span>
+                                @error('selisih')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -188,10 +210,13 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5">Berat Gentan</label>
-                                <input type="text" class="form-control"  wire:model="qty_gentan" />
+                                <input type="text" class="form-control" wire:model="qty_gentan" />
                                 <span class="input-group-text">
                                     kg
                                 </span>
+                                @error('qty_gentan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>                            
                         </div>
                     </div>
@@ -203,6 +228,9 @@
                                 <span class="input-group-text">
                                     kg
                                 </span>
+                                @error('berat_standard')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -214,6 +242,9 @@
                                 <span class="input-group-text">
                                     %
                                 </span>
+                                {{-- @error('rasio')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror --}}
                             </div>
                         </div>
                     </div>
@@ -221,7 +252,11 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Jam Produksi</label>
-                                <input class="form-control" type="time" placeholder="hh:mm" wire:model="work_hour" step="1">
+                                <input class="form-control" wire:model="work_hour" type="time" placeholder="hh:mm">
+                                {{-- <input class="form-control" type="time" placeholder="hh:mm" wire:model="work_hour"> --}}
+                                @error('work_hour')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -230,6 +265,9 @@
                             <div class="input-group">
                                 <label class="control-label col-4">Shift Kerja</label>
                                 <input type="text" class="form-control readonly" readonly="readonly" wire:model="work_shift" />
+                                @error('work_shift')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -238,6 +276,9 @@
                             <div class="input-group">
                                 <label class="control-label col-4">Nomor Han</label>
                                 <input type="text" class="form-control" placeholder="00-00-00-00A" wire:model="nomor_han" />
+                                @error('nomor_han')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -257,6 +298,9 @@
                             <div class="input-group">
                                 <label class="control-label col-5 pe-2">Nomor Gentan</label>
                                 <input type="text" class="form-control"  wire:model="gentan_no" />
+                                @error('gentan_no')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>

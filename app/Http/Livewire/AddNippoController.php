@@ -16,6 +16,7 @@ use App\Models\TdProductAssemblyLoss;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AddNippoController extends Component
 {
@@ -43,12 +44,13 @@ class AddNippoController extends Component
     public $details = [];
     public $orderid;
     public $nomor_barcode;
+    public $panjang_produksi;
 
     public function mount()
     {
         $this->production_date = Carbon::now()->format('Y-m-d');
         $this->created_on = Carbon::now()->format('Y-m-d');
-        $this->work_hour = Carbon::now()->format('H:i:s');
+        $this->work_hour = Carbon::now()->format('H:i');
 
         $workingShift = MsWorkingShift::where('work_hour_from', '<=', $this->work_hour)->where('work_hour_till', '>=', $this->work_hour)->first();
         $this->work_shift = $workingShift->id;
@@ -74,6 +76,19 @@ class AddNippoController extends Component
             $employe = MsEmployee::where('employeeno', $this->employeeno)->first();
             $products = MsProduct::where('code', $this->code)->first();
 
+            $totalAssembly = DB::select("
+            SELECT
+                CASE WHEN x.A1 IS NULL THEN 0 ELSE x.A1 END AS C1
+            FROM
+                (
+                SELECT SUM(panjang_produksi) AS A1 
+                FROM
+                    tdproduct_assembly AS ta 
+                WHERE
+                    lpk_id = $lpkid->id 
+            ) AS x
+            ");
+
             $seqno = 1;
             if(!empty($lastSeq)){
                 $seqno = $lastSeq->seq_no + 1;
@@ -93,13 +108,18 @@ class AddNippoController extends Component
             $product->gentan_no = $this->gentan_no;
             $product->nomor_han = $this->nomor_han;
             $product->product_id = $products->id;
+            $product->panjang_produksi = $this->panjang_produksi;
             $product->save();
 
             TdProductAssemblyLoss::where('lpk_id',$lpkid->id)->update([
                 'product_assembly_id' => $product->id,
-            ]);            
+            ]);    
+            
+            TdOrderLpk::where('lpk_id',$lpkid->id)->update([
+                'total_assembly_line' => $totalAssembly[0]->c1,
+            ]);
 
-            // $product->panjang_produksi = $this->panjang_produksi;
+            
             // $product->panjang_printing_inline = $this->panjang_printing_inline;
             // $product->berat_standard = $this->berat_standard;
             // $product->berat_produksi = $this->berat_produksi;            
@@ -108,18 +128,23 @@ class AddNippoController extends Component
             // $product->infure_cost = $this->infure_cost;
             // $product->product_id = $this->product_id;
             
-            $transStatus = 'true';            
+            DB::commit();
+            session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
+            return redirect()->route('nippo-infure');
         } catch (\Exception $e) {            
-            $transStatus = 'false';
+            DB::rollBack();
+            Log::error('Failed to save order: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
         }
         
-        if ($transStatus == 'true') {
-            session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
-            // return redirect()->route('nippo-infure');
-        } else {
-            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
-            DB::rollBack();
-        }
+        // if ($transStatus == 'true') {
+        //     session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
+        //     // return redirect()->route('nippo-infure');
+        // } else {
+        //     Log::error('Failed to save order: ' . $e->getMessage());
+        //     $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
+        //     DB::rollBack();
+        // }
     }
 
     public function addLossInfure()
@@ -185,8 +210,7 @@ class AddNippoController extends Component
             ->first();
 
             if($tdorderlpk == null){
-                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor LPK ' . $this->lpk_no . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor LPK ' . $this->lpk_no . ' Tidak Terdaftar']);
             } else {
                 $this->lpk_date = Carbon::parse($tdorderlpk->lpk_date)->format('Y-m-d');
                 $this->panjang_lpk = $tdorderlpk->panjang_lpk;
@@ -214,8 +238,7 @@ class AddNippoController extends Component
             $machine=MsMachine::where('machineno', $this->machineno)->first();
 
             if($machine == null){
-                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Machine ' . $this->machineno . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Machine ' . $this->machineno . ' Tidak Terdaftar']);
             } else {
                 $this->machinename = $machine->machinename;
             }
@@ -225,8 +248,7 @@ class AddNippoController extends Component
             $msemployee=MsEmployee::where('employeeno', $this->employeeno)->first();
 
             if($msemployee == null){
-                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Employee ' . $this->employeeno . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Employee ' . $this->employeeno . ' Tidak Terdaftar']);
             } else {
                 $this->empname = $msemployee->empname;
             }
@@ -236,8 +258,7 @@ class AddNippoController extends Component
             $lossinfure=MsLossInfure::where('id', $this->loss_infure_id)->first();
 
             if($lossinfure == null){
-                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Employee ' . $this->loss_infure_id . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Employee ' . $this->loss_infure_id . ' Tidak Terdaftar']);
             } else {
                 $this->name_infure = $lossinfure->name;
             }
