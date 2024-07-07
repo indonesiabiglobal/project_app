@@ -1,5 +1,5 @@
 {{-- <title>LPK Entry</title> --}}
-<div class="container mt-4">
+<div class="container">
     <div class="row">
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -57,7 +57,8 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Buyer</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id='searchBuyer' name="searchBuyer" class="js-states form-control" placeholder="- all -">
+                    <select class="form-control" wire:model.defer="idBuyer" placeholder="- all -">
+                        <option value="">- Pilih Buyer -</option>
                         @foreach ($buyer as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -67,7 +68,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Status</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select id="printStatus" class="js-states form-control" placeholder="- all -">
+                    <select class="form-control" wire:model.defer="status" placeholder="- all -">
                         <option value="">- all -</option>
                         <option value="0">Un-Print</option>
                         <option value="1">Printed</option>
@@ -83,6 +84,9 @@
             <div class="toolbar">
                 <button id="btnFilter" wire:click="search" type="button" class="btn btn-info" style="width:125px;">
                     <i class="fa fa-search"></i> Filter
+                    <div wire:loading wire:target="search">
+                        <span class="fa fa-spinner fa-spin"></span>
+                    </div>
                 </button>
                 {{-- <button id="btnCreate" type="button" class="btn btn-success" style="width:125px;" asp-app-role="write">
                     <i class="fa fa-plus"></i> Add
@@ -122,7 +126,7 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
-                        @foreach ($tdOrderLpk as $item)
+                        @forelse ($tdOrderLpk as $item)
                         <tr>
                             <td>
                                 <a href="{{ route('edit-lpk', ['orderId' => $item->id]) }}" class="btn btn-info">
@@ -163,7 +167,11 @@
                                 {{ $item->tglproses }}
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="12" class="text-center">No results found</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

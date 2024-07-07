@@ -40,7 +40,6 @@ class AddLpkController extends Component
         $today = Carbon::now();
         $this->lpk_no = $today->format('ymd').'-000';
         $this->total_assembly_line = 0;
-        // $this->qty_gentan=0;
         $this->productlength=1;
         $this->defaultgulung=1;
     }
@@ -96,11 +95,9 @@ class AddLpkController extends Component
                 ['status_order' => 1]
             );
 
-            // session()->flash('message', 'Order saved successfully.');
             session()->flash('notification', ['type' => 'success', 'message' => 'Order saved successfully.']);
             return redirect()->route('lpk-entry');
         } catch (\Exception $e) {
-            // session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
             $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Failed to save the order: ' . $e->getMessage()]);
         }
     }
@@ -133,8 +130,7 @@ class AddLpkController extends Component
 
 
             if($tdorder == null){
-                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar']);
             } else {
                 $this->no_order = $tdorder->product_code;
                 $this->processdate = $tdorder->processdate;
@@ -150,7 +146,6 @@ class AddLpkController extends Component
         if(isset($this->machineno) && $this->machineno != ''){
             $machine=MsMachine::where('machineno', $this->machineno)->first();
             if($machine == null){
-                // session()->flash('error', 'Mesin ' . $this->machineno . ' Tidak Terdaftar');
                 $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Mesin ' . $this->machineno . ' Tidak Terdaftar']);
             } else {
                 $this->machinename = $machine->machinename;
@@ -164,8 +159,6 @@ class AddLpkController extends Component
             $this->selisihkurang = $this->productlength - $this->panjang_lpk;
         }
         
-        
-
         return view('livewire.order-lpk.add-lpk');
     }
 }

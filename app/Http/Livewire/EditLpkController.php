@@ -141,7 +141,7 @@ class EditLpkController extends Component
             $orderlpk->save();
 
             // session()->flash('message', 'Order updated successfully.');
-            session()->flash('notification', ['type' => 'success', 'message' => 'Order updated successfully.']);
+            session()->flash('notification', ['type' => 'success', 'message' => 'LPK updated successfully.']);
             return redirect()->route('lpk-entry');
         } catch (\Exception $e) {
             // session()->flash('error', 'Failed to save the order: ' . $e->getMessage());
@@ -170,11 +170,55 @@ class EditLpkController extends Component
 
     public function render()
     {
-        // $this->total_assembly_line = floatval($this->qty_lpk) * floatval($this->productlength);
-        // $this->qty_gentan = $this->productlength / $this->defaultgulung;
-        // $this->qty_gulung = $this->productlength * $this->qty_gentan;
-        // $this->panjang_lpk = $this->qty_gentan * $this->qty_gulung;
-        // $this->selisihkurang = $this->productlength - $this->panjang_lpk;
+        if(isset($this->po_no) && $this->po_no != ''){
+            $tdorder = DB::table('tdorder as tod')
+            ->join('msproduct as mp', 'mp.id', '=', 'tod.product_id')
+            ->join('msbuyer as mbu', 'mbu.id', '=', 'tod.buyer_id')
+            ->select(
+                'tod.id',
+                'tod.product_code',
+                'tod.processdate',
+                'tod.order_date',
+                'mp.name as produk_name',
+                'mbu.name as buyer_name',
+                'mp.ketebalan',
+                'mp.diameterlipat',
+                'mp.productlength',
+                'mp.one_winding_m_number'
+            )
+            ->where('po_no', $this->po_no)
+            ->first();
+
+
+            if($tdorder == null){
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar']);
+            } else {
+                $this->no_order = $tdorder->product_code;
+                $this->processdate = $tdorder->processdate;
+                $this->order_date = $tdorder->order_date;
+                $this->buyer_name = $tdorder->buyer_name;
+                $this->product_name = $tdorder->produk_name;
+                $this->productlength = $tdorder->productlength;
+                $this->defaultgulung = $tdorder->one_winding_m_number;
+                $this->dimensi = $tdorder->ketebalan.'x'.$tdorder->diameterlipat.'x'.$tdorder->productlength;
+            }
+        }
+
+        if(isset($this->machineno) && $this->machineno != ''){
+            $machine=MsMachine::where('machineno', $this->machineno)->first();
+            if($machine == null){
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Mesin ' . $this->machineno . ' Tidak Terdaftar']);
+            } else {
+                $this->machinename = $machine->machinename;
+            }
+        }
+        if(isset($this->qty_lpk) && isset($this->productlength)){
+            $this->total_assembly_line = $this->qty_lpk * $this->productlength;
+            $this->qty_gentan = $this->productlength / $this->defaultgulung;
+            $this->qty_gulung = $this->productlength * $this->qty_gentan;
+            $this->panjang_lpk = $this->qty_gentan * $this->qty_gulung;
+            $this->selisihkurang = $this->productlength - $this->panjang_lpk;
+        }
 
         return view('livewire.order-lpk.edit-lpk');
     }

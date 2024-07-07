@@ -17,6 +17,9 @@ class LpkEntryController extends Component
     public $tglMasuk;
     public $tglKeluar;
     public $searchTerm;
+    public $transaksi;
+    public $idBuyer;
+    public $status;
 
     public function mount()
     {
@@ -27,17 +30,31 @@ class LpkEntryController extends Component
     }
 
     public function search(){
-        $tglMasuk = '';
-        if (isset($this->tglMasuk) && $this->tglMasuk != '') {
-            $tglMasuk = "WHERE tolp.lpk_date >= '" . $this->tglMasuk . "'";
+        if($this->transaksi == 2){
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tolp.lpk_date >= '" . $this->tglMasuk . "'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tolp.lpk_date <= '" . $this->tglKeluar . "'";
+            }
+        } else {
+            $tglMasuk = '';
+            if (isset($this->tglMasuk) && $this->tglMasuk != '') {
+                $tglMasuk = "WHERE tolp.created_on >= '" . $this->tglMasuk . " 00:00'";
+            }
+            $tglKeluar = '';
+            if (isset($this->tglKeluar) && $this->tglKeluar != '') {
+                $tglKeluar = "AND tolp.created_on <= '" . $this->tglKeluar . " 23:59'";
+            }
         }
-        $tglKeluar = '';
-        if (isset($this->tglKeluar) && $this->tglKeluar != '') {
-            $tglKeluar = "AND tolp.lpk_date <= '" . $this->tglKeluar . "'";
-        }
+        
         $searchTerm = '';
         if (isset($this->searchTerm) && $this->searchTerm != '') {
-            $searchTerm = "AND (mp.name ilike '%" . $this->searchTerm . "%' OR tod.po_no ilike '%" . $this->searchTerm . "%')";
+            $searchTerm = "AND (mp.name ilike '%" . $this->searchTerm . "%' 
+                                OR tolp.lpk_no ilike '%" . $this->searchTerm . "%'
+                                OR tod.po_no ilike '%" . $this->searchTerm . "%')";
         }
         $idProduct = '';
         if (isset($this->idProduct) && $this->idProduct != '') {
@@ -46,6 +63,20 @@ class LpkEntryController extends Component
         $idBuyer = '';
         if (isset($this->idBuyer) && $this->idBuyer != '') {
             $idBuyer = "AND tod.buyer_id = '" . $this->idBuyer . "'";
+        }
+        $status = '';
+        if (isset($this->status) && $this->status != '') {
+            if ($this->status == 0){
+                $status = "AND tolp.reprint_no = 0";
+            } else if ($this->status == 1){
+                $status = "AND tolp.reprint_no = 1";
+            } else if ($this->status == 2){
+                $status = "AND tolp.reprint_no > 1";
+            } else if ($this->status == 3){
+                $status = "AND tolp.status_lpk = 0";
+            } else if ($this->status == 4){
+                $status = "AND tolp.status_lpk = 1";
+            }
         }
 
         $this->tdOrderLpk = DB::select("
@@ -79,7 +110,7 @@ class LpkEntryController extends Component
             $searchTerm
             $idProduct
             $idBuyer
-            limit 10
+            $status
         ");
     }
 
