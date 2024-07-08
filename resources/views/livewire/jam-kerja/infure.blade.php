@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4" resources="Search">Search</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <input id='searchText' name='searchText' class="form-control" type="text"  placeholder="search nomor PO, nama produk" />
+                    <input class="form-control" type="text"  placeholder="search nomor PO, nama produk" />
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Mesin</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select class="form-control" placeholder="- all -">
+                    <select class="form-control" placeholder="- all -" wire:model.defer="machine">
                         <option value="">- all -</option>
                         @foreach ($machine as $item)
                             <option value="{{ $item->id }}">{{ $item->machinename }}</option>
@@ -39,7 +39,12 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Shift</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select class="form-control" placeholder="- all -"></select>
+                    <select class="form-control" placeholder="- all -" wire:model.defer="shift">
+                        <option value="">- all -</option>
+                        @foreach ($workShift as $item)
+                            <option value="{{ $item->id }}">{{ $item->work_shift }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
@@ -48,6 +53,9 @@
             <div class="toolbar">
                 <button id="btnFilter" wire:click="search" type="button" class="btn btn-info" style="width:125px;">
                     <i class="fa fa-search"></i> Filter
+                    <div wire:loading wire:target="search">
+                        <span class="fa fa-spinner fa-spin"></span>
+                    </div>
                 </button>
 
                 <button id="btnCreate" type="button" data-bs-toggle="modal" data-bs-target="#modal-add" class="btn btn-success" style="width:125px;">
