@@ -39,11 +39,11 @@ class CheckListExport implements FromCollection, WithHeadings
         // if($this->filter == 2){
             $tglMasuk = '';
             if (isset($this->tglMasuk) && $this->tglMasuk != '') {
-                $tglMasuk = "WHERE tdpa.production_date >= '" . $this->tglMasuk . "'";
+                $tglMasuk = $this->tglMasuk . " 00:00:00";
             }
             $tglKeluar = '';
             if (isset($this->tglKeluar) && $this->tglKeluar != '') {
-                $tglKeluar = "AND tdpa.production_date <= '" . $this->tglKeluar . "'";
+                $tglKeluar = $this->tglKeluar . " 23:59:59";
             }
         // } else {
         //     $tglMasuk = '';
@@ -74,50 +74,33 @@ class CheckListExport implements FromCollection, WithHeadings
 
         return collect(DB::select("
             SELECT 
-                tdpa.id AS id, 
-                tdpa.production_no AS production_no, 
-                tdpa.production_date AS production_date, 
-                tdpa.employee_id AS employee_id, 
-                tdpa.work_shift AS work_shift, 
-                tdpa.work_hour AS work_hour, 
-                tdpa.machine_id AS machine_id, 
-                tdpa.lpk_id AS lpk_id, 
-                tdpa.product_id AS product_id, 
-                tdpa.panjang_produksi AS panjang_produksi, 
-                tdpa.panjang_printing_inline AS panjang_printing_inline, 
-                tdpa.berat_standard AS berat_standard, 
-                tdpa.berat_produksi AS berat_produksi, 
-                tdpa.nomor_han AS nomor_han, 
-                tdpa.gentan_no AS gentan_no, 
-                tdpa.seq_no AS seq_no, 
-                tdpa.status_production AS status_production, 
-                tdpa.status_kenpin AS status_kenpin, 
-                tdpa.infure_cost AS infure_cost, 
-                tdpa.infure_cost_printing AS infure_cost_printing, 
-                tdpa.infure_berat_loss AS infure_berat_loss, 
-                tdpa.kenpin_berat_loss AS kenpin_berat_loss, 
-                tdpa.kenpin_meter_loss AS kenpin_meter_loss, 
-                tdpa.kenpin_meter_loss_proses AS kenpin_meter_loss_proses, 
-                tdpa.created_by AS created_by, 
-                tdpa.created_on AS created_on, 
-                tdpa.updated_by AS updated_by, 
-                tdpa.updated_on AS updated_on, 
-                tdol.order_id AS order_id, 
-                tdol.lpk_no AS lpk_no, 
-                tdol.lpk_date AS lpk_date, 
-                tdol.panjang_lpk AS panjang_lpk, 
-                tdol.qty_gentan AS qty_gentan, 
-                tdol.qty_gulung AS qty_gulung, 
-                tdol.qty_lpk AS qty_lpk, 
+                tdpa.production_date,
+                tdpa.seq_no,
+                tdpa.production_date,
+                tdpa.work_shift, 
+                tdpa.work_hour,
+                mse.nik, 
+                mse.empname,
+                msm.machineno,
+                tdol.lpk_no,
+                msp.code,
+                msp.name,
+                tdpa.gentan_no,
+                tdpa.nomor_han,
+                tdpa.panjang_produksi,
+                tdpa.berat_standard,
+                tdpa.berat_produksi,
                 tdol.total_assembly_line AS total_assembly_line, 
-                tdol.total_assembly_qty AS total_assembly_qty
-            FROM tdProduct_assembly AS tdpa
-                INNER JOIN tdOrderLpk AS tdol ON tdpa.lpk_id = tdol.id
-            $tglMasuk
-            $tglKeluar
-            $noprosesawal
-            $noprosesakhir
-            $lpk_no
+                tdol.total_assembly_qty AS total_assembly_qty                
+            FROM tdproduct_assembly AS tdpa
+            INNER JOIN tdorderlpk AS tdol ON tdpa.lpk_id = tdol.id
+            INNER JOIN msproduct AS msp ON tdpa.product_id = msp.id
+            INNER JOIN msmachine AS msm ON msm.id = tdpa.machine_id 
+            LEFT JOIN msdepartment AS msd ON msd.id = msm.department_id
+            LEFT JOIN msemployee AS mse ON mse.id = tdpa.employee_id
+            WHERE tdpa.production_date BETWEEN '$tglMasuk' AND '$tglKeluar'
+                -- AND tdpa.machine_id = 1
+                -- AND tdpa.seq_no BETWEEN $noprosesawal AND $noprosesakhir;
         "));
     }
 

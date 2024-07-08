@@ -92,7 +92,12 @@
 		<div class="form-group">
 			<label class="control-label col-md-4 col-xs-12"></label>
 			<div class="input-group">
-				<button type="button" class="btn btn-success btn-print" wire:click="export" style="width:99%"><i class="fa fa-print"></i> Generate Report</button>
+				<button type="button" class="btn btn-success btn-print" wire:click="export" style="width:99%">
+					<i class="fa fa-print"></i> Generate Report
+					<div wire:loading wire:target="export">
+						<span class="fa fa-spinner fa-spin"></span>
+					</div>
+				</button>
 			</div>
 		</div>
 	</div>
