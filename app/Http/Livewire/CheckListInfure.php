@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\CheckListExport;
 use App\Exports\InfureExport;
 use App\Models\MsDepartment;
 use App\Models\MsMachine;
@@ -19,6 +20,10 @@ class CheckListInfure extends Component
     public $lpk_no;
     public $code;
     public $department;
+    public $jenisReport;
+    public $departemenId;
+    public $machineId;
+    public $nomor_han;
 
     public function mount()
     {
@@ -30,14 +35,29 @@ class CheckListInfure extends Component
 
     public function export()
     {
-        return Excel::download(new InfureExport(
-            $this->tglMasuk, 
-            $this->tglKeluar,
-            $this->noprosesawal,
-            $this->noprosesakhir,
-            $this->lpk_no,
-            $this->code,
-        ), 'checklist-infure.xlsx');
+        if($this->jenisReport == 2){
+            return Excel::download(new InfureExport(
+                $this->tglMasuk, 
+                $this->tglKeluar,
+                $this->noprosesawal,
+                $this->noprosesakhir,
+                $this->lpk_no,
+                $this->code,
+            ), 'LossInfure-Checklist.xlsx');
+        } else {
+            return Excel::download(new CheckListExport(
+                $this->tglMasuk, 
+                $this->tglKeluar,
+                $this->noprosesawal,
+                $this->noprosesakhir,
+                $this->lpk_no,
+                $this->code,
+                $this->departemenId,
+                $this->machineId,
+                $this->nomor_han,
+            ), 'NippoInfure-Checklist.xlsx');
+        }
+        
     }
 
     public function render()

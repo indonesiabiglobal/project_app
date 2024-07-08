@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Support\Facades\DB;
 
-class InfureExport implements FromCollection, WithHeadings
+class CheckListExport implements FromCollection, WithHeadings
 {
     // use Exportable;
     protected $tglMasuk;
@@ -17,8 +17,11 @@ class InfureExport implements FromCollection, WithHeadings
     protected $noprosesakhir;
     protected $lpk_no;
     protected $code;
+    protected $departemenId;
+    protected $machineId;
+    protected $nomor_han;
 
-    public function __construct($tglMasuk, $tglKeluar, $noprosesawal, $noprosesakhir, $lpk_no, $code)
+    public function __construct($tglMasuk, $tglKeluar, $noprosesawal, $noprosesakhir, $lpk_no, $code, $departemenId, $machineId, $nomor_han)
     {
         $this->tglMasuk = $tglMasuk;
         $this->tglKeluar = $tglKeluar;
@@ -26,6 +29,9 @@ class InfureExport implements FromCollection, WithHeadings
         $this->noprosesakhir = $noprosesakhir;
         $this->lpk_no = $lpk_no;
         $this->code = $code;
+        $this->departemenId = $departemenId;
+        $this->machineId = $machineId;
+        $this->nomor_han = $nomor_han;
     }
 
     public function collection()
@@ -118,8 +124,9 @@ class InfureExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Tanggal Proses', 'No Proses', 'Tanggal Produksi', 'Shift', 'Nomor LPK', 'Nama Produk', 'Nomor Order', 'Nomor Mesin',
-            'Petugas', 'NIK', 'Nama Loss', 'Kode Loss', 'Berat Loss'
+            'Tanggal Proses', 'No', 'Tanggal Produksi', 'Shift', 'Jam', 'NIK', 'Petugas', 'Nomor Mesin', 'Nomor LPK', 'Nomor Order',
+            'Nama Produk', 'Nomor Gentan', 'Nomor Hand', 'Panjang Infure (meter)', 'Berat Standard (kg)', 'Berat Produksi (kg)',
+            'Nama Loss', 'Berat Loss (kg)' 
         ];
     }
 }

@@ -115,7 +115,7 @@ class AddNippoController extends Component
                 'product_assembly_id' => $product->id,
             ]);    
             
-            TdOrderLpk::where('lpk_id',$lpkid->id)->update([
+            TdOrderLpk::where('id',$lpkid->id)->update([
                 'total_assembly_line' => $totalAssembly[0]->c1,
             ]);
 

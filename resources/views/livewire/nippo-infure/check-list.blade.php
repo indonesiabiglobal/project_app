@@ -33,7 +33,7 @@
 		<div class="form-group mt-1">
 			<div class="input-group">
 				<span class="input-group-addon col-12 col-lg-3">Jenis Report </span>
-				<select class="form-control" placeholder="- pilih jenis report -">
+				<select wire:model.defer="jenisReport" class="form-control" placeholder="- pilih jenis report -">
 					<option value="1">Check List</option>
 					<option value="2">Loss Infure</option>
 				</select>
@@ -63,8 +63,8 @@
 		</div>
         <div class="form-group mt-1">
 			<div class="input-group">
-				<span class="input-group-addon col-12 col-lg-3">Departement</span>
-				<select class="form-control" wire:model.defer="">
+				<span class="input-group-addon col-12 col-lg-3">Departemen</span>
+				<select class="form-control" wire:model.defer="departemenId">
 					<option value="">- all -</option>
 					@foreach ($department as $item)
 						<option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -75,7 +75,7 @@
 		<div class="form-group mt-1">
 			<div class="input-group">
 				<span class="input-group-addon col-12 col-lg-3">Mesin</span>
-				<select class="form-control">
+				<select class="form-control" wire:model.defer="machineId">
 					<option value="">- all -</option>
 					<option value="1"></option>
 					<option value="2"></option>
@@ -85,7 +85,7 @@
 		<div class="form-group mt-1">
 			<div class="input-group">
 				<span class="input-group-addon col-12 col-lg-3">Nomor Han</span>
-				<input type="text" class="form-control" placeholder="00-00-00A" />
+				<input type="text" class="form-control" placeholder="00-00-00A" wire:model.defer="nomor_han" />
 			</div>
 		</div>
 		<hr />
