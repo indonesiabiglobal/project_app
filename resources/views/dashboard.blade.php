@@ -666,17 +666,17 @@ Highcharts.chart('infureMachine', {
             data: [
                 {
                     name: 'INFURE PAB A',
-                    y: 86.87,
+                    y: 89.96,
                     drilldown: 'INFURE PAB A'
                 },
                 {
                     name: 'INFURE PAB C',
-                    y: 91.71,
+                    y: 93.50,
                     drilldown: 'INFURE PAB C'
                 },
                 {
                     name: 'INFURE PAB ',
-                    y: 84.27,
+                    y: 87.29,
                     drilldown: 'INFURE PAB A'
                 }
             ]
@@ -733,17 +733,17 @@ Highcharts.chart('seitaiMachine', {
             data: [
                 {
                     name: 'SEITAI PAB A',
-                    y: 86.87,
+                    y: 67.47,
                     drilldown: 'SEITAI PAB A'
                 },
                 {
                     name: 'SEITAI PAB C',
-                    y: 91.71,
+                    y: 77.05,
                     drilldown: 'SEITAI PAB C'
                 },
                 {
                     name: 'SEITAI PAB ',
-                    y: 84.27,
+                    y: 76.03,
                     drilldown: 'SEITAI PAB A'
                 }
             ]
@@ -809,7 +809,7 @@ Highcharts.chart('infureTen', {
         enabled: false
     },
     series: [{
-        data: [632, 727, 3202, 721,632, 727, 3202, 721,632, 727]
+        data: [216, 97, 86, 81, 58, 52, 47, 43, 43, 41]
     }]
 });
 
@@ -822,7 +822,7 @@ Highcharts.chart('seitaiTen', {
         align: 'left'
     },
     xAxis: {
-        categories: ['Heniku', 'Shiwa', 'Tachiage Lain lain', 'Putus Pinhole', 'Buble Goyang', 'Amigae', 'Jusi Keras', 'Printing ke Printing', 'Potong Gentan', 'mimihaba'],
+        categories: ['Sambung Gentan', 'Souji', 'Star Awal Produksi', 'Mimiore', 'Katagae', 'Mark Miss', 'Tobidashi', 'Sisa Katagae', 'Ponsu Tidak Motong', 'Tsumari'],
         title: {
             text: null
         },
@@ -864,7 +864,7 @@ Highcharts.chart('seitaiTen', {
         enabled: false
     },
     series: [{
-        data: [632, 727, 3202, 721,632, 727, 3202, 721,632, 727]
+        data: [317, 119, 99, 47, 32, 28, 19, 10, 9, 8]
     }]
 });
 
