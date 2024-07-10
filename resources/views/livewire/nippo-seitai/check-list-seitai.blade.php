@@ -99,14 +99,12 @@
 			<div class="input-group">
 				<button type="button" class="btn btn-success btn-print" style="width:99%" wire:click="export">
 					<i class="fa fa-print"></i> Generate Report
+					<div wire:loading wire:target="export">
+						<span class="fa fa-spinner fa-spin"></span>
+					</div>
 				</button>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-4"></div>
 </div>
-
-<input name="lpk_id" type="hidden" value="" />
-<input id="lpk_no_selected" type="hidden" value="" />
-<input name="product_id" type="hidden" value="" />
-<input id="product_code_selected" type="hidden" value="" />

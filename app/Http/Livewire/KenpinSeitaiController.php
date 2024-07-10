@@ -8,7 +8,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
-class KenpinSeitai extends Component
+class KenpinSeitaiController extends Component
 {
     use WithPagination;
 
@@ -47,7 +47,7 @@ class KenpinSeitai extends Component
         }
 
         $this->data = DB::select("
-        SELECT
+        SELECTa
             tdkg.id,
             tdkg.kenpin_no,
             tdkg.kenpin_date,

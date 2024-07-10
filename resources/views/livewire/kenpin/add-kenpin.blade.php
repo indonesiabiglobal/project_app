@@ -248,7 +248,7 @@
                                 @endphp
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">No results found</td>
+                                    <td colspan="8" class="text-center">No results found</td>
                                 </tr>
                             @endforelse
                             <tr>
