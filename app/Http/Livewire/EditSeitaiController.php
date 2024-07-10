@@ -61,11 +61,11 @@ class EditSeitaiController extends Component
     public function mount($orderId)
     {
         $data = DB::table('tdproduct_goods AS tdpg')
-        ->join('msproduct AS msp', 'tdpg.product_id', '=', 'msp.id')
-        ->join('msmachine AS msm', 'tdpg.machine_id', '=', 'msm.id')
-        ->join('tdorderlpk AS tdol', 'tdpg.lpk_id', '=', 'tdol.id')
-        ->join('msemployee AS mse', 'tdpg.employee_id', '=', 'mse.id')
-        ->join('msemployee AS mse2', 'tdpg.employee_id_infure', '=', 'mse2.id')
+        ->leftJoin('msproduct AS msp', 'tdpg.product_id', '=', 'msp.id')
+        ->leftJoin('msmachine AS msm', 'tdpg.machine_id', '=', 'msm.id')
+        ->leftJoin('tdorderlpk AS tdol', 'tdpg.lpk_id', '=', 'tdol.id')
+        ->leftJoin('msemployee AS mse', 'tdpg.employee_id', '=', 'mse.id')
+        ->leftJoin('msemployee AS mse2', 'tdpg.employee_id_infure', '=', 'mse2.id')
         ->select(
             'tdpg.id AS id', 
             'tdpg.production_no AS production_no', 
@@ -186,6 +186,22 @@ class EditSeitaiController extends Component
         if ($validatedData) {
             $this->emit('showModalLoss');
         }
+    }
+
+    public function deleteGentan($orderId)
+    {
+        $data = TdProductGoodsAssembly::findOrFail($orderId);
+        $data->delete();
+
+        $this->dispatchBrowserEvent('notification', ['type' => 'success', 'message' => 'Data Berhasil di Hapus']);
+    }
+
+    public function deleteLoss($orderId)
+    {
+        $data = TdProductGoodsLoss::findOrFail($orderId);
+        $data->delete();
+
+        $this->dispatchBrowserEvent('notification', ['type' => 'success', 'message' => 'Data Berhasil di Hapus']);
     }
 
     public function saveGentan()
