@@ -19,6 +19,8 @@ class NippoSeitaiController extends Component
     public $machine;
     public $transaksi;
     public $gentan_no;
+    public $machineid;
+    public $searchTerm;
 
     public function mount()
     {
@@ -45,7 +47,10 @@ class NippoSeitaiController extends Component
                 $tglKeluar = "AND tdpg.production_date <= '" . $this->tglKeluar . "'";
             }
             // produk
-            // mesin
+            $machineid = '';
+            if(isset($this->machineid) && $this->machineid != ''){
+                $machineid = "AND tdpg.machine_id='".$this->machineid."'";
+            }
             // status
             $searchTerm = '';
             if (isset($this->searchTerm) && $this->searchTerm != '') {
@@ -103,7 +108,7 @@ class NippoSeitaiController extends Component
             $tglKeluar
             $searchTerm
             $gentan_no
-            limit 5
+            $machineid
             ");
         } else {
             $tglMasuk = '';
@@ -115,7 +120,10 @@ class NippoSeitaiController extends Component
                 $tglKeluar = "AND tdpg.production_date <= '" . $this->tglKeluar . "'";
             }
             // produk
-            // mesin
+            $machineid = '';
+            if(isset($this->machineid) && $this->machineid != ''){
+                $machineid = "AND tdpg.machine_id='".$this->machineid."'";
+            }
             // status
             $searchTerm = '';
             if (isset($this->searchTerm) && $this->searchTerm != '') {
@@ -171,7 +179,7 @@ class NippoSeitaiController extends Component
             $tglMasuk
             $tglKeluar
             $searchTerm
-            limit 5
+            $machineid
             ");
         }
         
