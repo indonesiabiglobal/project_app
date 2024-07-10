@@ -61,8 +61,9 @@
 </div>
 <script>
 	document.addEventListener('livewire:load', function () {
-		Livewire.on('redirectToPrint', function (data) {
-			var printUrl = '{{ route('report-lpk') }}?test=' +  'data.test';
+		Livewire.on('redirectToPrint', function (lpk_id) {
+			// var dt=data;
+			var printUrl = '{{ route('report-lpk') }}?lpk_id=' +  lpk_id
 			window.open(printUrl, '_blank');
 		});
 	});
