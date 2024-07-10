@@ -182,8 +182,8 @@ Route::middleware('auth')->group(function () {
     })->name('report-gentan');
 
     Route::get('/report-lpk', function (Request $request) {
-        $test = $request->query('test');
-        return view('livewire.order-lpk.report-lpk', compact('test'));
+        $lpk_id = $request->query('lpk_id');
+        return view('livewire.order-lpk.report-lpk', compact('lpk_id'));
     })->name('report-lpk');
 
     Route::get('/report-masuk-gudang', function (Request $request) {
