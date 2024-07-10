@@ -80,7 +80,11 @@ use Carbon\Carbon;
                                     <p>Selisih -320m</p>
                                 </td>
                                 <td width="10%">
-                                    barcode
+                                    @php
+                                        $url = $data->lpk_no;
+                                        $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($url);
+                                    @endphp
+                                    <img src="{{ $qrCodeUrl }}" width="80" alt="QR Code">
                                 </td>
                             </tr>
                         </table>
