@@ -74,6 +74,7 @@ use App\Http\Livewire\NippoSeitaiController;
 use App\Http\Livewire\OrderLpkController;
 use App\Http\Livewire\OrderReportController;
 use App\Http\Livewire\PenarikanPalet;
+use App\Http\Livewire\PenarikanPaletController;
 use App\Http\Livewire\PengembalianPalet;
 use App\Http\Livewire\PrintLabelGudangKenpin;
 use App\Http\Livewire\ReportKenpin;
@@ -240,7 +241,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/print-label-gudang-kenpin', PrintLabelGudangKenpin::class)->name('print-label-gudang-kenpin');
     Route::get('/report-kenpin', ReportKenpinController::class)->name('report-kenpin');
 
-    Route::get('/penarikan-palet', PenarikanPalet::class)->name('penarikan-palet');
+    Route::get('/penarikan-palet', PenarikanPaletController::class)->name('penarikan-palet');
     Route::get('/pengembalian-palet', PengembalianPalet::class)->name('pengembalian-palet');
 
     Route::get('/general-report', GeneralReport::class)->name('general-report');
