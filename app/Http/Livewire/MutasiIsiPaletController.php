@@ -15,6 +15,7 @@ class MutasiIsiPaletController extends Component
     public $nomor_lot;
     public $qty_seitai;
     public $qty_mutasi;
+    public $orderId;
 
     public function search ()
     {
@@ -37,6 +38,7 @@ class MutasiIsiPaletController extends Component
         // ]);
 
         $paletTujuan = TdProductGoods::where('nomor_palet',$this->searchOld)->first();
+        $this->orderId = $paletTujuan->id;
         $this->nomor_lot=$paletTujuan->nomor_lot;
         $this->qty_seitai=$paletTujuan->qty_produksi;
         $this->qty_mutasi=$paletTujuan->qty_produksi;
@@ -44,13 +46,13 @@ class MutasiIsiPaletController extends Component
         if ($this->searchNew) {
             $this->emit('showModal');
         }else{
-            $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor Palet Tujuan ' . $this->searchNew . ' Tidak Terisi']);
+            $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor Palet Tujuan ' . $this->searchNew . ' Tidak Terisi']);
         }
     }
 
     public function saveMutasi()
-    {
-        $save = TdProductGoods::where('nomor_palet',$this->searchOld)->update([
+    {   
+        $save = TdProductGoods::where('id',$this->orderId)->update([
             'nomor_palet'=>$this->searchNew
         ]);
 
@@ -61,7 +63,7 @@ class MutasiIsiPaletController extends Component
 
     public function delete()
     {
-        $save = TdProductGoods::where('nomor_palet',$this->searchNew)->update([
+        $save = TdProductGoods::where('id',$this->orderId)->update([
             'nomor_palet'=>$this->searchOld
         ]);
 

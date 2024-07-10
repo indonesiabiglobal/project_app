@@ -56,6 +56,7 @@ use App\Http\Livewire\KatanukiController;
 use App\Http\Livewire\KenpinInfure;
 use App\Http\Livewire\KenpinInfureController;
 use App\Http\Livewire\KenpinSeitai;
+use App\Http\Livewire\KenpinSeitaiController;
 use App\Http\Livewire\LabelMasukGudang;
 use App\Http\Livewire\LossInfureController;
 use App\Http\Livewire\LossKategoriController;
@@ -73,6 +74,7 @@ use App\Http\Livewire\NippoSeitaiController;
 use App\Http\Livewire\OrderLpkController;
 use App\Http\Livewire\OrderReportController;
 use App\Http\Livewire\PenarikanPalet;
+use App\Http\Livewire\PenarikanPaletController;
 use App\Http\Livewire\PengembalianPalet;
 use App\Http\Livewire\PrintLabelGudangKenpin;
 use App\Http\Livewire\ReportKenpin;
@@ -232,14 +234,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/kenpin-infure', KenpinInfureController::class)->name('kenpin-infure');
     Route::get('/add-kenpin', AddKenpinController::class)->name('add-kenpin');
 
-    Route::get('/kenpin-seitai-kenpin', KenpinSeitai::class)->name('kenpin-seitai-kenpin');
+    Route::get('/kenpin-seitai-kenpin', KenpinSeitaiController::class)->name('kenpin-seitai-kenpin');
     Route::get('/add-kenpin-seitai', AddKenpinSeitaiController::class)->name('add-kenpin-seitai');
 
     Route::get('/mutasi-isi-palet-kenpin', MutasiIsiPaletKenpin::class)->name('mutasi-isi-palet-kenpin');
     Route::get('/print-label-gudang-kenpin', PrintLabelGudangKenpin::class)->name('print-label-gudang-kenpin');
     Route::get('/report-kenpin', ReportKenpinController::class)->name('report-kenpin');
 
-    Route::get('/penarikan-palet', PenarikanPalet::class)->name('penarikan-palet');
+    Route::get('/penarikan-palet', PenarikanPaletController::class)->name('penarikan-palet');
     Route::get('/pengembalian-palet', PengembalianPalet::class)->name('pengembalian-palet');
 
     Route::get('/general-report', GeneralReport::class)->name('general-report');

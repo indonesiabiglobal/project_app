@@ -3,27 +3,31 @@
 namespace App\Http\Livewire;
 
 use App\Models\MsMachine;
+use App\Models\MsProduct;
 use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class PenarikanPalet extends Component
+class PenarikanPaletController extends Component
 {
     public $penarikan = [];
     public $tglMasuk;
     public $tglKeluar;
     public $machine;
     public $transaksi;
+    public $product;
+    public $product_id;
 
     public function mount()
     {
+        $this->product = MsProduct::limit(10)->get();
         $this->machine = MsMachine::limit(10)->get();
         $this->tglMasuk = Carbon::now()->format('Y-m-d');
         $this->tglKeluar = Carbon::now()->format('Y-m-d'); 
     }
 
     public function search(){
-        if($this->transaksi == 2){
+        // if($this->transaksi == 2){
             // $tglMasuk = '';
             // if (isset($this->tglMasuk) && $this->tglMasuk != '') {
             //     $tglMasuk = "WHERE tdpg.production_date >= '" . $this->tglMasuk . "'";
@@ -86,7 +90,7 @@ class PenarikanPalet extends Component
             // $searchTerm
             // limit 5
             // ");
-        } else {
+        // } else {
             $tglMasuk = '';
             if (isset($this->tglMasuk) && $this->tglMasuk != '') {
                 $tglMasuk = "WHERE tdpg.production_date >= '" . $this->tglMasuk . "'";
@@ -95,29 +99,39 @@ class PenarikanPalet extends Component
             if (isset($this->tglKeluar) && $this->tglKeluar != '') {
                 $tglKeluar = "AND tdpg.production_date <= '" . $this->tglKeluar . "'";
             }
-            $searchTerm = '';
-            if (isset($this->searchTerm) && $this->searchTerm != '') {
-                $searchTerm = "AND (tdpg.nomor_palet ilike '%" . $this->searchTerm .
-                "%')";
+            $product_id = '';
+            if (isset($this->product_id) && $this->product_id) {
+                $product_id = "AND msp.id = '". $this->product_id . "'";
             }
+            // $searchTerm = '';
+            // if (isset($this->searchTerm) && $this->searchTerm != '') {
+            //     $searchTerm = "AND (tdpg.nomor_palet ilike '%" . $this->searchTerm .
+            //     "%')";
+            // }
 
             $this->penarikan = DB::select("
             SELECT
-                X.product_id AS product_id,
-                X.nomor_palet AS nomor_palet 
+                X.product_id,
+                X.nomor_palet,
+                X.code,
+                X.name 
             FROM
                 (
                 SELECT DISTINCT
-                    tdpg.product_id AS product_id,
-                    tdpg.nomor_palet AS nomor_palet 
+                    tdpg.product_id,
+                    tdpg.nomor_palet,
+                    msp.code,
+                    msp.name
                 FROM
-                    tdProduct_Goods AS tdpg
-                    $tglMasuk
-                    $tglKeluar
-                ) AS X
-            limit 5
+                    tdProduct_Goods AS tdpg 
+                    INNER JOIN msproduct as msp on msp.id = tdpg.product_id
+                $tglMasuk
+                $tglKeluar
+                $product_id
+                ) AS X 
+                LIMIT 5
             ");
-        }
+        // }
     }
 
     public function render()

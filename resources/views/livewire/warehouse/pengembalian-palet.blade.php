@@ -5,7 +5,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Nomor Palet </label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <input wire:model.defer="searchTerm" class="form-control" type="text" placeholder="A0000-000000" />
+                    <input wire:model.defer="nomor_palet" class="form-control" type="text" placeholder="A0000-000000" />
                 </div>
             </div>
         </div>    
@@ -13,15 +13,23 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-xs-4">Produk</label>
                 <div class="input-group col-md-9 col-xs-8">
-                    <select class="form-control" placeholder="- all -"></select>
+                    <select wire:model.defer="product_id" class="form-control" placeholder="- all -">
+                        <option value="">- all -</option>
+                        @foreach ($product as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>            
         </div>
     
         <div class="col-lg-12" style="border-top:1px solid #efefef">
             <div class="toolbar">
-                <button id="btnFilter" wire:click="search" type="button" class="btn btn-info" style="width:125px;">
+                <button wire:click="search" type="button" class="btn btn-info" style="width:125px;">
                     <i class="fa fa-search"></i> Filter
+                    <div wire:loading wire:target="search">
+                        <span class="fa fa-spinner fa-spin"></span>
+                    </div>
                 </button>
             </div>
         </div>
@@ -40,24 +48,26 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
-                        @foreach ($data as $item)
+                        @forelse ($data as $item)
                         <tr>
                             <td>
-                                {{-- <a href="{{ route('edit-nippo', ['orderId' => $item->id]) }}" class="btn btn-info">
-                                    <i class="fa fa-edit"></i> Edit
-                                </a> --}}
+                                <input type="checkbox" wire:model="selectedItems" value="{{ $item->product_id }}">
                             </td>
                             <td>                                
                                 {{ $item->nomor_palet }}
                             </td>
                             <td>
-                                
+                                {{ $item->code }}
                             </td>
                             <td>
-                                {{ $item->product_id }}
+                                {{ $item->name }}
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="4" class="text-center">No results found</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

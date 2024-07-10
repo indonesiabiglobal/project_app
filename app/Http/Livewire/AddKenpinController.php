@@ -7,6 +7,7 @@ use App\Models\TdOrder;
 use App\Models\MsEmployee;
 use App\Models\TdKenpinAssembly;
 use App\Models\TdKenpinAssemblyDetail;
+use App\Models\TdOrderLpk;
 use App\Models\TdProductAssembly;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -60,16 +61,16 @@ class AddKenpinController extends Component
             'berat_loss' => 'required',
         ]);
         
-        // $lpkid = TdProductAssembly::where('lpk_id', $this->lpk_id)->first();
+        $tdpa = TdProductAssembly::where('lpk_id', $this->lpk_id)->first();
 
         $datas = new TdKenpinAssemblyDetail();
-        $datas->product_assembly_id = $this->lpk_id;
+        $datas->product_assembly_id = $tdpa->id;
         $datas->berat_loss = $this->berat_loss;
         $datas->trial468 = 'T';
-        // $datas->lpk_id = $lpkid->lpk_id;
+        $datas->lpk_id = $this->lpk_id;
         
         $datas->save();
-        $this->dispatchBrowserEvent('notification', ['type' => 'success', 'message' => 'Data Berhasil di Hapus']);
+        $this->dispatchBrowserEvent('notification', ['type' => 'success', 'message' => 'Data Berhasil di Simpan']);
 
         $this->emit('closeModal');
     }
@@ -90,7 +91,6 @@ class AddKenpinController extends Component
             'lpk_no' => 'required'
         ]);
 
-        DB::beginTransaction();
         try {
 
             $mspetugas=MsEmployee::where('employeeno', $this->employeeno)->first();
@@ -100,7 +100,7 @@ class AddKenpinController extends Component
             $product->kenpin_date = $this->kenpin_date;
             $product->employee_id = $mspetugas->id;
             $product->lpk_id = $this->lpk_id;
-            $product->berat_loss = $this->berat_loss;
+            // $product->berat_loss = $this->berat_loss;
             $product->remark = $this->remark;
             $product->status_kenpin = $this->status_kenpin;
             $product->save();
@@ -148,11 +148,9 @@ class AddKenpinController extends Component
             ->join('msproduct as mp', 'mp.id', '=', 'tolp.product_id')
             ->where('tolp.lpk_no', $this->lpk_no)
             ->first();
-            // dd($tdorderlpk);
 
             if($tdorderlpk == null){
-                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor LPK ' . $this->lpk_no . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor LPK ' . $this->lpk_no . ' Tidak Terdaftar']);
             } else {
                 $this->lpk_date = Carbon::parse($tdorderlpk->lpk_date)->format('Y-m-d');
                 $this->panjang_lpk = $tdorderlpk->panjang_lpk;
@@ -186,7 +184,7 @@ class AddKenpinController extends Component
                 ->join('msemployee AS mse', 'mse.id', '=', 'tdpa.employee_id')
                 ->join('msproduct AS msp', 'msp.id', '=', 'tdpa.product_id')
                 ->join('msmachine AS msm', 'msm.id', '=', 'tdpa.machine_id')
-                ->join('tdkenpin_assembly_detail AS tad', 'tad.product_assembly_id', '=', 'tdpa.lpk_id')
+                ->join('tdkenpin_assembly_detail AS tad', 'tad.lpk_id', '=', 'tdol.id')
                 ->where('tdpa.lpk_id', $this->lpk_id)
                 ->get();
             }
@@ -196,8 +194,7 @@ class AddKenpinController extends Component
             $msemployee=MsEmployee::where('employeeno', $this->employeeno)->first();
 
             if($msemployee == null){
-                // session()->flash('error', 'Nomor PO ' . $this->po_no . ' Tidak Terdaftar');
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Employee ' . $this->employeeno . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Employee ' . $this->employeeno . ' Tidak Terdaftar']);
             } else {
                 $this->empname = $msemployee->empname;
             }
@@ -217,7 +214,7 @@ class AddKenpinController extends Component
             ->first();
 
             if($gentan == null){
-                $this->dispatchBrowserEvent('notification', ['type' => 'error', 'message' => 'Nomor Gentan ' . $this->gentan_no . ' Tidak Terdaftar']);
+                $this->dispatchBrowserEvent('notification', ['type' => 'warning', 'message' => 'Nomor Gentan ' . $this->gentan_no . ' Tidak Terdaftar']);
             } else {
                 $this->machineno = $gentan->nomesin;
                 $this->namapetugas = $gentan->namapetugas;

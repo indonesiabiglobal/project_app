@@ -59,6 +59,9 @@
             <div class="toolbar">
                 <button wire:click="search" type="button" class="btn btn-info" style="width:125px;">
                     <i class="fa fa-search"></i> Filter
+                    <div wire:loading wire:target="search">
+                        <span class="fa fa-spinner fa-spin"></span>
+                    </div>
                 </button>
                 <button 
                     id="btnCreate" 
