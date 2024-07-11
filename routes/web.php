@@ -4,6 +4,7 @@ use App\Http\Livewire\AddKenpinController;
 use App\Http\Livewire\AddKenpinSeitaiController;
 use App\Http\Livewire\AddLossController;
 use App\Http\Livewire\AddLpkController;
+use App\Http\Livewire\AddMasterProdukController;
 use App\Http\Livewire\AddNippoController;
 use App\Http\Livewire\AddOrder;
 use App\Http\Livewire\AddOrderController;
@@ -253,6 +254,8 @@ Route::middleware('auth')->group(function () {
     // Master Tabel
     Route::get('/buyer', BuyerController::class)->name('buyer');
     Route::get('/master-produk', MasterProdukController::class)->name('master-produk');
+    Route::get('/add-master-produk', AddMasterProdukController::class)->name('add-master-produk');
+
     Route::get('/tipe-produk', TipeProdukController::class)->name('tipe-produk');
     Route::get('/jenis-produk', JenisProdukController::class)->name('jenis-produk');
     Route::get('/departemen', DepartemenController::class)->name('departemen');

@@ -99,6 +99,7 @@
         'add-kenpin-seitai',
         'edit-seitai',
         'add-seitai',
+        'add-master-produk'
         ]))
         
         @include('layouts.nav')
