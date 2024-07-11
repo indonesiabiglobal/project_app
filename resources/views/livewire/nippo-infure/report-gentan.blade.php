@@ -6,6 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+@php
+    $data = collect(DB::select("
+         SELECT
+             tdol.lpk_no,
+             msp.name,
+             msp.code,
+             msp.code_alias,
+             msp.product_type_code,
+             to_char(tdpa.production_date, 'YYYY-MM-DD') AS production_date,
+             tdpa.work_hour,
+             tdpa.gentan_no,
+             tdpa.work_shift,
+             msm.machineno,
+             tdpa.berat_produksi,
+             tdpa.panjang_produksi,
+             tdpa.nomor_han,
+             mse.employeeno as nik,
+     mse.empname
+         FROM
+             tdproduct_assembly AS tdpa
+             INNER JOIN tdorderlpk AS tdol ON tdpa.lpk_id = tdol.ID
+             INNER JOIN msproduct as msp on msp.id = tdol.product_id
+             LEFT JOIN msworkingshift as msw on msw.id = tdpa.work_shift
+             INNER JOIN msmachine as msm on msm.id = tdpa.machine_id
+             INNER JOIN msemployee as mse on mse.id = tdpa.employee_id
+          WHERE
+             tdpa.id = '$tdpa_id'
+         "))->first();
+@endphp
+
 <body style="background-color: #CCCCCC;margin: 0">
     <div align="center">
         <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="350" style="padding:25px">
@@ -16,7 +46,7 @@
                             <tr>
                                 <td width="50%" align="center">
                                     <span>
-                                        <font style="font-size: 38px; font-weight: bold;">1</font>
+                                        <font style="font-size: 38px; font-weight: bold;">{{ $data->gentan_no }}</font>
                                     </span>
                                 </td>
                                 <td width="50%" align="center">
@@ -30,7 +60,7 @@
                                 <td align="center">
                                     <span>
                                         <font style="font-size: 28px; font-weight: bold;">
-                                            {{ $lpk_no }}
+                                            {{ $data->lpk_no }}
                                         </font>
                                     </span>
                                 </td>
@@ -42,7 +72,7 @@
                                 <td align="center">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            {{ $name }}
+                                            {{ $data->name }}
                                         </font>
                                     </span>
                                 </td>
@@ -60,7 +90,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $code }}
+                                            : {{ $data->code }}
                                         </font>
                                     </span>
                                 </td>
@@ -77,7 +107,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $product_type_code }}
+                                            : {{ $data->code_alias }}
                                         </font>
                                     </span>
                                 </td>
@@ -95,7 +125,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $production_date }}
+                                            : {{ $data->production_date }}
                                         </font>
                                     </span>
                                 </td>
@@ -111,7 +141,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $work_hour }}
+                                            : {{ $data->work_hour }}
                                         </font>
                                     </span>
                                 </td>
@@ -127,7 +157,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $work_shift }}
+                                            : {{ $data->work_shift }}
                                         </font>
                                     </span>
                                 </td>
@@ -143,7 +173,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $code }}
+                                            : {{ $data->machineno }}
                                         </font>
                                     </span>
                                 </td>
@@ -161,7 +191,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $berat_produksi }}
+                                            : {{ $data->berat_produksi }} kg    
                                         </font>
                                     </span>
                                 </td>
@@ -177,8 +207,8 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : @if (isset($panjang_produksi))
-                                                {{ $panjang_produksi }}
+                                            : @if (isset($data->panjang_produksi))
+                                                {{ $data->panjang_produksi }} m
                                             @endif
                                         </font>
                                     </span>
@@ -211,7 +241,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $nomor_han }}
+                                            : {{ $data->nomor_han }}
                                         </font>
                                     </span>
                                 </td>
@@ -229,7 +259,7 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : {{ $nik }}
+                                            : {{ $data->nik }}
                                         </font>
                                     </span>
                                 </td>
@@ -245,8 +275,8 @@
                                 <td width="60%">
                                     <span>
                                         <font style="font-size: 22px;">
-                                            : @if (isset($empname))
-                                                {{ $empname }}
+                                            : @if (isset($data->empname))
+                                                {{ $data->empname }}
                                             @endif
                                         </font>
                                     </span>
