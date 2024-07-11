@@ -2,8 +2,15 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-6 mb-2">
-            <button id="btnCreate" type="button" data-bs-toggle="modal" data-bs-target="#modal-add-rev" class="btn btn-success" style="width:125px;">
+            {{-- <button id="btnCreate" type="button" data-bs-toggle="modal" data-bs-target="#modal-add-rev" class="btn btn-success" style="width:125px;">
                 <i class="fa fa-plus"></i> Add New
+            </button> --}}
+            <button 
+                type="button" 
+                class="btn btn-success" 
+                style="width:125px;"
+                onclick="window.location.href='{{ route('add-master-produk') }}'">
+                <i class="fa fa-plus"></i> Add
             </button>
         </div>
     
