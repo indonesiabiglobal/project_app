@@ -25,7 +25,7 @@
 		<div class="form-group mt-1">
 			<div class="input-group">
 				<span class="input-group-addon col-12 col-lg-3">Nippo </span>
-				<select id="department" class="form-control" placeholder="- pilih jenis report -">
+				<select class="form-control" wire:model.defer="nippo" placeholder="- pilih -">
 					<option value="1">Infure</option>
 					<option value="2">Seitai</option>
 				</select>
@@ -34,13 +34,13 @@
         <div class="form-group mt-1">
 			<div class="input-group">
 				<span class="input-group-addon col-12 col-lg-3">Nomor LPK </span>
-				<input type="text" class="form-control" placeholder="000000-000">
+				<input type="text" class="form-control" wire:model.defer="nolpk" placeholder="000000-000">
 			</div>
 		</div>
         <div class="form-group mt-1">
 			<div class="input-group">
 				<span class="input-group-addon col-12 col-lg-3">Nomor Order </span>
-				<input type="text" class="form-control" placeholder="...">
+				<input type="text" class="form-control" wire:model.defer="noorder" placeholder="...">
 			</div>
 		</div>
         <div class="form-group mt-1">

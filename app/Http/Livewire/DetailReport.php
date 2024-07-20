@@ -11,6 +11,9 @@ class DetailReport extends Component
 {
     public $tglMasuk;
     public $tglKeluar;
+    public $nippo='1';
+    public $nolpk;
+    public $noorder;
 
     public function mount()
     {
@@ -20,9 +23,13 @@ class DetailReport extends Component
 
     public function export()
     {
+        
         return Excel::download(new DetailReportExport(
             $this->tglMasuk, 
-            $this->tglKeluar
+            $this->tglKeluar,
+            $this->nippo,
+            $this->nolpk,
+            $this->noorder
         ), 'Detail_Report.xlsx');
     }
     public function render()
